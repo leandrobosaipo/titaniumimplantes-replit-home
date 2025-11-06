@@ -87,6 +87,14 @@ export default {
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
+      letterSpacing: {
+        tighter: "-0.02em",
+        tight: "-0.01em",
+        normal: "0",
+        wide: "0.01em",
+        wider: "0.02em",
+        widest: "0.05em",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
