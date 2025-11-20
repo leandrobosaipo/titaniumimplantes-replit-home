@@ -1,59 +1,52 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import slide1 from "@assets/home-topo_1762428378908.jpeg";
-import slide2 from "@assets/home-slide_1762428378908.jpeg";
+import { carouselConfig } from "@/data/carousel";
+import type { CarouselSlide } from "@/types/carousel";
 
-interface CarouselSlide {
-  id: string;
-  image: string;
-  title: string;
-  subtitle: string;
-  buttonText?: string;
-  buttonLink?: string;
+interface CarouselProps {
+  /** Slides customizados (opcional). Se não fornecido, usa a configuração padrão */
+  slides?: CarouselSlide[];
+  /** Intervalo de autoplay em milissegundos (opcional) */
+  autoplayInterval?: number;
 }
 
-const slides: CarouselSlide[] = [
-  {
-    id: "1",
-    image: slide1,
-    title: "Parceria com a Globus",
-    subtitle: "Referência mundial em soluções para cirurgias de coluna",
-    buttonText: "Conheça nosso portfólio",
-    buttonLink: "/produtos",
-  },
-  {
-    id: "2",
-    image: slide2,
-    title: "Qualidade certificada e tecnologia de ponta",
-    subtitle: "Para sua prática médica",
-    buttonText: "Conheça nosso portfólio",
-    buttonLink: "/produtos",
-  },
-  {
-    id: "3",
-    image: slide1,
-    title: "Excelência em Materiais Cirúrgicos",
-    subtitle: "Comprometimento com a saúde e inovação",
-    buttonText: "Conheça nosso portfólio",
-    buttonLink: "/produtos",
-  },
-];
-
-export function Carousel() {
+export function Carousel({ slides: customSlides, autoplayInterval: customInterval }: CarouselProps = {} as CarouselProps) {
+  const slides = customSlides || carouselConfig.slides;
+  const autoplayInterval = customInterval || carouselConfig.autoplayInterval || 5000;
+  
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Detectar se é dispositivo touch
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    const checkTouch = () => {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkTouch();
+    window.addEventListener('resize', checkTouch);
+    return () => window.removeEventListener('resize', checkTouch);
+  }, []);
+
+  // Resetar slide atual se a lista de slides mudar
+  useEffect(() => {
+    if (currentSlide >= slides.length) {
+      setCurrentSlide(0);
+    }
+  }, [slides.length, currentSlide]);
+
+  useEffect(() => {
+    if (!isAutoPlaying || slides.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, autoplayInterval);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, slides.length, autoplayInterval]);
 
   useEffect(() => {
     return () => {
@@ -73,6 +66,25 @@ export function Carousel() {
     }, 10000);
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    setIsAutoPlaying(false);
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    // Retomar autoplay após um pequeno delay quando o mouse sair
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+    resumeTimeoutRef.current = setTimeout(() => {
+      setIsAutoPlaying(true);
+    }, 1000);
+  };
+
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
     pauseAndResume();
@@ -88,10 +100,29 @@ export function Carousel() {
     pauseAndResume();
   };
 
+  // Se não houver slides, não renderizar nada
+  if (slides.length === 0) {
+    return null;
+  }
+
+  // Verificar se há conteúdo de texto em algum slide
+  const hasTextContent = slides.some(slide => slide.title || slide.subtitle || slide.buttonText);
+
   return (
-    <section className="relative w-full h-[500px] md:h-[600px] overflow-hidden bg-muted" data-testid="section-carousel">
+    <section 
+      className="relative w-full h-[calc(100vh-64px)] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group -mt-[64px] pt-[64px] md:mt-[120px] md:pt-0" 
+      data-testid="section-carousel"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => {
+        setTimeout(() => setIsHovered(false), 2000);
+      }}
+    >
       {slides.map((slide, index) => {
         const isActive = index === currentSlide;
+        const hasSlideContent = slide.title || slide.subtitle || slide.buttonText;
+        
         return (
           <div
             key={slide.id}
@@ -102,74 +133,97 @@ export function Carousel() {
           >
             <img
               src={slide.image}
-              alt={slide.title}
+              alt={slide.title || `Slide ${index + 1}`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40" />
             
-            <div className="absolute inset-0 flex items-center">
-              <div className="max-w-7xl mx-auto px-6 w-full">
-                <div className="max-w-2xl text-primary-foreground">
-                  <h2 
-                    className="text-3xl md:text-5xl font-bold mb-4 leading-tight"
-                    data-testid={`carousel-title-${index}`}
-                  >
-                    {slide.title}
-                  </h2>
-                  <p className="text-lg md:text-xl mb-8 opacity-95" data-testid={`carousel-subtitle-${index}`}>
-                    {slide.subtitle}
-                  </p>
-                  {slide.buttonText && slide.buttonLink && (
-                    <Button
-                      asChild
-                      size="lg"
-                      className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8"
-                      data-testid={`button-carousel-cta-${index}`}
-                    >
-                      <a href={slide.buttonLink}>{slide.buttonText}</a>
-                    </Button>
-                  )}
+            {/* Overlay apenas se houver conteúdo de texto */}
+            {hasSlideContent && (
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40 pointer-events-none" />
+            )}
+            
+            {/* Container de conteúdo apenas se houver texto */}
+            {hasSlideContent && (
+              <div className="absolute inset-0 flex items-center pointer-events-none">
+                <div className="max-w-7xl mx-auto px-6 w-full">
+                  <div className="max-w-2xl text-primary-foreground">
+                    {slide.title && (
+                      <h2 
+                        className="text-3xl md:text-5xl font-bold mb-4 leading-tight"
+                        data-testid={`carousel-title-${index}`}
+                      >
+                        {slide.title}
+                      </h2>
+                    )}
+                    {slide.subtitle && (
+                      <p className="text-lg md:text-xl mb-8 opacity-95" data-testid={`carousel-subtitle-${index}`}>
+                        {slide.subtitle}
+                      </p>
+                    )}
+                    {slide.buttonText && slide.buttonLink && (
+                      <Button
+                        asChild
+                        size="lg"
+                        className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8 pointer-events-auto"
+                        data-testid={`button-carousel-cta-${index}`}
+                      >
+                        <a href={slide.buttonLink}>{slide.buttonText}</a>
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         );
       })}
 
+      {/* Botão Anterior */}
       <Button
         size="icon"
         variant="ghost"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm text-primary-foreground hover:bg-background/30 w-12 h-12"
+        className={`carousel-nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${
+          (isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
+        }`}
         onClick={prevSlide}
         data-testid="button-carousel-prev"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
       </Button>
 
+      {/* Botão Próximo */}
       <Button
         size="icon"
         variant="ghost"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm text-primary-foreground hover:bg-background/30 w-12 h-12"
+        className={`carousel-nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${
+          (isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
+        }`}
         onClick={nextSlide}
         data-testid="button-carousel-next"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </Button>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      {/* Dots de navegação */}
+      <div 
+        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 transition-opacity duration-300 z-30 opacity-100 md:opacity-0 md:group-hover:opacity-100"
+        style={{
+          opacity: isHovered ? 1 : undefined,
+        }}
+      >
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all touch-manipulation ${
               index === currentSlide
-                ? "bg-primary-foreground w-8"
-                : "bg-primary-foreground/50 hover:bg-primary-foreground/75"
+                ? "bg-primary-foreground w-6 sm:w-8"
+                : "bg-primary-foreground/50 hover:bg-primary-foreground/75 active:bg-primary-foreground"
             }`}
             data-testid={`button-carousel-dot-${index}`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Ir para o slide ${index + 1}`}
           />
         ))}
       </div>

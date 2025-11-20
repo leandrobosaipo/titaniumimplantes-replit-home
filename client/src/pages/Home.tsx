@@ -11,7 +11,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-[128px] md:pt-[120px]">
+      <main className="pt-0">
         <Carousel />
         <WelcomeSection />
         <ProductCategories />

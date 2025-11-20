@@ -352,4 +352,56 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  /* Controles do carrossel sempre visíveis em dispositivos touch */
+  @media (hover: none) and (pointer: coarse) {
+    .carousel-nav-button {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+  }
+
+  /* Classes para controle de visibilidade das setas */
+  .carousel-nav-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .carousel-nav-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Garantir que group-hover funcione */
+  .group:hover .carousel-nav-button.carousel-nav-hidden {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Garantir que setas fiquem acima de tudo e posicionadas corretamente */
+  .carousel-nav-button {
+    position: absolute !important;
+    z-index: 60 !important;
+  }
+
+  /* Garantir que setas não sejam sobrepostas - posicionamento explícito */
+  .carousel-nav-button[data-testid="button-carousel-prev"] {
+    left: 0.5rem !important;
+    right: auto !important;
+  }
+
+  .carousel-nav-button[data-testid="button-carousel-next"] {
+    right: 0.5rem !important;
+    left: auto !important;
+  }
+
+  @media (min-width: 640px) {
+    .carousel-nav-button[data-testid="button-carousel-prev"] {
+      left: 1rem !important;
+    }
+
+    .carousel-nav-button[data-testid="button-carousel-next"] {
+      right: 1rem !important;
+    }
+  }
 }
