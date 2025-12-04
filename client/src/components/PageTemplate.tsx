@@ -29,7 +29,7 @@ export function PageTemplate({ pageKey }: PageTemplateProps) {
         description={pageConfig.description}
         canonical={canonicalUrl}
       />
-      <div className="mx-auto max-w-[1280px] px-8 pt-[70px] lg:pt-[150px] pb-16 md:pb-24">
+      <div className="mx-auto max-w-[1280px] px-8 pt-[70px] lg:pt-[130px] pb-16 md:pb-24">
         <h1
           className="text-[#0a324c] text-[36px] md:text-[48px] lg:text-[56px] mb-8"
           style={{

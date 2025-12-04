@@ -110,7 +110,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
 
   return (
     <section
-      className="relative w-full h-[calc(100vh-70px)] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group mt-[70px] lg:mt-[150px]"
+      className="relative w-full h-[calc(100vh-70px)] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group mt-[70px] lg:mt-[130px]"
       data-testid="section-carousel"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -135,7 +135,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
               alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
               className="w-full h-full object-cover"
               loading={index === 0 ? "eager" : "lazy"}
-              fetchPriority={index === 0 ? "high" : "auto"}
+              fetchpriority={index === 0 ? "high" : "auto"}
             />
 
             {/* Container de conteúdo apenas se houver texto */}

@@ -42,7 +42,7 @@ export function Header() {
   if (!isScrolled) {
     return (
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out h-[70px] lg:h-[150px]"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out h-[70px] lg:h-[130px]"
         style={{
           background: "linear-gradient(to bottom, #01155a 0%, #01155a 60%, #0953b0 100%)",
         }}
@@ -83,7 +83,7 @@ export function Header() {
               className="flex justify-between items-center py-4 pt-7 transition-opacity duration-300"
               style={{
                 position: "relative",
-                top: "-20px",
+                top: "0px",
               }}
               data-testid="header-top"
             >
