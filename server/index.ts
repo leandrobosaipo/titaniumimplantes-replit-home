@@ -62,8 +62,14 @@ app.use((req, res, next) => {
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     // Importação dinâmica para evitar carregar vite em produção
-    const { setupVite } = await import("./vite.dev");
-    await setupVite(app, server);
+    try {
+      const { setupVite } = await import("./vite.dev");
+      await setupVite(app, server);
+    } catch (error) {
+      log(`Failed to setup Vite: ${error instanceof Error ? error.message : String(error)}`);
+      // Fallback para servir arquivos estáticos se vite falhar
+      serveStatic(app);
+    }
   } else {
     serveStatic(app);
   }
