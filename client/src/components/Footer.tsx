@@ -1,5 +1,5 @@
-import { Link } from "wouter";
-import { Mail, MapPin, Phone } from "lucide-react";
+import abradiLogo from "@assets/abradi.png";
+import eticaesaudeLogo from "@assets/eticaesaude.png";
 
 const navigationLinks = [
   { title: "Início", href: "/" },
@@ -19,122 +19,248 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-primary-foreground" data-testid="footer">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold text-xl">T</span>
-              </div>
-              <div>
-                <div className="font-bold text-xl leading-none tracking-tight">TITANIUM</div>
-                <div className="text-xs tracking-wider mt-1 opacity-90">IMPLANTES</div>
-              </div>
-            </div>
-            <p className="text-primary-foreground/80 text-sm leading-relaxed mb-4" data-testid="text-footer-tagline">
+    <footer
+      className="relative w-full"
+      style={{
+        backgroundColor: "#01155a",
+      }}
+      data-testid="footer"
+    >
+      {/* Bloco Principal - 4 Colunas */}
+      <div className="mx-auto max-w-[1280px] pt-16 pb-16 px-6 md:pt-20 md:pb-20 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-8">
+          {/* Coluna 1: Logo + Slogan */}
+          <div className="flex flex-col">
+            {/* Logo */}
+            <img
+              src="/logo.png"
+              alt="Titanium Implantes"
+              className="w-[160px] md:w-[180px] h-auto object-contain mb-4"
+              data-testid="logo-footer"
+            />
+
+            {/* Slogan */}
+            <p
+              className="text-white"
+              style={{
+                fontFamily: "Inter, Lato, sans-serif",
+                fontWeight: 400,
+                fontSize: "18px",
+                lineHeight: 1.4,
+                marginTop: "16px",
+              }}
+              data-testid="text-footer-slogan"
+            >
               Respeito, segurança, inovação e compromisso com a saúde.
             </p>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-lg mb-4" data-testid="text-footer-nav-title">Navegação</h3>
-            <ul className="space-y-2">
-              {navigationLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
+          {/* Coluna 2: Links de Navegação */}
+          <div className="flex flex-col text-center md:text-left">
+            {/* Título */}
+            <h3
+              className="mb-3"
+              style={{
+                fontFamily: "Inter, Lato, sans-serif",
+                fontWeight: 600,
+                fontSize: "20px",
+                color: "#0d70dc",
+                marginBottom: "12px",
+              }}
+              data-testid="text-footer-nav-title"
+            >
+              Início
+            </h3>
+
+            {/* Links */}
+            <ul>
+              {navigationLinks.map((link, index) => (
+                <li
+                  key={link.href}
+                  style={{
+                    marginBottom: index < navigationLinks.length - 1 ? "12px" : "0",
+                  }}
+                >
+                  <a
                     href={link.href}
-                    className="text-primary-foreground/80 hover:text-primary-foreground text-sm hover-elevate inline-block transition-all"
-                    data-testid={`link-footer-${link.title.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="text-white hover:opacity-80 transition-opacity no-underline"
+                    style={{
+                      fontFamily: "Inter, Lato, sans-serif",
+                      fontWeight: 500,
+                      fontSize: "18px",
+                    }}
+                    data-testid={`link-footer-${link.title.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-lg mb-4" data-testid="text-footer-contact-title">Contato</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <div>
-                  <a 
-                    href="tel:+556530255625" 
-                    className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors"
-                    data-testid="link-footer-phone"
-                  >
-                    (65) 3025-5625
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <div>
-                  <a 
-                    href="mailto:contratos@titaniumimplantes.com.br" 
-                    className="text-primary-foreground/80 hover:text-primary-foreground text-sm transition-colors break-all"
-                    data-testid="link-footer-email"
-                  >
-                    contratos@titaniumimplantes.com.br
-                  </a>
-                </div>
-              </li>
-            </ul>
+          {/* Coluna 3: Contato + Endereço */}
+          <div className="flex flex-col text-center md:text-left" style={{ gap: "24px" }}>
+            {/* Bloco Contato */}
+            <div className="flex flex-col">
+              <h3
+                style={{
+                  fontFamily: "Inter, Lato, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "20px",
+                  color: "#0d70dc",
+                  marginBottom: "12px",
+                }}
+                data-testid="text-footer-contato-title"
+              >
+                Contato
+              </h3>
+              <div className="flex flex-col" style={{ gap: "10px" }}>
+                <a
+                  href="tel:+556530255625"
+                  className="text-white hover:opacity-80 transition-opacity no-underline"
+                  style={{
+                    fontFamily: "Inter, Lato, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "18px",
+                    lineHeight: 1.4,
+                  }}
+                  data-testid="link-footer-telefone"
+                >
+                  (65) 3025-5625
+                </a>
+                <a
+                  href="mailto:contratos@titaniunimplantes.com.br"
+                  className="text-white hover:opacity-80 transition-opacity no-underline"
+                  style={{
+                    fontFamily: "Inter, Lato, sans-serif",
+                    fontWeight: 400,
+                    fontSize: "18px",
+                    lineHeight: 1.4,
+                  }}
+                  data-testid="link-footer-email"
+                >
+                  contratos@titaniunimplantes.com.br
+                </a>
+              </div>
+            </div>
+
+            {/* Bloco Endereço */}
+            <div className="flex flex-col" style={{ marginTop: "0px" }}>
+              <h3
+                style={{
+                  fontFamily: "Inter, Lato, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "20px",
+                  color: "#0d70dc",
+                  marginBottom: "12px",
+                }}
+                data-testid="text-footer-endereco-title"
+              >
+                Endereço
+              </h3>
+              <p
+                className="text-white"
+                style={{
+                  fontFamily: "Inter, Lato, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "18px",
+                  lineHeight: 1.4,
+                }}
+                data-testid="text-footer-endereco"
+              >
+                Av. Hist. Rubens de Mendonça, 2368, Sala 1101 - Cuiabá – MT
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-lg mb-4" data-testid="text-footer-address-title">Endereço</h3>
-            <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <address className="text-primary-foreground/80 text-sm not-italic leading-relaxed" data-testid="text-footer-address">
-                Av. Hist. Rubens de Mendonça, 2368, Sala 1101 - Cuiabá - MT
-              </address>
+          {/* Coluna 4: Empresas Associadas */}
+          <div className="flex flex-col items-center md:items-center">
+            {/* Título */}
+            <h3
+              className="text-center mb-3"
+              style={{
+                fontFamily: "Inter, Lato, sans-serif",
+                fontWeight: 600,
+                fontSize: "20px",
+                color: "#0d70dc",
+                marginBottom: "12px",
+              }}
+              data-testid="text-footer-partners-title"
+            >
+              Empresa associada:
+            </h3>
+
+            {/* Logos */}
+            <div
+              className="flex items-center justify-center flex-wrap"
+              style={{
+                gap: "24px",
+              }}
+            >
+              {/* Logo ABRAIDI */}
+              <img
+                src={abradiLogo}
+                alt="ABRAIDI"
+                className="w-[70px] md:w-[90px] lg:w-[120px] h-[130px] object-contain"
+                data-testid="logo-abraidi"
+              />
+
+              {/* Logo ÉticaSaúde */}
+              <img
+                src={eticaesaudeLogo}
+                alt="ÉticaSaúde"
+                className="w-[70px] md:w-[90px] lg:w-[120px] h-[130px] object-contain"
+                data-testid="logo-eticasaude"
+              />
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-primary-foreground/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-6 flex-wrap justify-center md:justify-start">
-              <div className="text-sm text-primary-foreground/70" data-testid="text-footer-copyright">
-                © {currentYear} Titanium Implantes. Todos os Direitos Reservados
-              </div>
-            </div>
-
-            <div className="flex items-center gap-6 flex-wrap justify-center">
-              {legalLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  data-testid={`link-footer-legal-${link.title.toLowerCase().replace(/\s+/g, '-')}`}
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </div>
+      {/* Barra Inferior */}
+      <div
+        className="w-full py-4 px-6 md:px-12"
+        style={{
+          backgroundColor: "#0071e2",
+        }}
+        data-testid="footer-bottom-bar"
+      >
+        <div className="mx-auto max-w-[1280px] flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+          {/* Texto Copyright */}
+          <div
+            className="text-white text-center md:text-left"
+            style={{
+              fontFamily: "Inter, Lato, sans-serif",
+              fontWeight: 400,
+              fontSize: "16px",
+            }}
+            data-testid="text-footer-copyright"
+          >
+            © {currentYear} Titaniun Implantes. Todos os Direitos Reservados
           </div>
 
-          <div className="mt-8 pt-8 border-t border-primary-foreground/20">
-            <div className="text-center">
-              <p className="text-sm text-primary-foreground/60 mb-4" data-testid="text-footer-partners">
-                Empresa associada:
-              </p>
-              <div className="flex items-center justify-center gap-8 flex-wrap">
-                <div className="bg-primary-foreground/10 px-6 py-3 rounded-md">
-                  <span className="text-primary-foreground font-semibold text-sm" data-testid="text-partner-abraidi">
-                    ABRAIDI
-                  </span>
-                </div>
-                <div className="bg-primary-foreground/10 px-6 py-3 rounded-md">
-                  <span className="text-primary-foreground font-semibold text-sm" data-testid="text-partner-eticasaude">
-                    Ética Saúde
-                  </span>
-                </div>
-              </div>
-            </div>
+          {/* Links Legais */}
+          <div
+            className="flex items-center flex-wrap justify-center md:justify-end"
+            style={{
+              gap: "32px",
+            }}
+          >
+            {legalLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-white hover:opacity-80 transition-opacity"
+                style={{
+                  fontFamily: "Inter, Lato, sans-serif",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                }}
+                data-testid={`link-footer-legal-${link.title.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                {link.title}
+              </a>
+            ))}
           </div>
         </div>
       </div>

@@ -1,3 +1,16 @@
+# Dados Dinâmicos das Seções
+
+Este diretório contém as configurações dinâmicas das seções da página inicial, seguindo um padrão arquitetural consistente que separa dados de apresentação.
+
+## Seções Configuráveis
+
+- **Carrossel** (`carousel.ts`) - Banner principal com slides
+- **Quem Somos** (`quemSomos.ts`) - Seção institucional com background image
+
+Cada seção possui sua própria documentação detalhada. Veja `README-quemsomos.md` para informações sobre a seção Quem Somos.
+
+---
+
 # Dados Dinâmicos do Carrossel
 
 Este diretório contém a configuração dinâmica do carrossel da página inicial.

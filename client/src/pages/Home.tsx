@@ -1,9 +1,10 @@
 import { Header } from "@/components/Header";
 import { Carousel } from "@/components/Carousel";
-import { WelcomeSection } from "@/components/WelcomeSection";
-import { ProductCategories } from "@/components/ProductCategories";
-import { CTASection } from "@/components/CTASection";
-import { InstitutionalSection } from "@/components/InstitutionalSection";
+import { QuemSomosSection } from "@/components/QuemSomosSection";
+import { AreasAtuacaoSection } from "@/components/AreasAtuacaoSection";
+import { ExcelenciaMateriaisSection } from "@/components/ExcelenciaMateriaisSection";
+import { CertificacoesSection } from "@/components/CertificacoesSection";
+import { ContatoSection } from "@/components/ContatoSection";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -13,10 +14,11 @@ export default function Home() {
       
       <main className="pt-0">
         <Carousel />
-        <WelcomeSection />
-        <ProductCategories />
-        <CTASection />
-        <InstitutionalSection />
+        <QuemSomosSection />
+        <AreasAtuacaoSection />
+        <ExcelenciaMateriaisSection />
+        <CertificacoesSection />
+        <ContatoSection />
       </main>
 
       <Footer />

@@ -1,0 +1,49 @@
+# Dependências
+node_modules
+npm-debug.log
+package-lock.json
+
+# Build outputs
+dist
+build
+*.log
+
+# Arquivos de desenvolvimento
+.env.local
+.env.development
+.env.test
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Git
+.git
+.gitignore
+.github
+
+# Documentação (não necessária no container)
+docs
+*.md
+!README.md
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.tmp
+*.temp
+.cache
+
+# Testes
+coverage
+.nyc_output
+*.test.js
+*.spec.js
+
+# Outros
+.replit
+replit.md
+

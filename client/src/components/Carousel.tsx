@@ -14,7 +14,7 @@ interface CarouselProps {
 export function Carousel({ slides: customSlides, autoplayInterval: customInterval }: CarouselProps = {} as CarouselProps) {
   const slides = customSlides || carouselConfig.slides;
   const autoplayInterval = customInterval || carouselConfig.autoplayInterval || 5000;
-  
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
@@ -109,8 +109,8 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
   const hasTextContent = slides.some(slide => slide.title || slide.subtitle || slide.buttonText);
 
   return (
-    <section 
-      className="relative w-full h-[calc(100vh-64px)] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group -mt-[64px] pt-[64px] md:mt-[120px] md:pt-0" 
+    <section
+      className="relative w-full h-[calc(100vh-150px)] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group mt-[150px]"
       data-testid="section-carousel"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -122,13 +122,12 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
       {slides.map((slide, index) => {
         const isActive = index === currentSlide;
         const hasSlideContent = slide.title || slide.subtitle || slide.buttonText;
-        
+
         return (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ${
-              isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-700 ${isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
             data-testid={`carousel-slide-${index}`}
           >
             <img
@@ -136,19 +135,19 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
               alt={slide.title || `Slide ${index + 1}`}
               className="w-full h-full object-cover"
             />
-            
+
             {/* Overlay apenas se houver conteúdo de texto */}
             {hasSlideContent && (
               <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40 pointer-events-none" />
             )}
-            
+
             {/* Container de conteúdo apenas se houver texto */}
             {hasSlideContent && (
               <div className="absolute inset-0 flex items-center pointer-events-none">
                 <div className="max-w-7xl mx-auto px-6 w-full">
                   <div className="max-w-2xl text-primary-foreground">
                     {slide.title && (
-                      <h2 
+                      <h2
                         className="text-3xl md:text-5xl font-bold mb-4 leading-tight"
                         data-testid={`carousel-title-${index}`}
                       >
@@ -182,9 +181,8 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
       <Button
         size="icon"
         variant="ghost"
-        className={`carousel-nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${
-          (isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
-        }`}
+        className={`carousel-nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${(isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
+          }`}
         onClick={prevSlide}
         data-testid="button-carousel-prev"
         aria-label="Previous slide"
@@ -196,9 +194,8 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
       <Button
         size="icon"
         variant="ghost"
-        className={`carousel-nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${
-          (isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
-        }`}
+        className={`carousel-nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${(isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
+          }`}
         onClick={nextSlide}
         data-testid="button-carousel-next"
         aria-label="Next slide"
@@ -207,7 +204,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
       </Button>
 
       {/* Dots de navegação */}
-      <div 
+      <div
         className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 transition-opacity duration-300 z-30 opacity-100 md:opacity-0 md:group-hover:opacity-100"
         style={{
           opacity: isHovered ? 1 : undefined,
@@ -217,11 +214,10 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all touch-manipulation ${
-              index === currentSlide
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all touch-manipulation ${index === currentSlide
                 ? "bg-primary-foreground w-6 sm:w-8"
                 : "bg-primary-foreground/50 hover:bg-primary-foreground/75 active:bg-primary-foreground"
-            }`}
+              }`}
             data-testid={`button-carousel-dot-${index}`}
             aria-label={`Ir para o slide ${index + 1}`}
           />

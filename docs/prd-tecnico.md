@@ -59,6 +59,8 @@ O projeto atual entrega uma landing page corporativa estática para a Titanium I
 
 ## Requisitos Funcionais
 
+> **Nota**: O RF04 (Atualização de Conteúdo) já está parcialmente implementado no carrossel da home através do padrão de arquivos de configuração. Veja seção "Sistema de Administração de Conteúdo - Padrão Implementado" para detalhes.
+
 ### RF01: Sistema de Roteamento
 - Implementar roteamento declarativo que carregue páginas internas
 - Suportar lazy loading de componentes com React.lazy
@@ -290,9 +292,188 @@ export const sectionSchema = z.discriminatedUnion('type', [
 - Documentação completa
 - Deploy e monitoramento
 
+## Sistema de Administração de Conteúdo - Padrão Implementado
+
+### Caso de Estudo: Carrossel da Home
+
+O carrossel da página inicial implementa um padrão de administração de conteúdo que serve como referência para outras seções do site. Este padrão demonstra como separar dados de apresentação de forma eficiente e manutenível.
+
+#### Arquitetura do Sistema
+
+O sistema de administração do carrossel segue uma arquitetura em três camadas:
+
+1. **Camada de Tipos** (`client/src/types/carousel.ts`)
+   - Define interfaces TypeScript para type safety
+   - Documenta a estrutura de dados esperada
+   - Garante consistência entre configuração e componente
+
+2. **Camada de Dados** (`client/src/data/carousel.ts`)
+   - Arquivo de configuração centralizado
+   - Contém todos os dados dos slides
+   - Importa imagens usando alias `@assets`
+   - Exporta objeto de configuração tipado
+
+3. **Camada de Apresentação** (`client/src/components/Carousel.tsx`)
+   - Componente React reutilizável
+   - Aceita configuração padrão ou props customizadas
+   - Lógica de apresentação isolada dos dados
+
+#### Estrutura de Dados
+
+```typescript
+// client/src/types/carousel.ts
+export interface CarouselSlide {
+  id: string;                    // Identificador único
+  image: string;                 // Caminho da imagem (import estático)
+  title: string;                 // Título principal
+  subtitle: string;              // Subtítulo/descrição
+  buttonText?: string;           // Texto do botão (opcional)
+  buttonLink?: string;          // Link de destino (opcional)
+}
+
+export interface CarouselConfig {
+  slides: CarouselSlide[];
+  autoplayInterval?: number;     // Intervalo em ms (padrão: 5000)
+}
+```
+
+#### Arquivo de Configuração
+
+```typescript
+// client/src/data/carousel.ts
+import type { CarouselConfig } from "@/types/carousel";
+import slide1 from "@assets/slide-globus-without-title.jpg";
+import slide2 from "@assets/slide-certificada.jpg";
+import slide3 from "@assets/slide-medtronic.jpg";
+
+export const carouselConfig: CarouselConfig = {
+  slides: [
+    {
+      id: "1",
+      image: slide1,
+      title: "Parceria com a Globus",
+      subtitle: "referência mundial em soluções para cirurgias de coluna.",
+      buttonText: "Conheça nosso portfólio",
+      buttonLink: "/produtos",
+    },
+    // ... mais slides
+  ],
+  autoplayInterval: 5000,
+};
+```
+
+#### Como Administrar o Conteúdo
+
+**Adicionar um novo slide:**
+1. Adicionar imagem em `attached_assets/`
+2. Importar imagem no topo de `carousel.ts`
+3. Adicionar objeto ao array `slides`
+
+**Modificar um slide existente:**
+- Editar propriedades diretamente no objeto do slide em `carousel.ts`
+- Alterações são refletidas automaticamente via hot reload
+
+**Remover um slide:**
+- Remover objeto do array `slides`
+
+**Alterar intervalo de autoplay:**
+- Modificar propriedade `autoplayInterval` no objeto de configuração
+
+#### Vantagens deste Padrão
+
+1. **Separação de Responsabilidades**
+   - Dados separados da lógica de apresentação
+   - Fácil localizar e editar conteúdo
+
+2. **Type Safety**
+   - TypeScript garante estrutura correta dos dados
+   - Autocomplete e validação em tempo de desenvolvimento
+
+3. **Manutenibilidade**
+   - Edição de conteúdo sem tocar em código React
+   - Documentação inline no arquivo de configuração
+
+4. **Reutilização**
+   - Componente aceita props customizadas ou usa config padrão
+   - Pode ser usado em múltiplas páginas com configurações diferentes
+
+5. **Hot Reload**
+   - Alterações refletidas imediatamente em desenvolvimento
+   - Não requer rebuild ou reinicialização do servidor
+
+6. **Flexibilidade**
+   - Suporta slides com ou sem conteúdo de texto
+   - Overlay e botões aparecem apenas quando necessário
+
+#### Estrutura de Arquivos
+
+```
+client/src/
+├── components/
+│   └── Carousel.tsx          # Componente de apresentação
+├── data/
+│   ├── carousel.ts           # Configuração dos slides
+│   └── README.md            # Documentação de uso
+└── types/
+    └── carousel.ts           # Interfaces TypeScript
+```
+
+#### Documentação de Uso
+
+O arquivo `client/src/data/README.md` contém documentação detalhada sobre como editar o carrossel, incluindo:
+- Instruções passo a passo para adicionar/remover slides
+- Como adicionar novas imagens
+- Estrutura de dados completa
+- Exemplos práticos
+
+#### Aplicação do Padrão em Outras Seções
+
+Este padrão pode ser replicado para outras seções do site seguindo a mesma estrutura:
+
+1. **Criar tipos** em `client/src/types/[secao].ts`
+2. **Criar configuração** em `client/src/data/[secao].ts`
+3. **Criar componente** em `client/src/components/[Seccao].tsx`
+4. **Documentar** em `client/src/data/README.md` ou arquivo específico
+
+**Exemplo de seções candidatas:**
+- Categorias de produtos (`ProductCategories`)
+- Seções institucionais (`InstitutionalSection`)
+- CTAs (`CTASection`)
+- Rodapé (`Footer`)
+
+#### Próximos Passos para Expansão
+
+Para evoluir este padrão para um sistema mais robusto:
+
+1. **Migração para JSON + API**
+   - Manter estrutura atual como fallback
+   - Adicionar endpoint `/api/content/carousel`
+   - Hook `useCarousel()` com TanStack Query
+
+2. **Validação com Zod**
+   - Criar schema Zod baseado nas interfaces TypeScript
+   - Validar dados em runtime antes de renderizar
+
+3. **Admin Interface** (futuro)
+   - Interface visual para edição
+   - Upload de imagens integrado
+   - Preview em tempo real
+
+4. **Versionamento**
+   - Histórico de alterações
+   - Rollback para versões anteriores
+   - Deploy controlado
+
 ## Governança e Manutenção
 
 ### Processo de Atualização de Conteúdo
+
+**Padrão Atual (Carrossel e similares):**
+1. Editar arquivo de configuração em `client/src/data/[secao].ts`
+2. Hot reload automático em desenvolvimento
+3. Build e deploy para produção
+
+**Padrão Futuro (Conteúdo via API):**
 1. Editar JSON de conteúdo (via admin futuro ou diretamente no banco)
 2. Validação automática via Zod antes de salvar
 3. Deploy automático via CI/CD (futuro)
@@ -311,9 +492,28 @@ export const sectionSchema = z.discriminatedUnion('type', [
 
 ## Análise de Escalabilidade e Manutenibilidade
 
-A migração para conteúdo gerenciado por JSON validado melhora significativamente a escalabilidade editorial: novas páginas podem ser publicadas sem alterar código, e o uso de schemas compartilhados reduz riscos de inconsistência.
+### Padrão Atual Implementado
+
+O sistema de administração do carrossel demonstra um padrão funcional e escalável que já está em produção:
+
+- **Separação de dados e apresentação**: Conteúdo editável sem modificar componentes React
+- **Type safety**: TypeScript garante consistência estrutural
+- **Hot reload**: Alterações refletidas imediatamente em desenvolvimento
+- **Documentação inline**: Instruções claras para manutenção
+
+Este padrão pode ser replicado para outras seções do site, criando uma base consistente antes da migração completa para API + banco de dados.
+
+### Migração Futura
+
+A migração para conteúdo gerenciado por JSON validado (via API) melhora significativamente a escalabilidade editorial: novas páginas podem ser publicadas sem alterar código, e o uso de schemas compartilhados reduz riscos de inconsistência.
 
 O uso de componentes reutilizáveis mantém a base de código enxuta e facilita expansão futura para outros idiomas ou temas. Recomenda-se planejar desde já um mecanismo de cache (ex: `etag` ou `s-maxage`) e considerar futura renderização híbrida (SSR/SSG) caso SEO e performance sejam críticos.
+
+**Estratégia de Migração Gradual:**
+1. Manter padrão atual (arquivos de configuração) como base
+2. Adicionar camada de API opcional que lê dos mesmos arquivos
+3. Migrar gradualmente para banco de dados mantendo compatibilidade
+4. Implementar admin interface quando necessário
 
 ## Conclusão
 

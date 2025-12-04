@@ -1,6 +1,38 @@
+# Dependências
 node_modules
+npm-debug.log
+package-lock.json
+
+# Build outputs
 dist
-.DS_Store
+build
 server/public
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs
+
+# Arquivos temporários
+*.tmp
+*.temp
+.cache
+
+# Vite
 vite.config.ts.*
+
+# Outros
 *.tar.gz
