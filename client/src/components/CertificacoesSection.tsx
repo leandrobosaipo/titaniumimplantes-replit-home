@@ -37,6 +37,22 @@ export function CertificacoesSection() {
             </span>
           </div>
 
+          {/* Título H2 para SEO */}
+          <h2
+            className="text-[#1A1A1A]"
+            style={{
+              fontFamily: "Lato, sans-serif",
+              fontWeight: 700,
+              fontSize: "28px",
+              lineHeight: 1.2,
+              maxWidth: "540px",
+              marginBottom: "16px",
+            }}
+            data-testid="text-certificacoes-title"
+          >
+            Certificações e Compliance
+          </h2>
+
           {/* Texto Institucional */}
           <p
             className="text-[#1A1A1A]"

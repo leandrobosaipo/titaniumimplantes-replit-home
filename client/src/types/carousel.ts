@@ -8,6 +8,8 @@ export interface CarouselSlide {
   id: string;
   /** Caminho da imagem de fundo (pode ser import estático ou URL) */
   image: string;
+  /** Texto alternativo descritivo da imagem para acessibilidade e SEO */
+  alt?: string;
   /** Título principal do slide */
   title: string;
   /** Subtítulo/descrição do slide */

@@ -66,7 +66,7 @@ export function ExcelenciaMateriaisSection() {
               }}
               data-testid="text-excelencia-desc"
             >
-              {c.descricao}
+              {c.descricao} Explore nossas <a href="#areas-atuacao" className="text-white hover:underline font-semibold">especialidades</a> e conheça nossa <a href="/quem-somos" className="text-white hover:underline font-semibold">história e compromisso</a>.
             </p>
           </div>
 

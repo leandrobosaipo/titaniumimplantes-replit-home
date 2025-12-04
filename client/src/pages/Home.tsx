@@ -1,27 +1,26 @@
-import { Header } from "@/components/Header";
+import { Layout } from "@/components/Layout";
+import { PageSEO } from "@/components/SEO/PageSEO";
 import { Carousel } from "@/components/Carousel";
 import { QuemSomosSection } from "@/components/QuemSomosSection";
 import { AreasAtuacaoSection } from "@/components/AreasAtuacaoSection";
 import { ExcelenciaMateriaisSection } from "@/components/ExcelenciaMateriaisSection";
 import { CertificacoesSection } from "@/components/CertificacoesSection";
 import { ContatoSection } from "@/components/ContatoSection";
-import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="pt-0">
-        <Carousel />
-        <QuemSomosSection />
-        <AreasAtuacaoSection />
-        <ExcelenciaMateriaisSection />
-        <CertificacoesSection />
-        <ContatoSection />
-      </main>
-
-      <Footer />
-    </div>
+    <Layout>
+      <PageSEO
+        title="Titanium Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT"
+        description="Distribuidora especializada em implantes para coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia em Cuiabá-MT. Soluções certificadas, alta tecnologia e entrega ágil."
+        canonical="https://titaniumimplantes.com.br/"
+      />
+      <Carousel />
+      <QuemSomosSection />
+      <AreasAtuacaoSection />
+      <ExcelenciaMateriaisSection />
+      <CertificacoesSection />
+      <ContatoSection />
+    </Layout>
   );
 }

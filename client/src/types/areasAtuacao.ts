@@ -8,8 +8,10 @@ export interface EspecialidadeCard {
   id: string;
   /** Título da especialidade */
   titulo: string;
-  /** Descrição da especialidade */
+  /** Descrição curta da especialidade */
   descricao: string;
+  /** Descrição longa otimizada para SEO (100-150 palavras) */
+  descricaoLonga?: string;
   /** Caminho da imagem de background (pode ser import estático ou URL) */
   imagem: string;
   /** Caminho da imagem do ícone circular (pode ser import estático ou URL) */

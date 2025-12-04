@@ -140,7 +140,7 @@ export function ContatoSection() {
               }}
               data-testid="text-contato-desc"
             >
-              {c.descricao}
+              {c.descricao} Conheça nossos <a href="/produtos" className="text-[#0d70dc] hover:underline font-semibold">produtos e soluções</a> ou saiba mais <a href="/quem-somos" className="text-[#0d70dc] hover:underline font-semibold">sobre a Titanium Implantes</a>.
             </p>
           </div>
 
