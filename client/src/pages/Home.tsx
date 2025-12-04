@@ -15,12 +15,12 @@ export default function Home() {
         description="Distribuidora especializada em implantes para coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia em Cuiabá-MT. Soluções certificadas, alta tecnologia e entrega ágil."
         canonical="https://titaniumimplantes.com.br/"
       />
-      <Carousel />
-      <QuemSomosSection />
-      <AreasAtuacaoSection />
-      <ExcelenciaMateriaisSection />
-      <CertificacoesSection />
-      <ContatoSection />
+        <Carousel />
+        <QuemSomosSection />
+        <AreasAtuacaoSection />
+        <ExcelenciaMateriaisSection />
+        <CertificacoesSection />
+        <ContatoSection />
     </Layout>
   );
 }
