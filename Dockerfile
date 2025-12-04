@@ -7,7 +7,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar todas as dependências (incluindo devDependencies para build)
-RUN npm ci
+# --legacy-peer-deps resolve problemas de peer dependencies
+# --ignore-optional ignora falhas em dependências opcionais (como bufferutil)
+RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
 
 # Copiar todo o código fonte
 COPY . .
@@ -24,7 +26,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar apenas dependências de produção
-RUN npm ci --only=production && npm cache clean --force
+# --legacy-peer-deps resolve problemas de peer dependencies
+# --ignore-optional ignora falhas em dependências opcionais
+RUN npm ci --only=production --legacy-peer-deps || npm install --only=production --legacy-peer-deps && npm cache clean --force
 
 # Copiar arquivos buildados do stage anterior
 COPY --from=builder /app/dist ./dist
