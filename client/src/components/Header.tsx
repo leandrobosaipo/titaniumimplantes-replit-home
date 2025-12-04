@@ -8,7 +8,7 @@ const menuItems = [
   { label: "Home", path: "/" },
   { label: "Quem Somos", path: "/quem-somos" },
   { label: "Produtos", path: "/produtos" },
-  { label: "Canal de Denúncia", path: "/canal-denuncia" },
+  { label: "Canal de Denúncia", path: "/canal-de-denuncia" },
   { label: "LGPD", path: "/lgpd" },
   { label: "Contato", path: "/contato" },
 ];
@@ -42,37 +42,65 @@ export function Header() {
   if (!isScrolled) {
     return (
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out h-[70px] lg:h-[150px]"
         style={{
           background: "linear-gradient(to bottom, #01155a 0%, #01155a 60%, #0953b0 100%)",
-          height: "150px",
         }}
         data-testid="header"
       >
         <div className="max-w-[1280px] mx-auto px-8 md:px-12 relative h-full">
-          {/* Linha Superior: Logo + Ícones Sociais - Sobe parcialmente */}
-          <div
-            className="flex justify-between items-center py-4 pt-7 transition-opacity duration-300"
-            style={{
-              position: "relative",
-              top: "-20px",
-            }}
-            data-testid="header-top"
-          >
-            {/* Logo à esquerda */}
+          {/* Layout Mobile: Centralizado e simples */}
+          <div className="lg:hidden flex items-center justify-between h-full" data-testid="header-mobile">
+            {/* Logo */}
             <Link href="/" data-testid="link-home">
               <img
                 src="/logo.png"
-                alt="Titanium Implantes"
-                className="w-[160px] md:w-[180px] lg:w-[200px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
+                alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+                className="w-[140px] md:w-[160px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
                 data-testid="logo-header"
+                width="160"
+                height="48"
               />
             </Link>
 
-            {/* Ícones sociais à direita (desktop) + Botão hamburger (mobile) */}
-            <div className="flex items-center gap-5 md:gap-6">
-              {/* Ícones sociais - Desktop */}
-              <div className="hidden lg:flex items-center gap-5 md:gap-6">
+            {/* Botão hamburger */}
+            <Button
+              size="icon"
+              variant="ghost"
+              className="text-white hover:bg-white/10"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              data-testid="button-menu-toggle"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </Button>
+          </div>
+
+          {/* Layout Desktop: Logo + Menu Pill */}
+          <div className="hidden lg:block relative h-full">
+            {/* Linha Superior: Logo + Ícones Sociais - Sobe parcialmente */}
+            <div
+              className="flex justify-between items-center py-4 pt-7 transition-opacity duration-300"
+              style={{
+                position: "relative",
+                top: "-20px",
+              }}
+              data-testid="header-top"
+            >
+              {/* Logo à esquerda */}
+              <Link href="/" data-testid="link-home-desktop">
+                <img
+                  src="/logo.png"
+                  alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+                  className="w-[200px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
+                  data-testid="logo-header-desktop"
+                  width="200"
+                  height="60"
+                />
+              </Link>
+
+              {/* Ícones sociais à direita */}
+              <div className="flex items-center gap-5 md:gap-6">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
@@ -90,61 +118,49 @@ export function Header() {
                   </a>
                 ))}
               </div>
-
-              {/* Botão hamburger - Mobile */}
-              <Button
-                size="icon"
-                variant="ghost"
-                className="lg:hidden text-white hover:bg-white/10"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                data-testid="button-menu-toggle"
-                aria-label="Toggle menu"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </Button>
             </div>
-          </div>
 
-          {/* Linha Inferior: Menu Pill - Sobrepõe carrossel */}
-          <div
-            className="absolute bottom-0 inset-x-8 md:inset-x-12"
-            style={{
-              transform: "translateY(50%)",
-              zIndex: 60,
-            }}
-            data-testid="header-menu-wrapper"
-          >
-            <nav
-              className="bg-[#0d70dc] rounded-lg px-10 py-3.5 shadow-lg hidden lg:flex items-center transition-all duration-300 w-full"
+            {/* Linha Inferior: Menu Pill - Sobrepõe carrossel */}
+            <div
+              className="absolute bottom-0 inset-x-8 md:inset-x-12"
               style={{
-                boxShadow: "0px 6px 18px rgba(0,0,0,0.25)",
+                transform: "translateY(50%)",
+                zIndex: 60,
               }}
-              data-testid="nav-desktop"
+              data-testid="header-menu-wrapper"
             >
-              <ul className="flex items-center gap-10 md:gap-12">
-                {menuItems.map((item) => {
-                  const isActive = location === item.path;
-                  return (
-                    <li key={item.path}>
-                      <Link
-                        href={item.path}
-                        data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                        className={`px-4 py-2 rounded-sm font-semibold text-sm transition-all ${
-                          isActive
-                            ? "bg-white text-[#0d70dc] font-bold"
-                            : "text-white hover:opacity-80"
-                        }`}
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                        }}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+              <nav
+                className="bg-[#0d70dc] rounded-lg px-10 py-3.5 shadow-lg flex items-center transition-all duration-300 w-full"
+                style={{
+                  boxShadow: "0px 6px 18px rgba(0,0,0,0.25)",
+                }}
+                data-testid="nav-desktop"
+              >
+                <ul className="flex items-center gap-10 md:gap-12">
+                  {menuItems.map((item) => {
+                    const isActive = location === item.path;
+                    return (
+                      <li key={item.path}>
+                        <Link
+                          href={item.path}
+                          data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
+                          className={`px-4 py-2 rounded-sm font-semibold text-sm transition-all ${
+                            isActive
+                              ? "bg-white text-[#0d70dc] font-bold"
+                              : "text-white hover:opacity-80"
+                          }`}
+                          style={{
+                            fontFamily: "Inter, sans-serif",
+                          }}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
 
@@ -218,9 +234,11 @@ export function Header() {
           <Link href="/" data-testid="link-home-compact">
             <img
               src="/logo.png"
-              alt="Titanium Implantes"
+              alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
               className="w-[140px] md:w-[160px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
               data-testid="logo-header-compact"
+              width="160"
+              height="48"
             />
           </Link>
 

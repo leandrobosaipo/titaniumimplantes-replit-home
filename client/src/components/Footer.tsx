@@ -5,7 +5,7 @@ const navigationLinks = [
   { title: "Início", href: "/" },
   { title: "Compliance", href: "/compliance" },
   { title: "LGPD", href: "/lgpd" },
-  { title: "Canal de Denúncias", href: "/canal-denuncia" },
+  { title: "Canal de Denúncias", href: "/canal-de-denuncia" },
   { title: "Suporte", href: "/suporte" },
   { title: "FAQ", href: "/faq" },
 ];
@@ -34,9 +34,12 @@ export function Footer() {
             {/* Logo */}
             <img
               src="/logo.png"
-              alt="Titanium Implantes"
+              alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
               className="w-[160px] md:w-[180px] h-auto object-contain mb-4"
               data-testid="logo-footer"
+              width="180"
+              height="54"
+              loading="lazy"
             />
 
             {/* Slogan */}
@@ -57,9 +60,10 @@ export function Footer() {
 
           {/* Coluna 2: Links de Navegação */}
           <div className="flex flex-col text-center md:text-left">
-            {/* Título */}
-            <h3
-              className="mb-3"
+            {/* Título "Início" como link */}
+            <a
+              href="/"
+              className="mb-3 no-underline hover:opacity-80 transition-opacity"
               style={{
                 fontFamily: "Inter, Lato, sans-serif",
                 fontWeight: 600,
@@ -67,18 +71,18 @@ export function Footer() {
                 color: "#0d70dc",
                 marginBottom: "12px",
               }}
-              data-testid="text-footer-nav-title"
+              data-testid="link-footer-inicio-title"
             >
               Início
-            </h3>
+            </a>
 
-            {/* Links */}
+            {/* Links (excluindo "Início" que já está no título) */}
             <ul>
-              {navigationLinks.map((link, index) => (
+              {navigationLinks.filter(link => link.href !== "/").map((link, index, filteredLinks) => (
                 <li
                   key={link.href}
                   style={{
-                    marginBottom: index < navigationLinks.length - 1 ? "12px" : "0",
+                    marginBottom: index < filteredLinks.length - 1 ? "12px" : "0",
                   }}
                 >
                   <a
@@ -200,17 +204,19 @@ export function Footer() {
               {/* Logo ABRAIDI */}
               <img
                 src={abradiLogo}
-                alt="ABRAIDI"
+                alt="ABRAIDI - Associação Brasileira de Importadores e Distribuidores de Implantes"
                 className="w-[70px] md:w-[90px] lg:w-[120px] h-[130px] object-contain"
                 data-testid="logo-abraidi"
+                loading="lazy"
               />
 
               {/* Logo ÉticaSaúde */}
               <img
                 src={eticaesaudeLogo}
-                alt="ÉticaSaúde"
+                alt="ÉticaSaúde - Certificação de ética e compliance em saúde"
                 className="w-[70px] md:w-[90px] lg:w-[120px] h-[130px] object-contain"
                 data-testid="logo-eticasaude"
+                loading="lazy"
               />
             </div>
           </div>
