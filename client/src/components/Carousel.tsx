@@ -132,32 +132,27 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
           >
             <img
               src={slide.image}
-              alt={slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
+              alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
               className="w-full h-full object-cover"
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === 0 ? "high" : "auto"}
             />
 
-            {/* Overlay apenas se houver conteúdo de texto */}
-            {hasSlideContent && (
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40 pointer-events-none" />
-            )}
-
             {/* Container de conteúdo apenas se houver texto */}
             {hasSlideContent && (
               <div className="absolute inset-0 flex items-center pointer-events-none">
                 <div className="max-w-7xl mx-auto px-6 w-full">
-                  <div className="max-w-2xl text-primary-foreground">
+                  <div className="max-w-2xl text-white">
                     {slide.title && (
                       <h2
-                        className="text-3xl md:text-5xl font-bold mb-4 leading-tight"
+                        className="text-3xl md:text-5xl font-bold mb-4 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                         data-testid={`carousel-title-${index}`}
                       >
                         {slide.title}
                       </h2>
                     )}
                     {slide.subtitle && (
-                      <p className="text-lg md:text-xl mb-8 opacity-95" data-testid={`carousel-subtitle-${index}`}>
+                      <p className="text-lg md:text-xl mb-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]" data-testid={`carousel-subtitle-${index}`}>
                         {slide.subtitle}
                       </p>
                     )}
