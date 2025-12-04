@@ -80,11 +80,12 @@ export function AreasAtuacaoSection() {
                 {/* Imagem */}
                 <img
                   src={especialidade.imagem}
-                  alt={especialidade.titulo}
+                  alt={`Soluções em implantes cirúrgicos para ${especialidade.titulo} - Titanium Implantes Cuiabá-MT`}
                   className="w-full object-cover h-[140px] md:h-[180px]"
                   style={{
                     borderRadius: "20px 20px 0 0",
                   }}
+                  loading="lazy"
                   data-testid={`img-especialidade-${especialidade.id}`}
                 />
 
@@ -95,8 +96,9 @@ export function AreasAtuacaoSection() {
                 >
                   <img
                     src={especialidade.icone}
-                    alt={`Ícone ${especialidade.titulo}`}
+                    alt={`Ícone representativo de ${especialidade.titulo} - Titanium Implantes`}
                     className="object-contain w-[34px] h-[34px] md:w-[40px] md:h-[40px]"
+                    loading="lazy"
                   />
                 </div>
               </div>
