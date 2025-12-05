@@ -5,25 +5,24 @@ export function CertificacoesSection() {
 
   return (
     <section
-      className="relative w-full bg-cover bg-no-repeat bg-center"
+      className="relative w-full pt-12 pb-12 md:bg-cover md:bg-no-repeat md:bg-center md:pt-20 md:pb-20"
       style={{
         backgroundImage: `url(${c.imagem})`,
-        paddingTop: "80px",
-        paddingBottom: "80px",
       }}
       data-testid="section-certificacoes"
     >
-      <div className="mx-auto max-w-[1280px] px-8">
+      {/* Overlay azul escuro no mobile */}
+      <div className="absolute inset-0 bg-[#01155a] md:hidden" />
+      <div className="relative mx-auto max-w-[600px] px-6 text-center md:max-w-[1280px] md:px-8 md:text-left">
         {/* Conteúdo */}
-        <div className="flex flex-col md:items-end">
+        <div className="flex flex-col items-center md:items-end">
           {/* Tag/Badge */}
-          <div style={{ marginBottom: "24px" }}>
+          <div style={{ marginBottom: "20px" }}>
             <span
-              className="inline-block bg-[#0d70dc] text-white uppercase rounded-full"
+              className="inline-block bg-[#1E4DD9] text-white uppercase rounded-full text-xs md:bg-[#0d70dc] md:text-sm"
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: 600, // Semibold
-                fontSize: "14px",
                 borderRadius: "999px",
                 padding: "6px 18px",
                 display: "inline-flex",
@@ -37,9 +36,9 @@ export function CertificacoesSection() {
             </span>
           </div>
 
-          {/* Título H2 para SEO */}
+          {/* Título H2 para SEO - Oculto no mobile */}
           <h2
-            className="text-[#1A1A1A]"
+            className="hidden text-[#1A1A1A] md:block"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 700,
@@ -55,13 +54,11 @@ export function CertificacoesSection() {
 
           {/* Texto Institucional */}
           <p
-            className="text-[#1A1A1A]"
+            className="text-white text-center leading-[1.4] max-w-[90%] md:text-[#1A1A1A] md:leading-[1.6] md:max-w-[540px]"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 400, // Regular
               fontSize: "20px",
-              lineHeight: 1.6,
-              maxWidth: "540px",
               marginBottom: "32px",
             }}
             data-testid="text-certificacoes-institucional"
@@ -70,9 +67,9 @@ export function CertificacoesSection() {
           </p>
         </div>
 
-        {/* Botão centralizado horizontalmente na seção inteira */}
+        {/* Botão centralizado horizontalmente na seção inteira - Oculto no mobile */}
         {c.mostrarBotao && c.textoBotao && c.linkBotao && (
-          <div className="flex justify-center w-full mt-8">
+          <div className="hidden justify-center w-full mt-8 md:flex">
             <a
               href={c.linkBotao}
               className="inline-flex items-center justify-center bg-[#0d70dc] text-white rounded-full hover:bg-[#0d70dc] transition uppercase"
