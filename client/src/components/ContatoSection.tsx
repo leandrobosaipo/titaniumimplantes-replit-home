@@ -103,26 +103,24 @@ export function ContatoSection() {
 
   return (
     <section
-      className="relative w-full pt-16 pb-16 px-6 md:pt-24 md:pb-24 md:px-12"
+      className="relative w-full pt-12 pb-12 px-6 md:pt-24 md:pb-24 md:px-12 flex flex-col items-center md:block"
       style={{
         backgroundColor: "#F4F5F7",
       }}
       data-testid="section-contato"
     >
-      <div className="mx-auto max-w-[1280px]">
+      <div className="mx-auto w-full md:max-w-[1280px]">
         {/* Grid 2 colunas no desktop, 1 coluna no mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-[45%_55%] gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[45%_55%] gap-8 md:gap-12 items-center justify-items-center md:justify-items-start">
           {/* Coluna Esquerda: Título e Descrição */}
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             {/* Título */}
             <h2
-              className="text-[#0d70dc] text-[32px] md:text-[42px] mb-6"
+              className="text-[24px] md:text-[42px] text-[#0A2473] md:text-[#0d70dc] text-center md:text-left mb-8 md:mb-6"
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: 700,
-                lineHeight: 1.2,
-                maxWidth: "420px",
-                marginBottom: "24px",
+                lineHeight: 1.3,
               }}
               data-testid="text-contato-title"
             >
@@ -131,7 +129,7 @@ export function ContatoSection() {
 
             {/* Descrição */}
             <p
-              className="text-[#1A1A1A] text-[18px]"
+              className="hidden md:block text-[#1A1A1A] text-[18px]"
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: 400,
@@ -147,7 +145,7 @@ export function ContatoSection() {
           {/* Coluna Direita: Formulário */}
           <div className="w-full">
             <div
-              className="bg-white rounded-[24px] p-10 shadow-lg w-full"
+              className="bg-white rounded-[24px] p-8 md:p-10 shadow-lg w-full max-w-[480px] md:max-w-none"
               data-testid="form-container"
             >
               <Form {...form}>
@@ -303,7 +301,7 @@ export function ContatoSection() {
                             {...field}
                             placeholder="Sua mensagem"
                             style={{
-                              height: "160px",
+                              minHeight: "140px",
                               backgroundColor: "#F1F4F9",
                               border: "none",
                               borderRadius: "8px",
@@ -323,22 +321,20 @@ export function ContatoSection() {
                   />
 
                   {/* Botão Enviar */}
-                  <div className="flex justify-center md:justify-end">
+                  <div className="flex justify-center md:justify-end w-full md:w-auto">
                     <Button
                       type="submit"
                       disabled={isSubmitting}
                       style={{
-                        backgroundColor: isSubmitting ? "#A0AEC0" : "#0d70dc",
+                        backgroundColor: isSubmitting ? "#A0AEC0" : "#1E4DD9",
                         color: "#FFFFFF",
                         fontFamily: "Lato, sans-serif",
-                        fontWeight: 600,
+                        fontWeight: 700,
                         fontSize: "16px",
-                        borderRadius: "999px",
-                        padding: "12px 32px",
                         textTransform: "uppercase",
                         letterSpacing: "0.5px",
                       }}
-                      className="hover:bg-[#0d70dc] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full md:w-auto rounded-xl md:rounded-full py-3.5 md:py-3 px-0 md:px-8 hover:bg-[#1E4DD9] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       data-testid="button-enviar"
                     >
                       {isSubmitting ? "ENVIANDO..." : "ENVIAR"}
