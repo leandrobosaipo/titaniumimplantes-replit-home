@@ -5,13 +5,12 @@ export function QuemSomosSection() {
 
   return (
     <section
-      className="relative w-full bg-cover bg-no-repeat"
+      className="relative w-full bg-cover bg-no-repeat pt-0 md:pt-[120px]"
       style={{
         backgroundImage: `url(${c.backgroundImage})`,
         backgroundPosition: "right center",
         minHeight: "760px",
         maxHeight: "820px",
-        paddingTop: "120px",
         paddingBottom: "140px",
       }}
       data-testid="section-quem-somos"

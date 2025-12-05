@@ -110,7 +110,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
 
   return (
     <section
-      className="relative w-full h-[350px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group mt-[70px] lg:mt-[130px]"
+      className="relative w-full h-[350px] sm:h-[350px] md:h-[500px] lg:h-[600px] overflow-hidden bg-muted group mt-[70px] lg:mt-[130px]"
       data-testid="section-carousel"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
