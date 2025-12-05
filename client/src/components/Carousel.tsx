@@ -130,10 +130,22 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
               }`}
             data-testid={`carousel-slide-${index}`}
           >
+            {/* Imagem Mobile - visível apenas até breakpoint md */}
+            {slide.imageMobile && (
+              <img
+                src={slide.imageMobile}
+                alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
+                className="w-full h-full object-cover block md:hidden"
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchpriority={index === 0 ? "high" : "auto"}
+              />
+            )}
+            
+            {/* Imagem Desktop - visível a partir de breakpoint md */}
             <img
               src={slide.image}
               alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${slide.imageMobile ? "hidden md:block" : ""}`}
               loading={index === 0 ? "eager" : "lazy"}
               fetchpriority={index === 0 ? "high" : "auto"}
             />
