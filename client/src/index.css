@@ -15,6 +15,10 @@
   border-width: 0;
 }
 
+.font-lato {
+  font-family: "Lato, sans-serif";
+}
+
 /* LIGHT MODE */
 :root {
   --button-outline: rgba(0,0,0, .10);
