@@ -103,6 +103,7 @@ export function ContatoSection() {
 
   return (
     <section
+      id="contato"
       className="relative w-full pt-12 pb-12 px-6 md:pt-24 md:pb-24 md:px-12 flex flex-col items-center md:block"
       style={{
         backgroundColor: "#F4F5F7",
@@ -349,4 +350,3 @@ export function ContatoSection() {
     </section>
   );
 }
-

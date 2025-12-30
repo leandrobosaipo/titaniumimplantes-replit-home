@@ -15,15 +15,6 @@ import slide3Mobile from "@assets/slide-medtronic-mobile.jpg";
 export const carouselConfig: CarouselConfig = {
   slides: [
     {
-      id: "1",
-      image: slide1,
-      imageMobile: slide1Mobile,
-      title: "",
-      subtitle: "",
-      buttonText: "",
-      buttonLink: "/produtos",
-    },
-    {
       id: "2",
       image: slide2,
       imageMobile: slide2Mobile,
@@ -32,6 +23,7 @@ export const carouselConfig: CarouselConfig = {
       buttonText: "",
       buttonLink: "",
     },
+    
     {
       id: "3",
       image: slide3,
@@ -40,6 +32,14 @@ export const carouselConfig: CarouselConfig = {
       subtitle: "",
       buttonText: "",
       buttonLink: "",
+    },{
+      id: "1",
+      image: slide1,
+      imageMobile: slide1Mobile,
+      title: "",
+      subtitle: "",
+      buttonText: "",
+      buttonLink: "/produtos",
     },
   ],
   autoplayInterval: 5000,
