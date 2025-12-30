@@ -5,7 +5,7 @@ export function AreasAtuacaoSection() {
 
   return (
     <section
-      className="relative w-full bg-white"
+      className="relative w-full bg-[#f4efeb] md:bg-white"
       style={{
         paddingTop: "80px",
         paddingBottom: "100px",
@@ -53,7 +53,7 @@ export function AreasAtuacaoSection() {
 
           {/* Subtítulo */}
           <p
-            className="text-[#0a324c] text-[22px] md:text-[28px] lg:text-[32px] mb-15"
+            className="hidden md:block text-[#0a324c] text-[22px] md:text-[28px] lg:text-[32px] mb-15"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 400, // Regular para o texto completo
@@ -72,7 +72,7 @@ export function AreasAtuacaoSection() {
           {c.especialidades.map((especialidade) => (
             <div
               key={especialidade.id}
-              className="relative"
+              className="relative bg-white rounded-xl shadow-lg overflow-hidden"
               data-testid={`card-especialidade-${especialidade.id}`}
             >
               {/* Container da imagem com posição relativa */}
@@ -81,10 +81,7 @@ export function AreasAtuacaoSection() {
                 <img
                   src={especialidade.imagem}
                   alt={`Soluções em implantes cirúrgicos para ${especialidade.titulo} - Titanium Implantes Cuiabá-MT`}
-                  className="w-full object-cover h-[140px] md:h-[180px]"
-                  style={{
-                    borderRadius: "20px 20px 0 0",
-                  }}
+                  className="w-full object-cover h-[140px] md:h-[180px] rounded-t-xl"
                   loading="lazy"
                   data-testid={`img-especialidade-${especialidade.id}`}
                 />
@@ -104,14 +101,13 @@ export function AreasAtuacaoSection() {
               </div>
 
               {/* Conteúdo do card (espaçamento para o ícone sobreposto) */}
-              <div className="mt-8">
+              <div className="mt-8 px-4 pb-4">
                 {/* Título do card */}
                 <h3
-                  className="text-[#0a324c]"
+                  className="text-[#0a324c] text-[45px] md:text-[25px]"
                   style={{
                     fontFamily: "Lato, sans-serif",
                     fontWeight: 700, // Bold
-                    fontSize: "25px",
                     marginBottom: "8px",
                   }}
                   data-testid={`text-card-title-${especialidade.id}`}
@@ -121,7 +117,7 @@ export function AreasAtuacaoSection() {
 
                 {/* Descrição do card */}
                 <p
-                  className="text-[#4A4A4A]"
+                  className="hidden md:block text-[#4A4A4A]"
                   style={{
                     fontFamily: "Lato, sans-serif",
                     fontWeight: 400, // Regular

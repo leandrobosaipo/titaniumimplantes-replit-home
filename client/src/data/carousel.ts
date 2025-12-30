@@ -2,9 +2,9 @@ import type { CarouselConfig } from "@/types/carousel";
 import slide1 from "@assets/Titniun_Mobile_Banner_1920x350-primeiro-min.jpg";
 import slide2 from "@assets/Titniun_Mobile_Banner_1920x350-segundo-min.jpg";
 import slide3 from "@assets/Titniun_Mobile_Banner_1920x350-terceiro-min.jpg";
-import slide1Mobile from "@assets/slide-globus-min-mobile.jpg";
-import slide2Mobile from "@assets/slide-certificada-mobile.jpg";
-import slide3Mobile from "@assets/slide-medtronic-mobile.jpg"; 
+import slide1Mobile from "@assets/Banner 01-min.png";
+import slide2Mobile from "@assets/Banner 02-min.png";
+import slide3Mobile from "@assets/Banner 03-min.png"; 
 
 /**
  * Configuração dinâmica do carrossel
