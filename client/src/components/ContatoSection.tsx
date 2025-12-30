@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { contatoConfig as c } from "@/data/contato";
 import { Input } from "@/components/ui/input";
@@ -42,6 +43,25 @@ function maskPhone(value: string): string {
       .replace(/-$/, "");
   }
 }
+
+// Componente animado para FormItem com shake quando há erro
+const AnimatedFormItem = ({ 
+  children, 
+  hasError, 
+  ...props 
+}: React.HTMLAttributes<HTMLDivElement> & { hasError?: boolean }) => {
+  return (
+    <motion.div
+      animate={hasError ? {
+        x: [0, -10, 10, -10, 10, 0],
+      } : {}}
+      transition={{ duration: 0.5 }}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 export function ContatoSection() {
   if (!c.ativo) return null;
@@ -102,13 +122,16 @@ export function ContatoSection() {
   };
 
   return (
-    <section
+    <motion.section
       id="contato"
       className="relative w-full pt-12 pb-12 px-6 md:pt-24 md:pb-24 md:px-12 flex flex-col items-center md:block"
       style={{
         backgroundColor: "#F4F5F7",
       }}
       data-testid="section-contato"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="mx-auto w-full md:max-w-[1280px]">
         {/* Grid 2 colunas no desktop, 1 coluna no mobile */}
@@ -117,7 +140,7 @@ export function ContatoSection() {
           <div className="flex flex-col w-full">
             {/* Título */}
             <h2
-              className="text-[24px] md:text-[42px] text-[#0A2473] md:text-[#0d70dc] text-center md:text-left mb-8 md:mb-6"
+              className="text-[28px] md:text-[42px] text-[#0A2473] md:text-[#0d70dc] text-center md:text-left mb-8 md:mb-6"
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: 700,
@@ -144,10 +167,13 @@ export function ContatoSection() {
           </div>
 
           {/* Coluna Direita: Formulário */}
-          <div className="w-full">
-            <div
-              className="bg-white rounded-[24px] p-8 md:p-10 shadow-lg w-full max-w-[480px] md:max-w-none"
+          <div className="w-full flex justify-center md:block">
+            <motion.div
+              className="bg-white rounded-[24px] p-8 md:p-10 shadow-lg w-full max-w-[480px] md:max-w-none mx-auto"
               data-testid="form-container"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             >
               <Form {...form}>
                 <form
@@ -158,8 +184,9 @@ export function ContatoSection() {
                   <FormField
                     control={form.control}
                     name="nome"
-                    render={({ field }) => (
-                      <FormItem>
+                    render={({ field, fieldState }) => (
+                      <AnimatedFormItem hasError={!!fieldState.error}>
+                        <FormItem>
                         <FormLabel
                           style={{
                             fontSize: "14px",
@@ -185,12 +212,19 @@ export function ContatoSection() {
                               color: "#1A1A1A",
                               fontFamily: "Lato, sans-serif",
                             }}
-                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-colors focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0"
+                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0 focus-visible:scale-[1.02] focus-visible:shadow-lg"
                             data-testid="input-nome"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={fieldState.error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <FormMessage />
+                        </motion.div>
                       </FormItem>
+                      </AnimatedFormItem>
                     )}
                   />
 
@@ -198,8 +232,9 @@ export function ContatoSection() {
                   <FormField
                     control={form.control}
                     name="email"
-                    render={({ field }) => (
-                      <FormItem>
+                    render={({ field, fieldState }) => (
+                      <AnimatedFormItem hasError={!!fieldState.error}>
+                        <FormItem>
                         <FormLabel
                           style={{
                             fontSize: "14px",
@@ -226,12 +261,19 @@ export function ContatoSection() {
                               color: "#1A1A1A",
                               fontFamily: "Lato, sans-serif",
                             }}
-                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-colors focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0"
+                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0 focus-visible:scale-[1.02] focus-visible:shadow-lg"
                             data-testid="input-email"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={fieldState.error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <FormMessage />
+                        </motion.div>
                       </FormItem>
+                      </AnimatedFormItem>
                     )}
                   />
 
@@ -239,8 +281,9 @@ export function ContatoSection() {
                   <FormField
                     control={form.control}
                     name="telefone"
-                    render={({ field }) => (
-                      <FormItem>
+                    render={({ field, fieldState }) => (
+                      <AnimatedFormItem hasError={!!fieldState.error}>
+                        <FormItem>
                         <FormLabel
                           style={{
                             fontSize: "14px",
@@ -271,12 +314,19 @@ export function ContatoSection() {
                               color: "#1A1A1A",
                               fontFamily: "Lato, sans-serif",
                             }}
-                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-colors focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0"
+                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0 focus-visible:scale-[1.02] focus-visible:shadow-lg"
                             data-testid="input-telefone"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={fieldState.error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <FormMessage />
+                        </motion.div>
                       </FormItem>
+                      </AnimatedFormItem>
                     )}
                   />
 
@@ -284,8 +334,9 @@ export function ContatoSection() {
                   <FormField
                     control={form.control}
                     name="mensagem"
-                    render={({ field }) => (
-                      <FormItem>
+                    render={({ field, fieldState }) => (
+                      <AnimatedFormItem hasError={!!fieldState.error}>
+                        <FormItem>
                         <FormLabel
                           style={{
                             fontSize: "14px",
@@ -312,41 +363,66 @@ export function ContatoSection() {
                               fontFamily: "Lato, sans-serif",
                               resize: "vertical",
                             }}
-                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-colors focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0"
+                            className="placeholder:text-[#A0AEC0] hover:bg-[#E8EDF5] transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#0d70dc] focus-visible:ring-offset-0 focus-visible:scale-[1.02] focus-visible:shadow-lg"
                             data-testid="textarea-mensagem"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={fieldState.error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <FormMessage />
+                        </motion.div>
                       </FormItem>
+                      </AnimatedFormItem>
                     )}
                   />
 
                   {/* Botão Enviar */}
-                  <div className="flex justify-center md:justify-end w-full md:w-auto">
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      style={{
-                        backgroundColor: isSubmitting ? "#A0AEC0" : "#1E4DD9",
-                        color: "#FFFFFF",
-                        fontFamily: "Lato, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "16px",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.5px",
-                      }}
-                      className="w-full md:w-auto rounded-xl md:rounded-full py-3.5 md:py-3 px-0 md:px-8 hover:bg-[#1E4DD9] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      data-testid="button-enviar"
+                  <div className="flex justify-center md:justify-end w-full md:w-auto mt-2">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      {isSubmitting ? "ENVIANDO..." : "ENVIAR"}
-                    </Button>
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        style={{
+                          backgroundColor: isSubmitting ? "#A0AEC0" : "#1E4DD9",
+                          color: "#FFFFFF",
+                          fontFamily: "Lato, sans-serif",
+                          fontWeight: 700,
+                          fontSize: "16px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          borderRadius: "999px",
+                          padding: "14px 32px",
+                          minHeight: "48px",
+                        }}
+                        className="w-full md:w-auto hover:bg-[#1E4DD9] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        data-testid="button-enviar"
+                      >
+                        {isSubmitting ? (
+                          <motion.span
+                            animate={{ opacity: [1, 0.5, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          >
+                            ENVIANDO...
+                          </motion.span>
+                        ) : (
+                          "ENVIAR"
+                        )}
+                      </Button>
+                    </motion.div>
                   </div>
                 </form>
               </Form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

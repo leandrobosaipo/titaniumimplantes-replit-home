@@ -12,9 +12,9 @@ export function ExcelenciaMateriaisSection() {
         {/* Versão Mobile: Badge e Título centralizados, KPIs horizontais */}
         <div className="md:hidden">
           {/* Badge centralizado */}
-          <div className="mb-6">
+          <div className="mb-6 flex justify-center">
             <span
-              className="inline-block bg-[#01155a] text-white uppercase rounded-full text-xs md:text-sm mx-auto md:mx-0"
+              className="inline-block bg-[#01155a] text-white uppercase rounded-full text-lg md:text-sm mx-auto md:mx-0"
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: 600,
@@ -33,7 +33,7 @@ export function ExcelenciaMateriaisSection() {
 
           {/* Título centralizado */}
           <h2
-            className="text-white text-2xl md:text-[36px] lg:text-[56px] text-center md:text-left mb-8 md:mb-6"
+            className="text-white text-3xl md:text-[36px] lg:text-[56px] text-center md:text-left mb-8 md:mb-6"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 800,
@@ -49,7 +49,7 @@ export function ExcelenciaMateriaisSection() {
             {c.kpis.map((kpi) => (
               <div
                 key={kpi.id}
-                className="grid grid-cols-2 rounded-xl overflow-hidden"
+                className="grid grid-cols-[3fr_2fr] rounded-xl overflow-hidden"
                 data-testid={`card-kpi-${kpi.id}`}
               >
                 {/* Lado Esquerdo: Texto (Azul Escuro) */}
@@ -62,7 +62,7 @@ export function ExcelenciaMateriaisSection() {
                   <h3
                     className="text-white"
                     style={{
-                      fontSize: "13px",
+                      fontSize: "18px",
                       fontWeight: 700,
                       lineHeight: 1.3,
                     }}
@@ -73,7 +73,7 @@ export function ExcelenciaMateriaisSection() {
                   <p
                     className="text-white"
                     style={{
-                      fontSize: "11px",
+                      fontSize: "16px",
                       opacity: 0.9,
                       lineHeight: 1.3,
                       marginTop: "4px",
@@ -93,7 +93,7 @@ export function ExcelenciaMateriaisSection() {
                   <div
                     className="text-[#0d70dc]"
                     style={{
-                      fontSize: "42px",
+                      fontSize: "52px",
                       fontWeight: 800,
                       lineHeight: 1,
                     }}
@@ -104,7 +104,7 @@ export function ExcelenciaMateriaisSection() {
                   <p
                     className="text-[#0d70dc] mt-1"
                     style={{
-                      fontSize: "14px",
+                      fontSize: "18px",
                       fontWeight: 500,
                       lineHeight: 1.4,
                     }}

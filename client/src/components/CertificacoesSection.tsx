@@ -19,7 +19,7 @@ export function CertificacoesSection() {
           {/* Tag/Badge */}
           <div style={{ marginBottom: "20px" }}>
             <span
-              className="inline-block bg-[#1E4DD9] text-white uppercase rounded-full text-xs md:bg-[#0d70dc] md:text-sm"
+              className="inline-block bg-[#1E4DD9] text-white uppercase rounded-full text-lg md:bg-[#0d70dc] md:text-sm"
               style={{
                 fontFamily: "Lato, sans-serif",
                 fontWeight: 600, // Semibold
@@ -54,11 +54,10 @@ export function CertificacoesSection() {
 
           {/* Texto Institucional */}
           <p
-            className="text-white text-center leading-[1.4] max-w-[90%] md:text-[#1A1A1A] md:leading-[1.6] md:max-w-[540px]"
+            className="text-white text-center leading-[1.4] max-w-[90%] text-2xl md:text-[#1A1A1A] md:text-[20px] md:leading-[1.6] md:max-w-[540px]"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 400, // Regular
-              fontSize: "20px",
               marginBottom: "32px",
             }}
             data-testid="text-certificacoes-institucional"
