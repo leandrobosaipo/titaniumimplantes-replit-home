@@ -1,10 +1,10 @@
 import type { CarouselConfig } from "@/types/carousel";
-import slide1 from "@assets/slide-globus-min.jpg";
-import slide2 from "@assets/slide-certificada.jpg";
-import slide3 from "@assets/slide-medtronic.jpg";
+import slide1 from "@assets/Titniun_Mobile_Banner_1920x350-primeiro-min.jpg";
+import slide2 from "@assets/Titniun_Mobile_Banner_1920x350-segundo-min.jpg";
+import slide3 from "@assets/Titniun_Mobile_Banner_1920x350-terceiro-min.jpg";
 import slide1Mobile from "@assets/slide-globus-min-mobile.jpg";
 import slide2Mobile from "@assets/slide-certificada-mobile.jpg";
-import slide3Mobile from "@assets/slide-medtronic-mobile.jpg";
+import slide3Mobile from "@assets/slide-medtronic-mobile.jpg"; 
 
 /**
  * Configuração dinâmica do carrossel
@@ -16,7 +16,7 @@ export const carouselConfig: CarouselConfig = {
   slides: [
     {
       id: "2",
-      image: slide2,
+      image: slide1,
       imageMobile: slide2Mobile,
       title: "",
       subtitle: "",
@@ -26,7 +26,7 @@ export const carouselConfig: CarouselConfig = {
     
     {
       id: "3",
-      image: slide3,
+      image: slide2,
       imageMobile: slide3Mobile,
       title: "",
       subtitle: "",
@@ -34,7 +34,7 @@ export const carouselConfig: CarouselConfig = {
       buttonLink: "",
     },{
       id: "1",
-      image: slide1,
+      image: slide3,
       imageMobile: slide1Mobile,
       title: "",
       subtitle: "",
