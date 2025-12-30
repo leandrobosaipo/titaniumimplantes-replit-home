@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ const menuItems = [
   { label: "Produtos", path: "/produtos" },
   { label: "Canal de Denúncia", path: "/canal-de-denuncia" },
   { label: "LGPD", path: "/lgpd" },
-  { label: "Contato", path: "/contato" },
+  { label: "Contato", path: "/#contato" },
 ];
 
 const socialLinks = [
@@ -22,8 +22,33 @@ const socialLinks = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const scrollToContato = () => {
+    const contatoEl =
+      document.getElementById("contato") ||
+      document.getElementById("contato-section");
+    if (contatoEl) {
+      contatoEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleContatoClick = (event?: MouseEvent<HTMLAnchorElement>) => {
+    event?.preventDefault();
+    setMobileMenuOpen(false);
+    setLocation("/#contato");
+    // Garante o scroll após o roteamento para a home
+    setTimeout(scrollToContato, 50);
+  };
+
+  const handleDefaultNav = (path: string) => {
+    setMobileMenuOpen(false);
+    // scrolla para o topo depois da troca de rota
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 30);
+  };
 
   // Hook de scroll detection
   useEffect(() => {
@@ -80,7 +105,7 @@ export function Header() {
           <div className="hidden lg:block relative h-full">
             {/* Linha Superior: Logo + Ícones Sociais - Sobe parcialmente */}
             <div
-              className="flex justify-between items-center py-4 pt-7 transition-opacity duration-300"
+              className="flex justify-between items-center py-4 pt-7 transition-opacity duration-300 inset-x-8 md:inset-x-12 w-full"
               style={{
                 position: "relative",
                 top: "0px",
@@ -136,18 +161,28 @@ export function Header() {
                 }}
                 data-testid="nav-desktop"
               >
-                <ul className="flex items-center gap-10 md:gap-12">
+                <ul className="flex items-center gap-4">
                   {menuItems.map((item) => {
                     const isActive = location === item.path;
-                    return (
-                      <li key={item.path}>
-                        <Link
-                          href={item.path}
-                          data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                          className={`px-4 py-2 rounded-sm font-semibold text-sm transition-all ${
-                            isActive
-                              ? "bg-white text-[#0d70dc] font-bold"
-                              : "text-white hover:opacity-80"
+                  const isContato = item.label === "Contato";
+                  const linkProps = isContato
+                    ? {
+                        href: "/#contato",
+                        onClick: handleContatoClick,
+                      }
+                    : {
+                        href: item.path,
+                        onClick: () => handleDefaultNav(item.path),
+                      };
+                  return (
+                    <li key={item.path}>
+                      <Link
+                        {...linkProps}
+                        data-testid={`link-nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
+                        className={`px-4 py-2 rounded-sm font-semibold text-lg transition-all ${
+                          isActive
+                            ? "bg-white text-[#0d70dc] font-bold"
+                            : "text-white hover:opacity-80"
                           }`}
                           style={{
                             fontFamily: "Inter, sans-serif",
@@ -177,10 +212,20 @@ export function Header() {
               <ul className="space-y-2">
                 {menuItems.map((item) => {
                   const isActive = location === item.path;
+                  const isContato = item.label === "Contato";
+                  const linkProps = isContato
+                    ? {
+                        href: "/#contato",
+                        onClick: handleContatoClick,
+                      }
+                    : {
+                        href: item.path,
+                        onClick: () => handleDefaultNav(item.path),
+                      };
                   return (
                     <li key={item.path}>
                       <Link
-                        href={item.path}
+                        {...linkProps}
                         onClick={() => setMobileMenuOpen(false)}
                         data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                         className={`block px-4 py-3 rounded-sm font-medium transition-all ${
@@ -305,15 +350,25 @@ export function Header() {
             <ul className="space-y-2">
               {menuItems.map((item) => {
                 const isActive = location === item.path;
-                return (
-                  <li key={item.path}>
-                    <Link
-                      href={item.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      data-testid={`link-mobile-compact-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
-                      className={`block px-4 py-3 rounded-sm font-medium transition-all ${
-                        isActive
-                          ? "bg-white text-[#0d70dc] font-bold"
+                  const isContato = item.label === "Contato";
+                  const linkProps = isContato
+                    ? {
+                        href: "/#contato",
+                        onClick: handleContatoClick,
+                      }
+                    : {
+                        href: item.path,
+                        onClick: () => handleDefaultNav(item.path),
+                      };
+                  return (
+                    <li key={item.path}>
+                      <Link
+                        {...linkProps}
+                        onClick={() => setMobileMenuOpen(false)}
+                        data-testid={`link-mobile-compact-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
+                        className={`block px-4 py-3 rounded-sm font-medium transition-all ${
+                          isActive
+                            ? "bg-white text-[#0d70dc] font-bold"
                           : "text-white hover:bg-white/10"
                       }`}
                     >

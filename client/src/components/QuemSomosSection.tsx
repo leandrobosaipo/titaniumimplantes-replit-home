@@ -5,13 +5,11 @@ export function QuemSomosSection() {
 
   return (
     <section
-      className="relative w-full bg-cover bg-no-repeat pt-0 md:pt-[120px]"
+      className="relative w-full bg-cover bg-no-repeat pt-0 md:pt-[120px] min-h-[400px] md:min-h-[760px] pb-16 md:pb-[140px]"
       style={{
         backgroundImage: `url(${c.backgroundImage})`,
         backgroundPosition: "right center",
-        minHeight: "760px",
         maxHeight: "820px",
-        paddingBottom: "140px",
       }}
       data-testid="section-quem-somos"
     >
@@ -28,11 +26,11 @@ export function QuemSomosSection() {
       />
 
       {/* Container centralizado com 1280px max-width e 32px padding lateral */}
-      <div className="relative mx-auto max-w-[1280px] px-8">
+      <div className="relative mx-auto max-w-[1280px] px-8 h-full flex items-center">
         {/* Conteúdo alinhado à esquerda */}
-        <div className="max-w-[640px] mb-8">
+        <div className="max-w-[640px] mb-8 w-full flex flex-col justify-center md:block">
           {/* Selo "QUEM SOMOS" */}
-          <div className="mb-4">
+          <div className="flex justify-center mb-4 mt-8 md:mt-0">
             <span
               className="inline-block bg-[#0d70dc] text-white uppercase rounded-full text-[18px] md:text-[18px]"
               style={{
@@ -56,7 +54,7 @@ export function QuemSomosSection() {
 
           {/* Título Principal */}
           <h2
-            className="text-[#0a324c] mb-6 text-[32px] md:text-[40px] lg:text-[40px]"
+            className="text-[#0a324c] mb-6 text-[32px] md:text-[40px] lg:text-[40px] text-center md:text-left"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 900, // Heavy
@@ -71,7 +69,7 @@ export function QuemSomosSection() {
 
           {/* Descrição */}
           <p
-            className="text-[#4A4A4A] text-[18px] md:text-[24px] lg:text-[24px]"
+            className="hidden md:block text-[#4A4A4A] text-[18px] md:text-[24px] lg:text-[24px]"
             style={{
               fontFamily: "Lato, sans-serif",
               fontWeight: 400, // Regular
@@ -87,7 +85,7 @@ export function QuemSomosSection() {
 
         {/* Botão centralizado horizontalmente na seção inteira */}
         {c.mostrarBotao && c.textoBotao && c.linkBotao && (
-          <div className="flex justify-center w-full">
+          <div className="hidden md:flex justify-center w-full">
             <a
               href={c.linkBotao}
               className="inline-flex items-center justify-center bg-[#0d70dc] text-white rounded-full hover:opacity-90 transition uppercase text-[14px] md:text-[20px] px-6 md:px-8 py-2 md:py-3 min-h-[36px] md:min-h-[48px]"

@@ -135,7 +135,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
               <img
                 src={slide.imageMobile}
                 alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
-                className="w-full h-full object-contain block md:hidden"
+                className="w-full h-full object-cover object-center block md:hidden"
                 loading={index === 0 ? "eager" : "lazy"}
                 fetchpriority={index === 0 ? "high" : "auto"}
               />
@@ -190,7 +190,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
       <Button
         size="icon"
         variant="ghost"
-        className={`carousel-nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${(isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
+        className={`carousel-nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm text-primary hover:bg-background/60 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${(isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
           }`}
         onClick={prevSlide}
         data-testid="button-carousel-prev"
@@ -203,7 +203,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
       <Button
         size="icon"
         variant="ghost"
-        className={`carousel-nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm text-primary-foreground hover:bg-background/90 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${(isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
+        className={`carousel-nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm text-primary hover:bg-background/60 active:bg-background w-10 h-10 sm:w-12 sm:h-12 transition-opacity duration-300 z-[60] ${(isHovered || isTouchDevice) ? 'carousel-nav-visible' : 'carousel-nav-hidden'
           }`}
         onClick={nextSlide}
         data-testid="button-carousel-next"
