@@ -1,12 +1,13 @@
 import type { QuemSomosPageConfig } from "@/types/quemSomosPage";
 import heroBg from "@assets/bg-quem-somos-home.jpg";
+import heroBgNew from "@assets/Site_251003_Titaniun Implantes_Quem somos.min.jpg";
 import historiaImg from "@assets/home-topo_1762428378908.jpeg";
 import estruturaImg from "@assets/home-slide_1762428378908.jpeg";
 
 export const quemSomosPageConfig: QuemSomosPageConfig = {
   hero: {
     titulo: "Compromisso com a vida, excelência em cada detalhe",
-    backgroundImage: heroBg,
+    backgroundImage: heroBgNew,
   },
   historia: {
     titulo: "Nossa História",

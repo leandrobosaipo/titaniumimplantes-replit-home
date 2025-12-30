@@ -117,7 +117,7 @@ export function AreasAtuacaoSection() {
 
                 {/* Descrição do card */}
                 <p
-                  className="hidden md:block text-[#4A4A4A]"
+                  className="text-[#4A4A4A]"
                   style={{
                     fontFamily: "Lato, sans-serif",
                     fontWeight: 400, // Regular
