@@ -44,13 +44,13 @@ export const canalDenunciaPageConfig: CanalDenunciaPageConfig = {
     cards: [
       {
         numero: 1,
-        icone: "FileText",
+        icone: "Monitor",
         titulo: "O quê",
         descricao: "Descreva a situação",
       },
       {
         numero: 2,
-        icone: "Clock",
+        icone: "Hourglass",
         titulo: "Quando",
         descricao: "Caso esta informação seja possível mensurar",
       },
@@ -62,7 +62,7 @@ export const canalDenunciaPageConfig: CanalDenunciaPageConfig = {
       },
       {
         numero: 4,
-        icone: "FileCheck",
+        icone: "FileText",
         titulo: "Documentos / Provas",
         descricao: "Quais e onde poderiam ser encontradas",
       },

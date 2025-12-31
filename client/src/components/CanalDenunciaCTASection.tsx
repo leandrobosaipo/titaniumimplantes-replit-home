@@ -10,7 +10,7 @@ export function CanalDenunciaCTASection() {
         <Card className="bg-[#0d70dc] border-0 shadow-xl rounded-2xl">
           <CardContent className="p-12 md:p-16 text-center">
             {/* Título */}
-            <h2 className="text-white text-3xl md:text-4xl font-black font-lato mb-4">
+            <h2 className="text-white text-5xl md:text-6xl font-black font-lato mb-4">
               {c.cta.titulo}
             </h2>
 
@@ -27,7 +27,7 @@ export function CanalDenunciaCTASection() {
             <Link href={c.cta.botaoLink}>
               <Button
                 size="lg"
-                className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-12 py-4 rounded-lg text-lg"
+                className="bg-white text-[#01155a] hover:bg-white/90 font-lato font-bold px-12 py-4 rounded-lg text-lg border-0"
               >
                 {c.cta.botaoTexto}
               </Button>

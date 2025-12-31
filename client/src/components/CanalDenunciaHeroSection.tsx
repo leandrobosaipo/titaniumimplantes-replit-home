@@ -8,7 +8,7 @@ export function CanalDenunciaHeroSection() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-8">
         {/* Título de contexto */}
-        <p className="text-white/80 text-sm md:text-base font-lato font-normal mb-4 uppercase tracking-wider">
+        <p className="text-white/80 text-sm md:text-base font-lato font-bold mb-4 uppercase tracking-wider">
           {c.hero.tituloContexto}
         </p>
 
@@ -19,7 +19,7 @@ export function CanalDenunciaHeroSection() {
         </h1>
 
         {/* Texto institucional */}
-        <div className="space-y-6 text-white text-lg md:text-xl font-lato leading-relaxed">
+        <div className="space-y-6 text-white text-lg md:text-xl font-lato font-semibold leading-relaxed">
           {c.hero.texto.map((paragrafo, index) => (
             <p key={index}>{paragrafo}</p>
           ))}
