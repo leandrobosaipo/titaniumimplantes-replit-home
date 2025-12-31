@@ -49,15 +49,15 @@ function getBackgroundText(tipo: string): string {
 export function QuemSomosMVVSection() {
   return (
     <section className="py-16 bg-[#F4F5F7] px-8">
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
         {c.mvv.map((item) => (
           <div
             key={item.id}
-            className="bg-[#01155a] text-white p-10 pt-20 rounded-[40px] flex flex-col shadow-lg relative min-h-[400px]"
+            className="bg-[#01155a] text-white p-10 pt-20 rounded-[40px] flex flex-col shadow-lg relative min-h-[500px] md:min-h-[400px]"
           >
             {/* Texto de fundo vertical */}
             <div
-              className="absolute right-0 bottom-0 pointer-events-none"
+              className="absolute right-0 bottom-0 pointer-events-none rotate-180 pr-0 md:pr-5"
               style={{
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
@@ -65,7 +65,6 @@ export function QuemSomosMVVSection() {
                 fontWeight: 900,
                 color: "rgba(96, 165, 250, 0.15)",
                 fontFamily: "Lato, sans-serif",
-                paddingRight: "20px",
                 paddingBottom: "20px",
               }}
             >
