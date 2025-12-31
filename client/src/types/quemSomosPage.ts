@@ -19,7 +19,7 @@ export interface QuemSomosPageConfig {
   estrutura: {
     titulo: string;
     subtitulo: string;
-    imagem: string;
+    imagem: string | string[];
     textoFinal: string;
     propositoBadge: string;
     propositoTexto: string;

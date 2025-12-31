@@ -1,8 +1,10 @@
 import type { QuemSomosPageConfig } from "@/types/quemSomosPage";
 import heroBg from "@assets/bg-quem-somos-home.jpg";
 import heroBgNew from "@assets/Site_251003_Titaniun Implantes_Quem somos.min.jpg";
-import historiaImg from "@assets/home-topo_1762428378908.jpeg";
+import historiaImg from "@assets/Quem-somos-historia-section.min.jpg";
 import estruturaImg from "@assets/home-slide_1762428378908.jpeg";
+import estruturaSlide1 from "@assets/Quem-somos-estrutura-slide-1.jpg";
+import estruturaSlide2 from "@assets/Quem-somos-estrutura-slide-2.jpg";
 
 export const quemSomosPageConfig: QuemSomosPageConfig = {
   hero: {
@@ -31,13 +33,13 @@ export const quemSomosPageConfig: QuemSomosPageConfig = {
       id: "3",
       tipo: "valores",
       titulo: "Nossos Valores:",
-      descricao: "• Ética e Transparência\n• Qualidade e Segurança\n• Inovação\n• Agilidade e Eficácia\n• Cuidado com a Vida",
+      descricao: "Ética e Transparência: relacionamento baseado em confiança e respeito.\nQualidade e Segurança: produtos certificados e processos auditados.\nInovação: soluções que acompanham os avanços da medicina moderna.\nAgilidade e Eficiência: entregas rápidas e suporte integral.\nCuidado com a Vida: foco em cada paciente, em cada história.",
     },
   ],
   estrutura: {
     titulo: "Nossa estrutura e diferenciais:",
     subtitulo: "Com uma equipe especializada e marcas exclusivas, a Titanium Implantes assegura excelência em todas as etapas, do atendimento à entrega.",
-    imagem: estruturaImg,
+    imagem: [estruturaSlide1, estruturaSlide2],
     textoFinal: "Mantemos certificações ISO, registro ANVISA, e atuamos em conformidade com as diretrizes de Compliance, LGPD e Ética em Saúde, reforçando nosso compromisso com a integridade e a transparência.",
     propositoBadge: "NOSSO PROPÓSITO",
     propositoTexto: "Mais do que distribuir produtos, acreditamos em construir confiança e devolver qualidade de vida. Cada solução entregue representa o resultado de um trabalho guiado por técnica, cuidado e responsabilidade com o futuro da saúde.",
