@@ -19,6 +19,7 @@ export interface Product {
   fullDescription: string;
   mainImage: string;
   images: string[];
+  anvisa?: string; // Número de registro ANVISA (opcional)
 }
 
 /**

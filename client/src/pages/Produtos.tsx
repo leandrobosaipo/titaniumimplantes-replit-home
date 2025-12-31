@@ -11,7 +11,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
@@ -53,94 +53,100 @@ export default function Produtos() {
       />
 
       <div className="mx-auto max-w-[1280px] px-8 pt-[100px] lg:pt-[160px] pb-24">
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
+        <Breadcrumb className="mb-6">
+          <BreadcrumbList className="text-sm text-[#4A4A4A]">
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/">Início</Link>
+                <Link href="/" className="hover:text-[#0a324c] transition-colors">Início</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
-            <BreadcrumbPage>Produtos</BreadcrumbPage>
+            <BreadcrumbPage className="text-[#4A4A4A]">Produtos</BreadcrumbPage>
           </BreadcrumbList>
         </Breadcrumb>
 
-        <h1
-          className="text-4xl md:text-5xl font-black mb-12 font-lato"
-          style={{ color: d.colors.text.primary }}
-        >
-          Produtos
-        </h1>
+        {/* Filtro Horizontal de Categorias */}
+        <div className="flex flex-wrap gap-3 mb-8">
+          {c.categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-6 py-2 rounded-full font-lato font-medium text-sm transition-all duration-300 ${
+                activeCategory === cat.id
+                  ? "border-2 border-[#0d70dc] bg-[#0d70dc] text-white shadow-md"
+                  : "border-2 border-[#0d70dc] text-[#0d70dc] bg-transparent hover:bg-[#0d70dc]/10"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12">
-          <aside className="space-y-2">
-            <h3 className="font-bold text-lg mb-4 uppercase tracking-wider" style={{ color: d.colors.text.primary }}>
-              Categorias
-            </h3>
-            {c.categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all font-medium ${
-                  activeCategory === cat.id
-                    ? "bg-[#0d70dc] text-white shadow-md"
-                    : "text-[#4A4A4A] hover:bg-gray-100"
-                }`}
+        {/* Grid de Produtos */}
+        <div className="space-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {paginatedProducts.map((product) => (
+              <Card
+                key={product.id}
+                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col min-h-[400px] md:min-h-[480px]"
               >
-                {cat.label}
-              </button>
-            ))}
-          </aside>
+                {/* Área de Imagem - 60-65% */}
+                <div className="bg-white flex items-center justify-center h-[60%] min-h-[240px] p-6">
+                  <img
+                    src={product.mainImage}
+                    alt={product.title}
+                    className="max-h-full max-w-full object-contain drop-shadow-lg"
+                  />
+                </div>
 
-          <div className="space-y-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {paginatedProducts.map((product) => (
-                <Card
-                  key={product.id}
-                  className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow group rounded-2xl"
-                >
-                  <div className="aspect-[4/3] overflow-hidden bg-white">
-                    <img
-                      src={product.mainImage}
-                      alt={product.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h4 className="font-bold text-xl mb-2 line-clamp-1" style={{ color: d.colors.text.primary }}>
+                {/* Conteúdo - 40-35% */}
+                <CardContent className="flex flex-col justify-between flex-1 p-6 md:p-8">
+                  <div>
+                    {/* Nome do Produto */}
+                    <h4
+                      className="font-lato font-semibold text-lg md:text-xl mb-2"
+                      style={{ color: d.colors.text.primary }}
+                    >
                       {product.title}
                     </h4>
-                    <p className="text-sm text-[#4A4A4A] line-clamp-2">{product.description}</p>
-                  </CardContent>
-                  <CardFooter className="p-6 pt-0">
-                    <Link href={`/produtos/${product.slug}`} className="w-full">
-                      <Button className="w-full bg-[#0d70dc] hover:bg-[#0953b0] text-white rounded-full font-bold uppercase text-xs tracking-widest">
-                        Ver Detalhes
-                      </Button>
-                    </Link>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
 
-            {totalPages > 1 && (
-              <Pagination>
-                <PaginationContent>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <PaginationItem key={page}>
-                      <PaginationLink
-                        isActive={currentPage === page}
-                        onClick={() => handlePageChange(page)}
-                        className="cursor-pointer rounded-full"
-                      >
-                        {page}
-                      </PaginationLink>
-                    </PaginationItem>
-                  ))}
-                </PaginationContent>
-              </Pagination>
-            )}
+                    {/* ANVISA */}
+                    <p className="font-lato text-xs md:text-sm text-[#4A4A4A] mb-4 font-normal">
+                      {product.anvisa ? `nº ANVISA ${product.anvisa}` : "Em conformidade"}
+                    </p>
+                  </div>
+
+                  {/* Botão */}
+                  <Link href={`/produtos/${product.slug}`} className="w-[70%] mx-auto">
+                    <Button
+                      className="w-full bg-[#01155a] hover:bg-[#012a7a] text-white font-lato font-semibold rounded-lg py-3 min-h-12 transition-colors"
+                      style={{ fontFamily: d.fonts.primary }}
+                    >
+                      Saiba mais
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+
+          {totalPages > 1 && (
+            <Pagination>
+              <PaginationContent>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      isActive={currentPage === page}
+                      onClick={() => handlePageChange(page)}
+                      className="cursor-pointer rounded-full transition-all"
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+              </PaginationContent>
+            </Pagination>
+          )}
         </div>
       </div>
     </Layout>

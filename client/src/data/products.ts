@@ -1,3 +1,24 @@
+/**
+ * Configuração de Produtos
+ * 
+ * ESTRUTURA DE IMAGENS:
+ * 
+ * As imagens dos produtos devem ser organizadas na pasta:
+ * attached_assets/produtos/
+ * 
+ * Padrão de nomenclatura:
+ * - Imagem principal: [slug-produto]-main.jpg
+ * - Imagens adicionais: [slug-produto]-1.jpg, [slug-produto]-2.jpg, etc.
+ * 
+ * Exemplo:
+ * - produto-dbs-percept-main.jpg
+ * - produto-dbs-percept-1.jpg
+ * - produto-dbs-percept-2.jpg
+ * 
+ * Para importar:
+ * import produtoMain from "@assets/produtos/[slug]-main.jpg";
+ */
+
 import type { ProductsPageConfig } from "@/types/products";
 import colunaImg from "@assets/coluna-bg-solucoes.jpg";
 import neuroImg from "@assets/neurologia-bg-solucoes.jpg";
@@ -5,6 +26,16 @@ import bucoImg from "@assets/bucomaxilfacial-bg-solucoes.jpg";
 import otorrinoImg from "@assets/otorrinolaringologia-bg-solucoes.jpg";
 import heroImg from "@assets/home-topo_1762428378908.jpeg";
 import estruturaImg from "@assets/home-slide_1762428378908.jpeg";
+
+import syncromedImg from "@assets/SynchroMed-II.jpg";
+import neuroestimuladorImg from "@assets/Neuroestimulador-Intellis.jpg";
+import dbsPerceptImg from "@assets/DBS-Percept-RC.jpg";
+import dvpStrataImg from "@assets/DVP-Strata-II.jpg";
+
+import neuronavegadorImg from "@assets/percept-rc-front-and-side.avif";
+import aspiradorImg from "@assets/Aspirador-Ultrassonico-Sonoca-300-Soring.webp";
+import espacadorImg from "@assets/Espacador-Cervical-COALITION-MIS-Globus.jpg";
+import valvulasImg from "@assets/Valvulas-para-Hidrocefalia-Pressao-Fixa-ATLAS.jpg";
 
 export const productsConfig: ProductsPageConfig = {
   categories: [
@@ -18,102 +49,105 @@ export const productsConfig: ProductsPageConfig = {
   products: [
     {
       id: "1",
-      slug: "sistema-fixacao-coluna",
-      categoryId: "coluna",
-      title: "Sistema de Fixação de Coluna",
-      description: "Sistema de fixação e espaçadores cervicais de alta precisão.",
+      slug: "percept-rc-neuroestimulador-medtronic",
+      categoryId: "neuro",
+      title: "Percept™ RC Neuroestimulador – Medtronic",
+      description:
+        "Sistema de neuroestimulação profunda (DBS) recarregável com tecnologia BrainSense™ para sensoriamento real-time e programação avançada.",
       fullDescription:
-        "Desenvolvido para garantir estabilidade máxima em cirurgias complexas de coluna. Fabricado em titânio grau médico para biocompatibilidade, com travas que asseguram segurança e facilidade de montagem em campo cirúrgico.",
-      mainImage: colunaImg,
-      images: [colunaImg, heroImg, estruturaImg],
+        "O Percept™ RC é um sistema de neuroestimulação cerebral profunda (DBS) recarregável desenvolvido pela Medtronic, líder mundial em tecnologias médicas. Equipado com a tecnologia exclusiva BrainSense™, este neuroestimulador representa uma evolução significativa no tratamento de distúrbios do movimento e condições neurológicas, oferecendo monitoramento cerebral em tempo real e terapias personalizadas adaptativas.",
+      mainImage: neuronavegadorImg, // Placeholder: substituir por produto-percept-rc-neuroestimulador-medtronic-main.jpg
+      images: [neuronavegadorImg],
+      anvisa: "10349001320",
     },
     {
       id: "2",
-      slug: "neuroestimulador-intellis",
+      slug: "synchromed-ii-bomba-infusao-implantavel-medtronic",
       categoryId: "neuro",
-      title: "Neuroestimulador Intellis",
-      description: "Neuroestimulador recarregável com programação avançada.",
+      title: "SynchroMed™ II – Bomba de Infusão Implantável – Medtronic",
+      description:
+        "Sistema de bomba de infusão implantável e programável que entrega medicamentos diretamente no espaço intratecal via cateter.",
       fullDescription:
-        "Oferece recursos de detecção e reprogramação contínua, permitindo terapias personalizadas para dor crônica e distúrbios neurológicos. Possui interface intuitiva e acompanhamento digital para médicos e pacientes.",
-      mainImage: neuroImg,
-      images: [neuroImg, estruturaImg, heroImg],
+        "Sistema de bomba de infusão implantável e programável que entrega medicamentos diretamente no espaço intratecal via cateter, usado para terapia de dor crônica intratável e espasticidade. Oferece fluxo preciso e programações personalizadas para necessidades terapêuticas específicas.",
+      mainImage: syncromedImg, // Placeholder: substituir por produto-synchromed-ii-main.jpg
+      images: [syncromedImg],
+      anvisa: "10349001240",
     },
     {
       id: "3",
-      slug: "kit-bucomaxilofacial",
-      categoryId: "buco",
-      title: "Kit Bucomaxilofacial",
-      description: "Conjunto para fixação crânio-maxilo-facial com placas e parafusos.",
+      slug: "neuroestimulador-intellis-medtronic",
+      categoryId: "coluna",
+      title: "Neuroestimulador Intellis™ – Medtronic",
+      description:
+        "Sistema de estimulação da medula espinhal recarregável com tecnologia AdaptiveStim™ para alívio de dor crônica neuropática e intratável.",
       fullDescription:
-        "Conjunto modular para reconstruções faciais, com variedade de tamanhos e perfis de placas. Revestimento pensado para reduzir atrito e otimizar a adaptação anatômica.",
-      mainImage: bucoImg,
-      images: [bucoImg, heroImg, estruturaImg],
+        "Sistema de estimulação da medula espinhal recarregável com tecnologia AdaptiveStim™ para alívio de dor crônica neuropática e intratável. Projeto compacto com bateria Overdrive™, recarga rápida (~1h) e relatórios Snapshot™ para monitoramento objetivo da terapia.",
+      mainImage: neuroestimuladorImg, // Placeholder: substituir por produto-neuroestimulador-intellis-main.jpg
+      images: [neuroestimuladorImg],
+      anvisa: "1034900",
     },
     {
       id: "4",
-      slug: "kit-otorrino-endoscopico",
-      categoryId: "otorrino",
-      title: "Kit Otorrino Endoscópico",
-      description: "Instrumental para procedimentos funcionais e reconstrutivos.",
+      slug: "dvp-strata-ii-medtronic",
+      categoryId: "neuro",
+      title: "DVP Strata™ II – Medtronic",
+      description:
+        "Sistema de válvula de derivação ventricular peritoneal com ajuste de pressão para tratamento de hidrocefalia e controle de fluxo de líquido cerebrospinal.",
       fullDescription:
-        "Instrumental endoscópico leve e ergonômico, com diferentes diâmetros e angulações para cirurgias nasais e otológicas. Superfícies tratadas para maior durabilidade e fácil esterilização.",
-      mainImage: otorrinoImg,
-      images: [otorrinoImg, estruturaImg, heroImg],
+        "Sistema de válvula de derivação ventricular peritoneal com ajuste de pressão, usado no tratamento de hidrocefalia para controlar o fluxo de líquido cerebrospinal e reduzir complicações associadas à hipertensão intracraniana.",
+      mainImage: dvpStrataImg, // Placeholder: substituir por produto-dvp-strata-ii-main.jpg
+      images: [dvpStrataImg],
+      anvisa: "10339190739",
     },
     {
       id: "5",
-      slug: "espacador-cervical-premium",
-      categoryId: "premium",
-      title: "Espaçador Cervical Premium",
-      description: "Implante intersomático cervical com perfil anatômico.",
+      slug: "neuronavegador-brainlab",
+      categoryId: "neuro",
+      title: "Neuronavegador – Brainlab",
+      description:
+        "Sistema de neuronavegação cirúrgica para orientação tridimensional em tempo real durante procedimentos neurológicos.",
       fullDescription:
-        "Desenvolvido para preservar a lordose cervical e facilitar a inserção minimamente invasiva. Revestimento poroso para favorecer a osteointegração e estabilidade inicial elevada.",
-      mainImage: heroImg,
-      images: [heroImg, colunaImg, neuroImg],
+        "Sistema de neuronavegação cirúrgica para orientação tridimensional em tempo real durante procedimentos neurológicos. Suporta planejamento pré-operatório e assistência precisa na localização de estruturas cerebrais e espinais.",
+      mainImage: neuroImg, // Placeholder: substituir por produto-neuronavegador-brainlab-main.jpg
+      images: [neuroImg],
+      anvisa: "80263050053",
     },
     {
       id: "6",
-      slug: "aspirador-ultrassonico",
+      slug: "aspirador-ultrassonico-sonoca-300-soring",
       categoryId: "neuro",
-      title: "Aspirador Ultrassônico",
-      description: "Precisão em remoção tecidual com preservação de estruturas nobres.",
+      title: "Aspirador Ultrassônico Sonoca 300 – Soring",
+      description:
+        "Aspirador ultrassônico cirúrgico para remoção de tecido com precisão e preservação de tecidos nobres em procedimentos neurocirúrgicos.",
       fullDescription:
-        "Equipamento indicado para neurocirurgia e procedimentos delicados. Ajuste de potência fino, ponteiras diversas e fluxo contínuo para maior controle intraoperatório.",
-      mainImage: estruturaImg,
-      images: [estruturaImg, neuroImg, heroImg],
+        "Aspirador ultrassônico cirúrgico para remoção de tecido com precisão e preservação de tecidos nobres. Indicado em procedimentos neurocirúrgicos e ortopédicos, com controle de energia ultrassônica e irrigação integrada.",
+      mainImage: aspiradorImg, // Placeholder: substituir por produto-aspirador-ultrassonico-sonoca-300-main.jpg
+      images: [aspiradorImg],
+      anvisa: "10171610052",
     },
     {
       id: "7",
-      slug: "sistema-lombar-hibrido",
+      slug: "espacador-cervical-coalition-mis-globus",
       categoryId: "coluna",
-      title: "Sistema Lombar Híbrido",
-      description: "Conjunto de parafusos pediculares e hastes de alta resistência.",
+      title: "Espaçador Cervical COALITION MIS – Globus",
+      description:
+        "Espaçador cervical intersomático MIS em titânio com perfis anatômicos e placas de fixação integradas para estabilização segmentar.",
       fullDescription:
-        "Permite correção de deformidades lombares com montagem versátil. Componentes com perfil baixo, compatíveis com técnicas minimamente invasivas e instrumentação robusta.",
-      mainImage: colunaImg,
-      images: [colunaImg, estruturaImg, heroImg],
+        "Espaçador cervical intersomático MIS em titânio com perfis anatômicos e placas de fixação integradas, projetado para estabilização segmentar em cirurgias minimamente invasivas da coluna cervical.",
+      mainImage: colunaImg, // Placeholder: substituir por produto-espacador-cervical-coalition-mis-main.jpg
+      images: [colunaImg],
     },
     {
       id: "8",
-      slug: "sistema-sinusite-fess",
-      categoryId: "otorrino",
-      title: "Sistema para Cirurgia FESS",
-      description: "Kit dedicado para cirurgias endoscópicas funcionais dos seios paranasais.",
+      slug: "valvulas-hidrocefalia-pressao-fixa-atlas",
+      categoryId: "neuro",
+      title: "Válvulas para Hidrocefalia – Pressão Fixa ATLAS",
+      description:
+        "Válvulas de pressão fixa para derivação ventricular em regimes terapêuticos de hidrocefalia com fluxo estável de líquido cerebrospinal.",
       fullDescription:
-        "Inclui lâminas, brocas e instrumentais delicados para ampla visualização e acesso preciso. Compatível com guias de navegação e técnicas de mínima invasão.",
-      mainImage: otorrinoImg,
-      images: [otorrinoImg, heroImg, estruturaImg],
-    },
-    {
-      id: "9",
-      slug: "fixador-maxilo-compact",
-      categoryId: "buco",
-      title: "Fixador Maxilo Compact",
-      description: "Sistema leve para estabilização maxilar e mandibular.",
-      fullDescription:
-        "Placas e parafusos de perfil reduzido para menor palpabilidade. Facilita reconstruções em traumas faciais e cirurgias ortognáticas com estabilidade pós-operatória confiável.",
-      mainImage: bucoImg,
-      images: [bucoImg, estruturaImg, heroImg],
+        "Válvulas de pressão fixa para derivação ventricular em regimes terapêuticos de hidrocefalia, projetadas para manutenção de fluxo estável de líquido cerebrospinal e redução de riscos de sobre-drenagem.",
+      mainImage: neuroImg, // Placeholder: substituir por produto-valvulas-hidrocefalia-atlas-main.jpg
+      images: [neuroImg],
     },
   ],
   itemsPerPage: 6,
