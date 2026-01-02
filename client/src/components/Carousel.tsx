@@ -110,7 +110,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
 
   return (
     <section
-      className="relative w-full h-[350px] sm:h-[350px] md:h-[500px] lg:h-[400px] overflow-hidden bg-muted group mt-[70px] lg:mt-[130px]"
+      className="relative w-full h-auto min-h-[350px] md:h-[500px] lg:h-[400px] overflow-hidden bg-muted group mt-[70px] lg:mt-[130px]"
       data-testid="section-carousel"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -119,39 +119,53 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
         setTimeout(() => setIsHovered(false), 2000);
       }}
     >
-      {slides.map((slide, index) => {
-        const isActive = index === currentSlide;
-        const hasSlideContent = slide.title || slide.subtitle || slide.buttonText;
+      {/* Elemento spacer para definir altura baseado no slide ativo (apenas mobile) */}
+      {slides[currentSlide]?.imageMobile && (
+        <div className="block md:hidden relative w-full" style={{ lineHeight: 0, fontSize: 0 }} aria-hidden="true">
+          <img
+            src={slides[currentSlide].imageMobile}
+            alt=""
+            className="w-full h-auto object-contain object-center opacity-0 pointer-events-none block"
+            style={{ visibility: 'hidden', display: 'block' }}
+          />
+        </div>
+      )}
+      
+      {/* Container para slides absolutos */}
+      <div className="absolute inset-0">
+        {slides.map((slide, index) => {
+          const isActive = index === currentSlide;
+          const hasSlideContent = slide.title || slide.subtitle || slide.buttonText;
 
-        return (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ${isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              }`}
-            data-testid={`carousel-slide-${index}`}
-          >
-            {/* Imagem Mobile - visível apenas até breakpoint md */}
-            {slide.imageMobile && (
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-700 ${isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                }`}
+              data-testid={`carousel-slide-${index}`}
+            >
+              {/* Imagem Mobile - visível apenas até breakpoint md */}
+              {slide.imageMobile && (
+                <img
+                  src={slide.imageMobile}
+                  alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
+                  className="w-full h-full object-contain object-center block md:hidden"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
+                />
+              )}
+              
+              {/* Imagem Desktop - visível a partir de breakpoint md - preenche toda área com foco no centro */}
               <img
-                src={slide.imageMobile}
+                src={slide.image}
                 alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
-                className="w-full h-full object-cover object-center block md:hidden"
+                className={`w-full h-full object-cover object-center ${slide.imageMobile ? "hidden md:block" : ""}`}
+                style={{
+                  objectPosition: 'center center',
+                }}
                 loading={index === 0 ? "eager" : "lazy"}
-                fetchpriority={index === 0 ? "high" : "auto"}
+                fetchPriority={index === 0 ? "high" : "auto"}
               />
-            )}
-            
-            {/* Imagem Desktop - visível a partir de breakpoint md - preenche toda área com foco no centro */}
-            <img
-              src={slide.image}
-              alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
-              className={`w-full h-full object-cover object-center ${slide.imageMobile ? "hidden md:block" : ""}`}
-              style={{
-                objectPosition: 'center center',
-              }}
-              loading={index === 0 ? "eager" : "lazy"}
-              fetchpriority={index === 0 ? "high" : "auto"}
-            />
 
             {/* Container de conteúdo apenas se houver texto */}
             {hasSlideContent && (
@@ -188,6 +202,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
           </div>
         );
       })}
+      </div>
 
       {/* Botão Anterior */}
       <Button

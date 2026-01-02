@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
+      <ScrollToTop />
       <SchemaMarkup />
       <Header />
       <main className="pt-0">{children}</main>

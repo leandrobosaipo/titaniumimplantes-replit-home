@@ -143,7 +143,7 @@ export function Footer() {
           {/* Coluna 2: Links de Navegação */}
           <div className="flex flex-col text-center md:text-left">
             {/* Título "Início" como link */}
-            <a
+            <Link
               href="/"
               className="mb-3 no-underline hover:opacity-80 transition-opacity"
               style={{
@@ -156,7 +156,7 @@ export function Footer() {
               data-testid="link-footer-inicio-title"
             >
               Início
-            </a>
+            </Link>
 
             {/* Links (excluindo "Início" que já está no título) */}
             <ul>
@@ -167,7 +167,7 @@ export function Footer() {
                     marginBottom: index < filteredLinks.length - 1 ? "12px" : "0",
                   }}
                 >
-                  <a
+                  <Link
                     href={link.href}
                     className="text-white hover:opacity-80 transition-opacity no-underline"
                     style={{
@@ -178,7 +178,7 @@ export function Footer() {
                     data-testid={`link-footer-${link.title.toLowerCase().replace(/\s+/g, "-")}`}
                   >
                     {link.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

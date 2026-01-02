@@ -300,10 +300,20 @@ export function Header() {
               <ul className="flex items-center gap-7 md:gap-8">
                 {menuItems.map((item) => {
                   const isActive = location === item.path;
+                  const isContato = item.label === "Contato";
+                  const linkProps = isContato
+                    ? {
+                        href: "/#contato",
+                        onClick: handleContatoClick,
+                      }
+                    : {
+                        href: item.path,
+                        onClick: () => handleDefaultNav(item.path),
+                      };
                   return (
                     <li key={item.path}>
                       <Link
-                        href={item.path}
+                        {...linkProps}
                         data-testid={`link-nav-compact-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                         className={`px-3 py-1.5 rounded-sm font-semibold text-xs transition-all ${
                           isActive

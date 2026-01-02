@@ -1,7 +1,10 @@
 import type { LgpdPageConfig } from "@/types/lgpdPage";
-import certificacaoImg from "@assets/certificacoes-lgpd.png";
-import destaqueMaterialImg from "@assets/home-topo_1762428378908.jpeg";
-import complianceImg from "@assets/eticaesaude.png";
+import isoImg from "@assets/lgpd/iso.jpg";
+import fdaImg from "@assets/lgpd/fda.jpg";
+import anvisaImg from "@assets/lgpd/anvisa.jpg";
+import abntImg from "@assets/lgpd/abnt.jpg";
+import destaqueMaterialImg from "@assets/lgpd/destaques_do_material-removebg-preview.png";
+import complianceImg from "@assets/lgpd/compliance_e_etica.jpg";
 
 export const lgpdPageConfig: LgpdPageConfig = {
   breadcrumb: "Certificações, Compliance e LGPD",
@@ -10,27 +13,27 @@ export const lgpdPageConfig: LgpdPageConfig = {
     itens: [
       {
         id: "1",
-        img: certificacaoImg,
+        img: isoImg,
         label: "ISO 13485:2016",
         sublabel: "Gestão de qualidade em dispositivos médicos.",
       },
       {
         id: "2",
-        img: certificacaoImg,
+        img: fdaImg,
         label: "FDA Approved",
         sublabel: "Segurança e eficácia aprovadas internacionalmente.",
       },
       {
         id: "3",
-        img: certificacaoImg,
+        img: anvisaImg,
         label: "ANVISA",
         sublabel: "Conformidade com as normas brasileiras de saúde.",
       },
       {
         id: "4",
-        img: certificacaoImg,
+        img: abntImg,
         label: "Normas Técnicas",
-        sublabel: "ASTM F136, ISO 5832-3, ISO 52640.",
+        sublabel: "ASTM F136-8e1, ISO 14801, ISO 10993.",
       },
     ],
   },
