@@ -26,6 +26,7 @@ export interface CanalDenunciaPageConfig {
     botaoTexto: string;
     botaoLink: string;
   };
+  webhookUrl: string;
 }
 
 export const canalDenunciaPageConfig: CanalDenunciaPageConfig = {
@@ -83,5 +84,6 @@ export const canalDenunciaPageConfig: CanalDenunciaPageConfig = {
     botaoTexto: "CONTATO",
     botaoLink: "/contato",
   },
+  webhookUrl: "/api/webhook/denuncia",
 };
 

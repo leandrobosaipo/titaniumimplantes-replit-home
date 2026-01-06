@@ -3,6 +3,7 @@ import { PageSEO } from "@/components/SEO/PageSEO";
 import { CanalDenunciaHeroSection } from "@/components/CanalDenunciaHeroSection";
 import { CanalDenunciaOrientacoesSection } from "@/components/CanalDenunciaOrientacoesSection";
 import { CanalDenunciaCTASection } from "@/components/CanalDenunciaCTASection";
+import { CanalDenunciaFormSection } from "@/components/CanalDenunciaFormSection";
 
 export default function CanalDenuncia() {
   return (
@@ -14,6 +15,7 @@ export default function CanalDenuncia() {
       <CanalDenunciaHeroSection />
       <CanalDenunciaOrientacoesSection />
       <CanalDenunciaCTASection />
+      <CanalDenunciaFormSection />
     </Layout>
   );
 }
