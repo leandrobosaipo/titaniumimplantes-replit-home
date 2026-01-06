@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Modelo JSON para adicionar novos produtos ao catálogo",
+  "description": "Template para estrutura de produtos da Titanium Implantes",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identificador único do produto (ex: '9', '10', etc.)",
+      "example": "9"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly identifier (sem espaços, em minúsculas, com hífens)",
+      "pattern": "^[a-z0-9-]+$",
+      "example": "produto-exemplo-nome"
+    },
+    "categoryId": {
+      "type": "string",
+      "description": "ID da categoria do produto",
+      "enum": ["premium", "coluna", "neuro", "buco", "otorrino"],
+      "example": "neuro"
+    },
+    "title": {
+      "type": "string",
+      "description": "Título completo do produto (aparece no card e na página de detalhes)",
+      "example": "Nome do Produto™ – Fabricante"
+    },
+    "description": {
+      "type": "string",
+      "description": "Descrição curta (aparece no card do produto, ~150 caracteres)",
+      "maxLength": 200,
+      "example": "Descrição breve do produto e suas principais características."
+    },
+    "fullDescription": {
+      "type": "string",
+      "description": "Descrição completa (aparece na página de detalhes do produto)",
+      "example": "Descrição detalhada do produto, incluindo especificações técnicas, indicações, benefícios e informações relevantes para profissionais de saúde."
+    },
+    "mainImage": {
+      "type": "string",
+      "description": "Caminho da imagem principal (será importado no products.ts)",
+      "example": "@assets/produtos/produto-exemplo-main.jpg"
+    },
+    "images": {
+      "type": "array",
+      "description": "Array de imagens adicionais do produto",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "@assets/produtos/produto-exemplo-1.jpg",
+        "@assets/produtos/produto-exemplo-2.jpg"
+      ]
+    },
+    "anvisa": {
+      "type": "string",
+      "description": "Número de registro ANVISA (opcional)",
+      "example": "10349001320"
+    }
+  },
+  "required": ["id", "slug", "categoryId", "title", "description", "fullDescription", "mainImage", "images"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "9",
+      "slug": "exemplo-produto-medtronic",
+      "categoryId": "neuro",
+      "title": "Exemplo de Produto™ – Medtronic",
+      "description": "Sistema avançado para tratamento de condições neurológicas com tecnologia de ponta.",
+      "fullDescription": "O Exemplo de Produto™ é um sistema desenvolvido pela Medtronic para tratamento de condições neurológicas. Oferece tecnologia de ponta com monitoramento em tempo real e terapias personalizadas adaptativas.",
+      "mainImage": "@assets/produtos/exemplo-produto-medtronic-main.jpg",
+      "images": [
+        "@assets/produtos/exemplo-produto-medtronic-1.jpg",
+        "@assets/produto-exemplo-medtronic-2.jpg"
+      ],
+      "anvisa": "10349001320"
+    }
+  ]
+}
+

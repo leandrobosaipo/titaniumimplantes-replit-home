@@ -150,5 +150,5 @@ export const productsConfig: ProductsPageConfig = {
       images: [neuroImg],
     },
   ],
-  itemsPerPage: 6,
+  itemsPerPage: 12,
 };

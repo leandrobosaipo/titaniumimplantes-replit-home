@@ -3,8 +3,8 @@ import heroBg from "@assets/bg-quem-somos-home.jpg";
 import heroBgNew from "@assets/Site_251003_Titaniun Implantes_Quem somos.min.jpg";
 import historiaImg from "@assets/Quem-somos-historia-section.min.jpg";
 import estruturaImg from "@assets/home-slide_1762428378908.jpeg";
-import estruturaSlide1 from "@assets/Quem-somos-estrutura-slide-1.jpg";
-import estruturaSlide2 from "@assets/Quem-somos-estrutura-slide-2.jpg";
+import estruturaSlide1 from "@assets/Quem-somos-estrutura-slide-3.jpg";
+import estruturaSlide2 from "@assets/Quem-somos-estrutura-slide-4.jpg";
 
 export const quemSomosPageConfig: QuemSomosPageConfig = {
   hero: {
