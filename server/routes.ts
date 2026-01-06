@@ -32,7 +32,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     try {
       const webhookUrl =
-        "https://criadordigital-n8n-webhook.easypanel.codigo5.com.br/webhook/denuncia-titanium-implantes";
+        "https://criadordigital-n8n-webhook.easypanel.codigo5.com.br/webhook/canal-denuncia";
 
       console.log("[DEBUG] Enviando para webhook externo:", webhookUrl);
       
