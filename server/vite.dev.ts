@@ -43,8 +43,45 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
+  // List all registered routes for debugging
+  console.log("[VITE] Rotas registradas no Express:");
+  app._router?.stack?.forEach((middleware: any) => {
+    if (middleware.route) {
+      console.log(`  ${Object.keys(middleware.route.methods).join(',').toUpperCase()} ${middleware.route.path}`);
+    }
+  });
+
+  // Apply Vite middleware conditionally - skip for /api routes
+  // IMPORTANTE: Este middleware deve ser aplicado DEPOIS das rotas da API serem registradas
+  // e deve definitivamente não processar rotas /api/*
+  app.use((req, res, next) => {
+    // CRITICAL: Skip ALL /api routes - they should be handled by API router
+    if (req.path.startsWith("/api")) {
+      console.log("[VITE] ⏭️ Pulando middleware do Vite para rota /api:", req.path);
+      return next(); // Pass to next middleware (which should be the API routes)
+    }
+    console.log("[VITE] ✅ Aplicando middleware do Vite para:", req.path);
+    // vite.middlewares is a Connect-compatible middleware function
+    // Only apply to non-API routes
+    return vite.middlewares(req, res, next);
+  });
+  
   app.use("*", async (req, res, next) => {
+    console.log("[VITE] Catch-all interceptado:", req.method, req.path);
+    // Skip API routes - they should be handled by registerRoutes
+    if (req.path.startsWith("/api")) {
+      console.log("[VITE] ⚠️ Rota /api chegou no catch-all - isso não deveria acontecer! Verificando rotas...");
+      // List routes to debug
+      const routes: string[] = [];
+      app._router?.stack?.forEach((middleware: any) => {
+        if (middleware.route) {
+          routes.push(`${Object.keys(middleware.route.methods).join(',').toUpperCase()} ${middleware.route.path}`);
+        }
+      });
+      console.log("[VITE] Rotas disponíveis:", routes);
+      return next(); // Let Express handle 404
+    }
+
     const url = req.originalUrl;
 
     try {

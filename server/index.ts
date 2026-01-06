@@ -17,6 +17,7 @@ app.use(express.json({
 app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
+  console.log("[MIDDLEWARE] Requisição recebida:", req.method, req.path);
   const start = Date.now();
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 
   res.on("finish", () => {
     const duration = Date.now() - start;
+    console.log("[MIDDLEWARE] Resposta enviada:", req.method, path, res.statusCode, `${duration}ms`);
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
@@ -47,7 +49,9 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  console.log("[SERVER] Iniciando registro de rotas...");
   const server = await registerRoutes(app);
+  console.log("[SERVER] Rotas registradas, configurando middlewares...");
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -85,5 +89,17 @@ app.use((req, res, next) => {
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+  }).on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      log(`❌ Erro: Porta ${port} já está em uso.`);
+      log(`💡 Solução: Pare o processo usando a porta ou use outra porta.`);
+      log(`   Para parar processos na porta ${port}, execute:`);
+      log(`   lsof -ti:${port} | xargs kill -9`);
+      log(`   Ou use outra porta: PORT=5001 npm run dev`);
+      process.exit(1);
+    } else {
+      log(`❌ Erro ao iniciar servidor: ${err.message}`);
+      throw err;
+    }
   });
 })();
