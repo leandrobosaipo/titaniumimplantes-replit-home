@@ -2,6 +2,7 @@ import { canalDenunciaPageConfig as c } from "@/data/canalDenunciaPage";
 import { Monitor, Hourglass, Search, FileText, Paperclip } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { designConstants as d } from "@/lib/designConstants";
+import { ScrollReveal } from "./ScrollReveal";
 
 // Mapa de ícones
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -14,27 +15,33 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function CanalDenunciaOrientacoesSection() {
   return (
-    <section className="bg-white py-16 md:py-24">
-      <div className="max-w-[1280px] mx-auto px-[10%]">
-        {/* Título */}
-        <h2
-          className="text-4xl md:text-5xl font-black font-lato text-center mb-8 md:mb-12"
-          style={{ color: d.colors.text.primary }}
-        >
-          {c.orientacoes.titulo}
-        </h2>
+    <>
+      <section className="bg-white py-16 md:py-24">
+        <div className="max-w-[1280px] mx-auto px-[10%]">
+          {/* Título */}
+          <ScrollReveal animation="fade-in-up" threshold={0.2}>
+            <h2
+              className="text-4xl md:text-5xl font-black font-lato text-center mb-8 md:mb-12"
+              style={{ color: d.colors.text.primary }}
+            >
+              {c.orientacoes.titulo}
+            </h2>
+          </ScrollReveal>
 
-        {/* Grid de Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {c.orientacoes.cards.map((card) => {
+          {/* Grid de Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {c.orientacoes.cards.map((card, index) => {
             const IconComponent = iconMap[card.icone] || Monitor;
             // Para o card de documentos, usar composição de ícones
             const isDocumentosCard = card.numero === 4;
             return (
-              <Card
+              <ScrollReveal
                 key={card.numero}
-                className="bg-[#F4F5F7] border-0 shadow-md hover:shadow-lg transition-shadow duration-300 rounded-xl relative"
+                animation="fade-in-up"
+                delay={index * 100}
+                threshold={0.1}
               >
+                <Card className="bg-[#F4F5F7] border-0 shadow-md hover:shadow-lg transition-all duration-300 rounded-xl relative hover:scale-[1.02]">
                 <CardContent className="p-6 md:p-8 relative min-h-[300px] flex flex-col">
                   {/* Header: Número e Título na mesma linha */}
                   <div className="flex flex-row items-center gap-3 mb-4">
@@ -70,15 +77,19 @@ export function CanalDenunciaOrientacoesSection() {
                   </div>
                 </CardContent>
               </Card>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        {/* Texto Complementar */}
-        <div className="mt-12 space-y-6 text-lg font-lato text-[#4A4A4A] leading-relaxed max-w-4xl mx-auto text-center">
-          {c.orientacoes.textos.map((texto, index) => (
-            <p key={index}>{texto}</p>
-          ))}
+          {/* Texto Complementar */}
+        <ScrollReveal animation="fade-in-up" delay={400} threshold={0.2}>
+          <div className="mt-12 space-y-6 text-lg font-lato text-[#4A4A4A] leading-relaxed max-w-4xl mx-auto text-center">
+            {c.orientacoes.textos.map((texto, index) => (
+              <p key={index}>
+                {texto}
+              </p>
+            ))}
 
           {/* Email */}
           <p>
@@ -95,8 +106,16 @@ export function CanalDenunciaOrientacoesSection() {
             Desde já, agradecemos o seu relato.
           </p>
         </div>
+        </ScrollReveal>
       </div>
     </section>
+
+    {/* Divider - Orientações para Formulário */}
+    <div className="relative bg-white overflow-hidden">
+      <div className="h-20 md:h-24 bg-gradient-to-b from-white via-gray-50/50 to-gray-50"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300/50 to-transparent"></div>
+    </div>
+    </>
   );
 }
 

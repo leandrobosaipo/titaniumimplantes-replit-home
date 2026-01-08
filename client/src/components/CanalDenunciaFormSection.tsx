@@ -32,6 +32,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { ScrollReveal } from "./ScrollReveal";
 
 /**
  * Gera código único de acompanhamento
@@ -198,11 +199,16 @@ export function CanalDenunciaFormSection() {
   }
 
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gray-50 py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Faça sua Denúncia</h2>
-          <Card className="bg-white shadow-sm">
+          <ScrollReveal animation="fade-in-up" threshold={0.15}>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12">
+              Faça sua Denúncia
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal animation="slide-up" delay={200} threshold={0.15}>
+            <Card className="bg-white shadow-sm">
             <div className="flex flex-col space-y-1.5 p-6">
               <h3 className="text-2xl font-semibold leading-none tracking-tight">
                 Formulário de Denúncia
@@ -526,6 +532,7 @@ export function CanalDenunciaFormSection() {
               </Form>
             </div>
           </Card>
+          </ScrollReveal>
         </div>
       </div>
     </section>
