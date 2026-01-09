@@ -95,6 +95,29 @@ export default {
         wider: "0.02em",
         widest: "0.05em",
       },
+      fontSize: {
+        // Escala de títulos padronizada (baseada em rem para acessibilidade)
+        "heading-1": ["2.25rem", { lineHeight: "1.2", fontWeight: "900" }], // 36px
+        "heading-1-md": ["3rem", { lineHeight: "1.2", fontWeight: "900" }], // 48px
+        "heading-1-lg": ["3.75rem", { lineHeight: "1.2", fontWeight: "900" }], // 60px
+        "heading-2": ["1.875rem", { lineHeight: "1.2", fontWeight: "900" }], // 30px
+        "heading-2-md": ["2.25rem", { lineHeight: "1.2", fontWeight: "900" }], // 36px
+        "heading-2-lg": ["3rem", { lineHeight: "1.2", fontWeight: "900" }], // 48px
+        "heading-3": ["1.5rem", { lineHeight: "1.375", fontWeight: "700" }], // 24px
+        "heading-3-md": ["1.875rem", { lineHeight: "1.375", fontWeight: "700" }], // 30px
+        "heading-4": ["1.25rem", { lineHeight: "1.4", fontWeight: "700" }], // 20px
+        "heading-4-md": ["1.5rem", { lineHeight: "1.4", fontWeight: "700" }], // 24px
+        // Escala de corpo de texto
+        "body-lg": ["1.125rem", { lineHeight: "1.625" }], // 18px
+        "body-lg-md": ["1.25rem", { lineHeight: "1.625" }], // 20px
+        "body": ["1rem", { lineHeight: "1.625" }], // 16px
+        "body-md": ["1.125rem", { lineHeight: "1.625" }], // 18px
+        "body-sm": ["0.875rem", { lineHeight: "1.625" }], // 14px
+        "body-sm-md": ["1rem", { lineHeight: "1.625" }], // 16px
+        // Badges e labels
+        "badge": ["0.875rem", { lineHeight: "1.5" }], // 14px
+        "badge-md": ["1rem", { lineHeight: "1.5" }], // 16px
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

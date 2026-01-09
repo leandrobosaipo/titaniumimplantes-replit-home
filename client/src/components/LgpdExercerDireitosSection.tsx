@@ -3,6 +3,8 @@ import { lgpdPageConfig as d } from "@/data/lgpdPage";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { Mail, Phone, MapPin, Users, Network, Share2, Shield } from "lucide-react";
+import { SectionTitle } from "@/components/ui/SectionTitle";
+import { SectionContainer } from "@/components/ui/SectionContainer";
 
 export function LgpdExercerDireitosSection() {
   const securityText = d.secaoDireitos.seguranca;
@@ -29,14 +31,14 @@ export function LgpdExercerDireitosSection() {
 
   return (
     <section className="bg-white py-24 px-8">
-      <div className="mx-auto max-w-[1280px]">
-        <h2 className="text-center text-[44px] md:text-[52px] font-[900] text-[#0a324c] mb-16 font-lato">
-          Como exercer seus <span className="text-[#0d70dc]">direitos</span>
-        </h2>
+      <SectionContainer>
+        <SectionTitle level={2} className="text-center text-[#0a324c] mb-16" highlightedText="direitos">
+          Como exercer seus direitos
+        </SectionTitle>
         <div className="grid md:grid-cols-2 gap-20 items-center">
           {/* Ilustração decorativa - Coluna esquerda */}
           <div className="hidden md:flex items-center justify-center">
-            <div className="relative w-full h-64 flex items-center justify-center">
+            <div className="relative w-full min-h-[16rem] flex items-center justify-center">
               <Users className="w-24 h-24 text-gray-300 absolute top-4 left-8" />
               <Network className="w-32 h-32 text-gray-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
               <Share2 className="w-20 h-20 text-gray-300 absolute bottom-8 right-12" />
@@ -48,15 +50,15 @@ export function LgpdExercerDireitosSection() {
           <div className="space-y-10 text-left">
             {d.secaoDireitos.contatos.map((c, i) => (
               <div key={`${c.tipo}-${i}`} className="flex items-center gap-6">
-                <div className="w-14 h-14 text-[#0d70dc] flex items-center justify-center">
-                  {c.tipo === "email" && <Mail size={28} />}
-                  {c.tipo === "tel" && <Phone size={28} />}
-                  {c.tipo === "map" && <MapPin size={28} />}
+                <div className="w-14 h-14 md:w-16 md:h-16 text-[#0d70dc] flex items-center justify-center">
+                  {c.tipo === "email" && <Mail className="w-7 h-7 md:w-8 md:h-8" />}
+                  {c.tipo === "tel" && <Phone className="w-7 h-7 md:w-8 md:h-8" />}
+                  {c.tipo === "map" && <MapPin className="w-7 h-7 md:w-8 md:h-8" />}
                 </div>
-                <span className="text-xl text-[#0a324c] font-medium font-lato">{c.valor}</span>
+                <span className="text-body-lg md:text-body-lg-md text-[#0a324c] font-medium font-lato">{c.valor}</span>
               </div>
             ))}
-            <p className="pt-10 text-xl leading-relaxed font-lato">
+            <p className="pt-10 text-body-lg md:text-body-lg-md leading-relaxed font-lato">
               <span className="text-[#0d70dc] font-bold">{securityLabel}</span>{" "}
               <span className="text-[#0a324c]">{securityContent}</span>
             </p>
@@ -69,7 +71,7 @@ export function LgpdExercerDireitosSection() {
             </div>
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 }

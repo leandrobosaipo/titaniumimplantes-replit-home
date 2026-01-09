@@ -22,13 +22,13 @@ export function CanalDenunciaHeroSection() {
             </p>
 
             {/* H1 com palavra destacada */}
-            <h1 className="text-white text-3xl md:text-5xl lg:text-6xl font-black font-lato leading-tight mb-8">
+            <h1 className="text-white text-heading-1 md:text-heading-1-md lg:text-heading-1-lg font-black leading-tight font-lato mb-8">
               {c.hero.titulo}{" "}
               <span className="text-[#60a5fa]">{c.hero.tituloDestaque}</span>
             </h1>
 
             {/* Texto institucional */}
-            <div className="space-y-6 text-white text-lg md:text-xl font-lato font-semibold leading-relaxed">
+            <div className="space-y-6 text-white text-body-lg md:text-body-lg-md font-lato font-semibold leading-relaxed">
               {c.hero.texto.map((paragrafo, index) => (
                 <p key={index} style={{ animationDelay: `${index * 100}ms` }}>
                   {paragrafo}

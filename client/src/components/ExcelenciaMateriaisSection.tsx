@@ -1,4 +1,6 @@
 import { excelenciaMateriaisConfig as c } from "@/data/excelenciaMateriais";
+import { SectionBadge } from "@/components/ui/SectionBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 export function ExcelenciaMateriaisSection() {
   if (!c.ativo) return null;
@@ -13,36 +15,19 @@ export function ExcelenciaMateriaisSection() {
         <div className="md:hidden">
           {/* Badge centralizado */}
           <div className="mb-6 flex justify-center">
-            <span
-              className="inline-block bg-[#01155a] text-white uppercase rounded-full text-lg md:text-sm mx-auto md:mx-0"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 600,
-                borderRadius: "999px",
-                padding: "6px 18px",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                letterSpacing: "0.5px",
-              }}
-              data-testid="text-excelencia-badge"
-            >
+            <SectionBadge variant="secondary" data-testid="text-excelencia-badge">
               {c.tituloSessao}
-            </span>
+            </SectionBadge>
           </div>
 
           {/* Título centralizado */}
-          <h2
-            className="text-white text-3xl md:text-[36px] lg:text-[56px] text-center md:text-left mb-8 md:mb-6"
-            style={{
-              fontFamily: "Lato, sans-serif",
-              fontWeight: 800,
-              lineHeight: 1.3,
-            }}
+          <SectionTitle
+            level={2}
+            className="text-white text-center md:text-left mb-8 md:mb-6"
             data-testid="text-excelencia-title"
           >
             {c.titulo}
-          </h2>
+          </SectionTitle>
 
           {/* Container de KPIs Mobile - Horizontal */}
           <div className="flex flex-col gap-5">
@@ -60,24 +45,13 @@ export function ExcelenciaMateriaisSection() {
                   }}
                 >
                   <h3
-                    className="text-white"
-                    style={{
-                      fontSize: "18px",
-                      fontWeight: 700,
-                      lineHeight: 1.3,
-                    }}
+                    className="text-white text-body-md font-bold leading-relaxed"
                     data-testid={`text-kpi-title-${kpi.id}`}
                   >
                     {kpi.titulo}
                   </h3>
                   <p
-                    className="text-white"
-                    style={{
-                      fontSize: "16px",
-                      opacity: 0.9,
-                      lineHeight: 1.3,
-                      marginTop: "4px",
-                    }}
+                    className="text-white text-body opacity-90 leading-relaxed mt-1"
                   >
                     {kpi.subtitulo}
                   </p>
@@ -91,23 +65,13 @@ export function ExcelenciaMateriaisSection() {
                   }}
                 >
                   <div
-                    className="text-[#0d70dc]"
-                    style={{
-                      fontSize: "52px",
-                      fontWeight: 800,
-                      lineHeight: 1,
-                    }}
+                    className="text-[#0d70dc] text-5xl md:text-6xl font-extrabold leading-none"
                     data-testid={`text-kpi-numero-${kpi.id}`}
                   >
                     {kpi.numero}
                   </div>
                   <p
-                    className="text-[#0d70dc] mt-1"
-                    style={{
-                      fontSize: "18px",
-                      fontWeight: 500,
-                      lineHeight: 1.4,
-                    }}
+                    className="text-[#0d70dc] mt-1 text-body-md font-medium leading-relaxed"
                     data-testid={`text-kpi-legenda-${kpi.id}`}
                   >
                     {kpi.legenda}
@@ -123,51 +87,24 @@ export function ExcelenciaMateriaisSection() {
           {/* Coluna Esquerda: Tag, Título e Parágrafo (empilhados) */}
           <div className="flex flex-col">
             {/* Tag/Badge */}
-            <div style={{ marginBottom: "28px" }}>
-              <span
-                className="inline-block bg-[#01155a] text-white uppercase rounded-full"
-                style={{
-                  fontFamily: "Lato, sans-serif",
-                  fontWeight: 600, // Semibold
-                  fontSize: "14px",
-                  borderRadius: "999px",
-                  padding: "6px 18px",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  letterSpacing: "0.5px",
-                }}
-                data-testid="text-excelencia-badge-desktop"
-              >
+            <div className="mb-7">
+              <SectionBadge variant="secondary" data-testid="text-excelencia-badge-desktop">
                 {c.tituloSessao}
-              </span>
+              </SectionBadge>
             </div>
 
             {/* Título Grande */}
-            <h2
-              className="text-white text-[36px] md:text-[48px] lg:text-[56px]"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 900, // Heavy
-                lineHeight: 1.2,
-                marginBottom: "24px",
-              }}
+            <SectionTitle
+              level={2}
+              className="text-white mb-6"
               data-testid="text-excelencia-title-desktop"
             >
               {c.titulo}
-            </h2>
+            </SectionTitle>
 
             {/* Parágrafo Institucional */}
             <p
-              className="text-white hidden md:block"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 400, // Regular
-                fontSize: "18px",
-                lineHeight: 1.6,
-                whiteSpace: "pre-line",
-                maxWidth: "420px",
-              }}
+              className="text-white hidden md:block text-body-md leading-relaxed whitespace-pre-line max-w-[420px] font-lato"
               data-testid="text-excelencia-desc"
             >
               {c.descricao} Explore nossas <a href="#areas-atuacao" className="text-white hover:underline font-semibold">especialidades</a> e conheça nossa <a href="/quem-somos" className="text-white hover:underline font-semibold">história e compromisso</a>.
@@ -178,15 +115,7 @@ export function ExcelenciaMateriaisSection() {
           <div className="flex flex-col gap-6 md:gap-8">
             {/* Linha 1: Texto Institucional */}
             <p
-              className="text-white hidden md:block"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 400, // Regular
-                fontSize: "20px",
-                lineHeight: 1.6,
-                maxWidth: "80%",
-                marginBottom: "28px",
-              }}
+              className="text-white hidden md:block text-body-lg-md leading-relaxed max-w-[80%] mb-7 font-lato"
               data-testid="text-excelencia-lateral"
             >
               {c.textoLateral}
@@ -218,18 +147,12 @@ export function ExcelenciaMateriaisSection() {
                     }}
                   >
                     <h3
-                      className="text-white text-center"
-                      style={{
-                        fontFamily: "Lato, sans-serif",
-                        fontWeight: 600, // Semibold
-                        fontSize: "14px",
-                        lineHeight: 1.4,
-                      }}
+                      className="text-white text-center text-badge font-semibold leading-relaxed font-lato"
                       data-testid={`text-kpi-title-desktop-${kpi.id}`}
                     >
                       {kpi.titulo}
                       <br />
-                      <span style={{ fontWeight: 400, fontSize: "11px" }}>{kpi.subtitulo}</span>
+                      <span className="font-normal text-body-sm">{kpi.subtitulo}</span>
                     </h3>
                   </div>
 
@@ -248,14 +171,7 @@ export function ExcelenciaMateriaisSection() {
                   >
                     {/* Número/Percentual */}
                     <div
-                      className="text-center mb-2"
-                      style={{
-                        fontFamily: "Lato, sans-serif",
-                        fontWeight: 800, // Extrabold
-                        fontSize: "52px",
-                        lineHeight: 1,
-                        color: "#0d70dc",
-                      }}
+                      className="text-center mb-2 text-5xl md:text-6xl font-extrabold leading-none text-[#0d70dc] font-lato"
                       data-testid={`text-kpi-numero-desktop-${kpi.id}`}
                     >
                       {kpi.numero}
@@ -263,14 +179,7 @@ export function ExcelenciaMateriaisSection() {
 
                     {/* Legenda */}
                     <p
-                      className="text-center"
-                      style={{
-                        fontFamily: "Lato, sans-serif",
-                        fontWeight: 500, // Medium
-                        fontSize: "14px",
-                        lineHeight: 1.4,
-                        color: "#0d70dc",
-                      }}
+                      className="text-center text-badge font-medium leading-relaxed text-[#0d70dc] font-lato"
                       data-testid={`text-kpi-legenda-desktop-${kpi.id}`}
                     >
                       {kpi.legenda}

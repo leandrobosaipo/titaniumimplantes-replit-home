@@ -1,4 +1,7 @@
 import { quemSomosConfig as c } from "@/data/quemSomos";
+import { SectionBadge } from "@/components/ui/SectionBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
+import { SectionContainer } from "@/components/ui/SectionContainer";
 
 export function QuemSomosSection() {
   if (!c.ativo) return null;
@@ -26,57 +29,27 @@ export function QuemSomosSection() {
       />
 
       {/* Container centralizado com 1280px max-width e 32px padding lateral */}
-      <div className="relative mx-auto max-w-[1280px] px-8 h-full flex items-center">
+      <SectionContainer className="relative h-full flex items-center">
         {/* Conteúdo alinhado à esquerda */}
         <div className="max-w-[640px] mb-8 w-full flex flex-col justify-center md:block">
           {/* Selo "QUEM SOMOS" */}
           <div className="flex justify-center mb-4 mt-8 md:mt-0">
-            <span
-              className="inline-block bg-[#0d70dc] text-white uppercase rounded-full text-[18px] md:text-[18px]"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 600, // Semibold
-                height: "32px",
-                minWidth: "140px",
-                borderRadius: "16px",
-                letterSpacing: "1px",
-                padding: "4px 16px",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-              data-testid="text-quem-somos-badge"
-            >
-              
+            <SectionBadge variant="primary" className="min-w-[140px]">
               {c.tituloSessao}
-            </span>
+            </SectionBadge>
           </div>
 
           {/* Título Principal */}
-          <h2
-            className="text-[#0a324c] mb-6 text-[32px] md:text-[40px] lg:text-[40px] text-center md:text-left"
-            style={{
-              fontFamily: "Lato, sans-serif",
-              fontWeight: 900, // Heavy
-              lineHeight: 1.2,
-              maxWidth: "600px",
-              marginBottom: "24px",
-            }}
-            data-testid="text-quem-somos-title"
+          <SectionTitle
+            level={2}
+            className="text-[#0a324c] mb-6 text-center md:text-left max-w-[600px]"
           >
             {c.titulo}
-          </h2>
+          </SectionTitle>
 
           {/* Descrição */}
           <p
-            className="hidden md:block text-[#4A4A4A] text-[18px] md:text-[24px] lg:text-[24px]"
-            style={{
-              fontFamily: "Lato, sans-serif",
-              fontWeight: 400, // Regular
-              lineHeight: 1.55,
-              maxWidth: "640px",
-              marginBottom: "32px",
-            }}
+            className="hidden md:block text-[#4A4A4A] text-body-md md:text-body-lg leading-relaxed font-lato max-w-[640px] mb-8"
             data-testid="text-quem-somos-desc"
           >
             {c.descricao}
@@ -88,20 +61,14 @@ export function QuemSomosSection() {
           <div className="hidden md:flex justify-center w-full">
             <a
               href={c.linkBotao}
-              className="inline-flex items-center justify-center bg-[#0d70dc] text-white rounded-full hover:opacity-90 transition uppercase text-[14px] md:text-[20px] px-6 md:px-8 py-2 md:py-3 min-h-[36px] md:min-h-[48px]"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 700, // Bold
-                borderRadius: "999px",
-                letterSpacing: "0.5px",
-              }}
+              className="inline-flex items-center justify-center bg-[#0d70dc] text-white rounded-full hover:opacity-90 transition uppercase text-body-sm md:text-xl px-6 md:px-8 py-2 md:py-3 min-h-[2.25rem] md:min-h-[3rem] font-bold font-lato tracking-wide"
               data-testid="button-quem-somos-cta"
             >
               {c.textoBotao.toUpperCase()}
             </a>
           </div>
         )}
-      </div>
+      </SectionContainer>
     </section>
   );
 }

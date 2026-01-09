@@ -421,4 +421,58 @@
       right: 1rem !important;
     }
   }
+
+  /* ============================================
+   * SISTEMA DE DESIGN ACESSÍVEL
+   * Utilities globais para componentes (sem dependência circular)
+   * ============================================ */
+
+  /* Container padrão de seções */
+  .section-container {
+    @apply mx-auto max-w-[80rem] px-8;
+  }
+
+  /* Ícones responsivos que escalam com texto */
+  .icon-responsive {
+    width: 1.5em;
+    height: 1.5em;
+    flex-shrink: 0;
+  }
+
+  .icon-responsive-sm {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+  }
+
+  .icon-responsive-md {
+    width: 1.5em;
+    height: 1.5em;
+    flex-shrink: 0;
+  }
+
+  .icon-responsive-lg {
+    width: 2em;
+    height: 2em;
+    flex-shrink: 0;
+  }
+
+  .icon-responsive-xl {
+    width: 3em;
+    height: 3em;
+    flex-shrink: 0;
+  }
+
+  /* Garantir line-height mínimo para acessibilidade em textos */
+  p:not(.no-line-height),
+  li:not(.no-line-height),
+  span:not(.icon):not(.no-line-height) {
+    line-height: 1.625;
+  }
+
+  /* Containers de texto não devem ter altura fixa */
+  .text-container {
+    min-height: auto;
+    height: auto;
+  }
 }

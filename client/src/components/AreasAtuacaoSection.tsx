@@ -1,4 +1,6 @@
 import { areasAtuacaoConfig as c } from "@/data/areasAtuacao";
+import { SectionBadge } from "@/components/ui/SectionBadge";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 export function AreasAtuacaoSection() {
   if (!c.ativo) return null;
@@ -15,54 +17,27 @@ export function AreasAtuacaoSection() {
       <div className="mx-auto max-w-[1280px] px-8">
         <div className="text-center">
           {/* Selo "ÁREAS DE ATUAÇÃO" */}
-          <div style={{ marginBottom: "24px" }}>
-            <span
-              className="inline-block bg-[#0d70dc] text-white uppercase rounded-full"
-              style={{
-                fontFamily: "Lato, sans-serif",
-                fontWeight: 600, // Semibold
-                fontSize: "25.47px",
-                height: "36px",
-                minWidth: "200px",
-                borderRadius: "18px",
-                padding: "4px 20px",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                letterSpacing: "0.5px",
-              }}
-              data-testid="text-areas-atuacao-badge"
-            >
+          <div className="mb-6">
+            <SectionBadge variant="primary" className="min-w-[200px]">
               {c.tituloSessao}
-            </span>
+            </SectionBadge>
           </div>
 
           {/* Título Principal */}
-          <h2
-            className="text-[#0a324c] text-[36px] md:text-[50px] lg:text-[63.58px] mb-4"
-            style={{
-              fontFamily: "Lato, sans-serif",
-              fontWeight: 900, // Heavy
-              lineHeight: 1.2,
-              marginBottom: "16px",
-            }}
-            data-testid="text-areas-atuacao-title"
+          <SectionTitle
+            level={2}
+            className="text-[#0a324c] mb-4"
+            as="h2"
           >
             {c.titulo}
-          </h2>
+          </SectionTitle>
 
           {/* Subtítulo */}
           <p
-            className="hidden md:block text-[#0a324c] text-[22px] md:text-[28px] lg:text-[32px] mb-15"
-            style={{
-              fontFamily: "Lato, sans-serif",
-              fontWeight: 400, // Regular para o texto completo
-              lineHeight: 1.4,
-              marginBottom: "60px",
-            }}
+            className="hidden md:block text-[#0a324c] text-body-lg-md md:text-2xl lg:text-3xl mb-15 font-lato leading-relaxed"
             data-testid="text-areas-atuacao-subtitle"
           >
-            <span style={{ fontWeight: 700 }}>Especialidades atendidas:</span>{" "}
+            <span className="font-bold">Especialidades atendidas:</span>{" "}
             {c.subtitulo.replace("Especialidades atendidas: ", "")}
           </p>
         </div>
@@ -104,12 +79,7 @@ export function AreasAtuacaoSection() {
               <div className="mt-8 px-4 pb-4">
                 {/* Título do card */}
                 <h3
-                  className="text-[#0a324c] text-[45px] md:text-[25px]"
-                  style={{
-                    fontFamily: "Lato, sans-serif",
-                    fontWeight: 700, // Bold
-                    marginBottom: "8px",
-                  }}
+                  className="text-[#0a324c] text-heading-4 md:text-heading-4-md font-bold leading-normal font-lato mb-2"
                   data-testid={`text-card-title-${especialidade.id}`}
                 >
                   {especialidade.titulo}
@@ -117,14 +87,7 @@ export function AreasAtuacaoSection() {
 
                 {/* Descrição do card */}
                 <p
-                  className="text-[#4A4A4A]"
-                  style={{
-                    fontFamily: "Lato, sans-serif",
-                    fontWeight: 400, // Regular
-                    fontSize: "18px",
-                    lineHeight: 1.55,
-                    maxWidth: "260px",
-                  }}
+                  className="text-[#4A4A4A] text-body font-lato leading-relaxed max-w-[16.25rem]"
                   data-testid={`text-card-desc-${especialidade.id}`}
                 >
                   {especialidade.descricao}
