@@ -4,6 +4,10 @@ import { useState, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertTriangle, Check, Info } from "lucide-react";
+import { useHoneypot } from "@/hooks/useHoneypot";
+import { useFormTimer } from "@/hooks/useFormTimer";
+import { HumanChallengeDialog } from "@/components/HumanChallengeDialog";
+import { humanChallengeMessages } from "@/data/messages";
 import { canalDenunciaPageConfig as c } from "@/data/canalDenunciaPage";
 import { denunciaSchema, tiposDenuncia, type DenunciaFormValues } from "@/types/canalDenuncia";
 import { Input } from "@/components/ui/input";
@@ -34,14 +38,8 @@ import {
 } from "@/components/ui/form";
 import { ScrollReveal } from "./ScrollReveal";
 
-/**
- * Gera código único de acompanhamento
- */
-function generateReportCode(): string {
-  const timestamp = Date.now().toString().slice(-6);
-  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-  return `DEN-${timestamp}-${random}`;
-}
+// Código de acompanhamento agora é gerado no backend
+// Função removida - código vem da resposta do servidor
 
 /**
  * Calcula o progresso do formulário baseado nos campos preenchidos
@@ -76,7 +74,11 @@ function calculateProgress(values: Partial<DenunciaFormValues>, isAnonymous: boo
 export function CanalDenunciaFormSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showHumanChallenge, setShowHumanChallenge] = useState(false);
+  const [pendingFormData, setPendingFormData] = useState<DenunciaFormValues | null>(null);
   const [reportCode, setReportCode] = useState<string>("");
+  const { honeypotProps } = useHoneypot();
+  const { getStartTime } = useFormTimer();
 
   const form = useForm<DenunciaFormValues>({
     resolver: zodResolver(denunciaSchema),
@@ -104,9 +106,12 @@ export function CanalDenunciaFormSection() {
     [formValues, isAnonymous]
   );
 
-  const onSubmit = async (data: DenunciaFormValues) => {
+  const submitForm = async (data: DenunciaFormValues, verificationToken?: string) => {
     setIsSubmitting(true);
     try {
+      // Capturar valor do honeypot
+      const honeypotValue = honeypotProps.ref.current?.value || "";
+
       const response = await fetch(c.webhookUrl, {
         method: "POST",
         headers: {
@@ -125,25 +130,65 @@ export function CanalDenunciaFormSection() {
           evidencias: data.evidencias || undefined,
           termos_aceitos: data.termos_aceitos,
           origem: "form_denuncia_titanium",
+          // Campos anti-spam
+          website: honeypotValue, // Honeypot (deve estar vazio - se preenchido = bot)
+          _formStartTime: getStartTime(), // Timestamp de início
+          // Verificação humana (se presente)
+          ...(verificationToken && {
+            humanVerified: true,
+            verificationToken,
+          }),
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Erro ao enviar formulário");
+        const errorData = await response.json().catch(() => ({}));
+        
+        // Verificar se é erro 429 com humanChallenge
+        if (response.status === 429 && errorData.humanChallenge) {
+          setPendingFormData(data);
+          setShowHumanChallenge(true);
+          setIsSubmitting(false);
+          return;
+        }
+
+        throw new Error(errorData.message || "Erro ao enviar formulário");
       }
 
-      // Gerar código de acompanhamento
-      const code = generateReportCode();
-      setReportCode(code);
-
-      // Mostrar tela de confirmação
-      setShowConfirmation(true);
+      // Receber código de acompanhamento da resposta do backend
+      const responseData = await response.json();
+      const code = responseData.codigo_denuncia;
+      
+      if (code) {
+        setReportCode(code);
+        // Mostrar tela de confirmação
+        setShowConfirmation(true);
+      } else {
+        // Fallback: se código não vier, mostrar erro
+        throw new Error("Código de acompanhamento não recebido do servidor");
+      }
+      
+      setPendingFormData(null);
     } catch (error) {
       // Erro
-      alert("Ocorreu um erro ao enviar. Tente novamente.");
+      alert(
+        error instanceof Error
+          ? error.message
+          : humanChallengeMessages.errorGeneric
+      );
       console.error("Erro ao enviar denúncia:", error);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const onSubmit = async (data: DenunciaFormValues) => {
+    await submitForm(data);
+  };
+
+  const handleHumanVerified = (token: string) => {
+    if (pendingFormData) {
+      submitForm(pendingFormData, token);
     }
   };
 
@@ -490,6 +535,17 @@ export function CanalDenunciaFormSection() {
                   </div>
 
                   {/* Termos e Condições */}
+                  {/* Campo Honeypot (oculto) - anti-spam */}
+                  <input
+                    ref={honeypotProps.ref}
+                    name={honeypotProps.name}
+                    type={honeypotProps.type}
+                    tabIndex={honeypotProps.tabIndex}
+                    autoComplete={honeypotProps.autoComplete}
+                    style={honeypotProps.style}
+                    aria-hidden={honeypotProps["aria-hidden"]}
+                  />
+
                   <FormField
                     control={form.control}
                     name="termos_aceitos"
@@ -535,6 +591,13 @@ export function CanalDenunciaFormSection() {
           </ScrollReveal>
         </div>
       </div>
+
+      {/* Dialog de verificação humana */}
+      <HumanChallengeDialog
+        open={showHumanChallenge}
+        onOpenChange={setShowHumanChallenge}
+        onVerified={handleHumanVerified}
+      />
     </section>
   );
 }

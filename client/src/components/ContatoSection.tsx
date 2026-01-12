@@ -4,6 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { useHoneypot } from "@/hooks/useHoneypot";
+import { useFormTimer } from "@/hooks/useFormTimer";
+import { HumanChallengeDialog } from "@/components/HumanChallengeDialog";
+import { humanChallengeMessages } from "@/data/messages";
 import { contatoConfig as c } from "@/data/contato";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -68,6 +72,10 @@ export function ContatoSection() {
 
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showHumanChallenge, setShowHumanChallenge] = useState(false);
+  const [pendingFormData, setPendingFormData] = useState<ContatoFormValues | null>(null);
+  const { honeypotProps } = useHoneypot();
+  const { getStartTime } = useFormTimer();
 
   const form = useForm<ContatoFormValues>({
     resolver: zodResolver(contatoSchema),
@@ -79,9 +87,12 @@ export function ContatoSection() {
     },
   });
 
-  const onSubmit = async (data: ContatoFormValues) => {
+  const submitForm = async (data: ContatoFormValues, verificationToken?: string) => {
     setIsSubmitting(true);
     try {
+      // Capturar valor do honeypot
+      const honeypotValue = honeypotProps.ref.current?.value || "";
+
       const response = await fetch(c.webhookUrl, {
         method: "POST",
         headers: {
@@ -93,31 +104,64 @@ export function ContatoSection() {
           telefone: data.telefone,
           mensagem: data.mensagem,
           origem: "form_contato_titanium_home",
+          // Campos anti-spam
+          website: honeypotValue, // Honeypot (deve estar vazio - se preenchido = bot)
+          _formStartTime: getStartTime(), // Timestamp de início
+          // Verificação humana (se presente)
+          ...(verificationToken && {
+            humanVerified: true,
+            verificationToken,
+          }),
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Erro ao enviar formulário");
+        const errorData = await response.json().catch(() => ({}));
+        
+        // Verificar se é erro 429 com humanChallenge
+        if (response.status === 429 && errorData.humanChallenge) {
+          setPendingFormData(data);
+          setShowHumanChallenge(true);
+          setIsSubmitting(false);
+          return;
+        }
+
+        throw new Error(errorData.message || "Erro ao enviar formulário");
       }
 
       // Sucesso
       toast({
         title: "Sucesso!",
-        description: "Mensagem enviada com sucesso! Entraremos em contato.",
+        description: verificationToken
+          ? humanChallengeMessages.successAfterVerification
+          : "Mensagem enviada com sucesso! Entraremos em contato.",
         variant: "default",
       });
 
       // Limpar formulário
       form.reset();
+      setPendingFormData(null);
     } catch (error) {
       // Erro
       toast({
         title: "Erro",
-        description: "Ocorreu um erro ao enviar. Tente novamente.",
+        description: error instanceof Error
+          ? error.message
+          : humanChallengeMessages.errorGeneric,
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const onSubmit = async (data: ContatoFormValues) => {
+    await submitForm(data);
+  };
+
+  const handleHumanVerified = (token: string) => {
+    if (pendingFormData) {
+      submitForm(pendingFormData, token);
     }
   };
 
@@ -379,6 +423,17 @@ export function ContatoSection() {
                     )}
                   />
 
+                  {/* Campo Honeypot (oculto) - anti-spam */}
+                  <input
+                    ref={honeypotProps.ref}
+                    name={honeypotProps.name}
+                    type={honeypotProps.type}
+                    tabIndex={honeypotProps.tabIndex}
+                    autoComplete={honeypotProps.autoComplete}
+                    style={honeypotProps.style}
+                    aria-hidden={honeypotProps["aria-hidden"]}
+                  />
+
                   {/* Botão Enviar */}
                   <div className="flex justify-center md:justify-end w-full md:w-auto mt-2">
                     <motion.div
@@ -423,6 +478,13 @@ export function ContatoSection() {
           </div>
         </div>
       </div>
+
+      {/* Dialog de verificação humana */}
+      <HumanChallengeDialog
+        open={showHumanChallenge}
+        onOpenChange={setShowHumanChallenge}
+        onVerified={handleHumanVerified}
+      />
     </motion.section>
   );
 }

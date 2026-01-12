@@ -10,7 +10,6 @@ export const contatoConfig: ContatoConfig = {
   titulo: "Seu próximo passo para a excelência em saúde",
   descricao:
     "Seja você um médico, uma clínica, um hospital ou um distribuidor, estamos prontos para transformar seus procedimentos com soluções inovadoras e de alta performance.",
-  webhookUrl:
-    "https://criadordigital-n8n-webhook.easypanel.codigo5.com.br/webhook/contact-form-titanium-implantes",
+  webhookUrl: "/api/webhook/contato", // Rota proxy no backend (com proteções anti-spam)
 };
 

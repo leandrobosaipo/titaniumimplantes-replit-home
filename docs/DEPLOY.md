@@ -76,9 +76,13 @@ Configure as seguintes variáveis de ambiente no EasyPanel:
 |----------|-------|-------------|-----------|
 | `NODE_ENV` | `production` | ✅ Sim | Ambiente de produção |
 | `PORT` | `5000` | ❌ Não | Porta do servidor (padrão: 5000) |
+| `WEBHOOK_CONTATO_URL` | `https://...` | ✅ Sim | URL do webhook de contato (n8n) |
+| `WEBHOOK_DENUNCIA_URL` | `https://...` | ✅ Sim | URL do webhook de denúncia (n8n) |
 | `DATABASE_URL` | `postgresql://...` | ❌ Não | URL do banco (se necessário no futuro) |
 
 **Nota**: O EasyPanel geralmente configura a porta automaticamente. Se não configurar, use `5000`.
+
+**Importante**: As URLs dos webhooks (`WEBHOOK_CONTATO_URL` e `WEBHOOK_DENUNCIA_URL`) devem ser mantidas secretas e configuradas apenas no backend. Nunca exponha essas URLs no código frontend.
 
 #### Passo 5: Configurar Porta
 
@@ -228,9 +232,16 @@ Antes de fazer deploy, certifique-se de:
 - [ ] `.gitignore` atualizado
 - [ ] Build local funciona (`npm run build`)
 - [ ] Docker build funciona localmente
-- [ ] Variáveis de ambiente configuradas no EasyPanel
+- [ ] Variáveis de ambiente configuradas no EasyPanel:
+  - [ ] `NODE_ENV=production`
+  - [ ] `WEBHOOK_CONTATO_URL` (URL do webhook de contato)
+  - [ ] `WEBHOOK_DENUNCIA_URL` (URL do webhook de denúncia)
+  - [ ] `PORT` (se necessário)
+- [ ] `dotenv` instalado (já incluído nas dependências)
+- [ ] Servidor carrega variáveis do `.env` automaticamente (configurado em `server/index.ts`)
 - [ ] Porta configurada corretamente
 - [ ] Repositório conectado no EasyPanel
+- [ ] Proteções anti-spam funcionando (testar formulários)
 
 ## 🔄 Deploy Automático
 
