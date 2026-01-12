@@ -29,20 +29,20 @@ export function QuemSomosSection() {
       />
 
       {/* Container centralizado com 1280px max-width e 32px padding lateral */}
-      <SectionContainer className="relative h-full flex items-center">
-        {/* Conteúdo alinhado à esquerda */}
-        <div className="max-w-[640px] mb-8 w-full flex flex-col justify-center md:block">
+      <SectionContainer className="relative h-full flex items-center justify-center md:justify-start">
+        {/* Conteúdo centralizado no mobile, alinhado à esquerda no desktop */}
+        <div className="max-w-[640px] mb-8 w-full flex flex-col justify-center items-center md:items-start md:block">
           {/* Selo "QUEM SOMOS" */}
-          <div className="flex justify-center mb-4 mt-8 md:mt-0">
+          <div className="flex justify-center mb-6 md:mb-4 mt-0 md:mt-0">
             <SectionBadge variant="primary" className="min-w-[140px]">
               {c.tituloSessao}
             </SectionBadge>
           </div>
 
-          {/* Título Principal */}
+          {/* Título Principal - Maior no mobile, centralizado */}
           <SectionTitle
             level={2}
-            className="text-[#0a324c] mb-6 text-center md:text-left max-w-[600px]"
+            className="text-[#0a324c] mb-6 text-center md:text-left max-w-[600px] text-heading-1 md:text-heading-2-md lg:text-heading-2-lg"
           >
             {c.titulo}
           </SectionTitle>

@@ -30,12 +30,12 @@ export function LgpdExercerDireitosSection() {
   };
 
   return (
-    <section className="bg-white py-24 px-8">
+    <section className="bg-white py-12 md:py-24 overflow-x-hidden">
       <SectionContainer>
-        <SectionTitle level={2} className="text-center text-[#0a324c] mb-16" highlightedText="direitos">
+        <SectionTitle level={2} className="text-center text-[#0a324c] mb-8 md:mb-16" highlightedText="direitos">
           Como exercer seus direitos
         </SectionTitle>
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-20 items-center">
           {/* Ilustração decorativa - Coluna esquerda */}
           <div className="hidden md:flex items-center justify-center">
             <div className="relative w-full min-h-[16rem] flex items-center justify-center">
@@ -47,24 +47,24 @@ export function LgpdExercerDireitosSection() {
           </div>
           
           {/* Conteúdo - Coluna direita */}
-          <div className="space-y-10 text-left">
+          <div className="space-y-6 md:space-y-10 text-left">
             {d.secaoDireitos.contatos.map((c, i) => (
-              <div key={`${c.tipo}-${i}`} className="flex items-center gap-6">
-                <div className="w-14 h-14 md:w-16 md:h-16 text-[#0d70dc] flex items-center justify-center">
+              <div key={`${c.tipo}-${i}`} className="flex items-center gap-4 md:gap-6">
+                <div className="w-14 h-14 md:w-16 md:h-16 text-[#0d70dc] flex items-center justify-center flex-shrink-0">
                   {c.tipo === "email" && <Mail className="w-7 h-7 md:w-8 md:h-8" />}
                   {c.tipo === "tel" && <Phone className="w-7 h-7 md:w-8 md:h-8" />}
                   {c.tipo === "map" && <MapPin className="w-7 h-7 md:w-8 md:h-8" />}
                 </div>
-                <span className="text-body-lg md:text-body-lg-md text-[#0a324c] font-medium font-lato">{c.valor}</span>
+                <span className="text-body-lg md:text-body-lg-md text-[#0a324c] font-medium font-lato break-words">{c.valor}</span>
               </div>
             ))}
-            <p className="pt-10 text-body-lg md:text-body-lg-md leading-relaxed font-lato">
+            <p className="pt-6 md:pt-10 text-body-lg md:text-body-lg-md leading-relaxed font-lato">
               <span className="text-[#0d70dc] font-bold">{securityLabel}</span>{" "}
               <span className="text-[#0a324c]">{securityContent}</span>
             </p>
             <div className="pt-4">
               <Link href="/#contato" onClick={handleContatoClick}>
-                <Button className="bg-[#0d70dc] hover:bg-[#0953b0] text-white rounded-full px-10 py-5 text-sm font-bold uppercase tracking-widest font-lato">
+                <Button className="bg-[#0d70dc] hover:bg-[#0953b0] text-white rounded-full px-6 md:px-10 py-4 md:py-5 text-sm font-bold uppercase tracking-widest font-lato w-full md:w-auto">
                   Falar com o DPO
                 </Button>
               </Link>
