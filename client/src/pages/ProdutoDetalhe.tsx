@@ -599,31 +599,31 @@ export default function ProdutoDetalhe() {
 
       {/* Navegação entre produtos */}
       <div className="mx-auto max-w-[1280px] px-8 pb-24">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">
           {prevProduct ? (
-            <Link href={`/produtos/${prevProduct.slug}`}>
-              <Button variant="outline" className="rounded-full px-6 h-12">
+            <Link href={`/produtos/${prevProduct.slug}`} className="w-full md:w-auto">
+              <Button variant="outline" className="w-full md:w-auto rounded-full px-6 h-12">
                 ← Anterior
               </Button>
             </Link>
           ) : (
-            <div />
+            <div className="hidden md:block" />
           )}
 
-          <Link href="/produtos">
-            <Button variant="ghost" className="rounded-full px-6 h-12">
+          <Link href="/produtos" className="w-full md:w-auto">
+            <Button variant="ghost" className="w-full md:w-auto rounded-full px-6 h-12">
               Voltar para produtos
             </Button>
           </Link>
 
           {nextProduct ? (
-            <Link href={`/produtos/${nextProduct.slug}`}>
-              <Button variant="outline" className="rounded-full px-6 h-12">
+            <Link href={`/produtos/${nextProduct.slug}`} className="w-full md:w-auto">
+              <Button variant="outline" className="w-full md:w-auto rounded-full px-6 h-12">
                 Próximo →
               </Button>
             </Link>
           ) : (
-            <div />
+            <div className="hidden md:block" />
           )}
         </div>
       </div>
