@@ -87,9 +87,16 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
+
+  // Em produção (Docker/EasyPanel), precisamos escutar em 0.0.0.0 para aceitar conexões externas.
+  // Em dev local (macOS), usar 127.0.0.1 evita erros de socket em alguns ambientes.
+  const host =
+    process.env.HOST ||
+    (process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1");
+
   server.listen({
     port,
-    host: process.env.HOST || "127.0.0.1",
+    host,
   }, () => {
     log(`serving on port ${port}`);
   }).on('error', (err: NodeJS.ErrnoException) => {

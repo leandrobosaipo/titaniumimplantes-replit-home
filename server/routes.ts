@@ -24,6 +24,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ message: "Rota de teste funcionando", timestamp: new Date().toISOString() });
   });
 
+  // Debug route: verifica se variáveis de ambiente críticas estão presentes (sem expor valores)
+  apiRouter.get("/env-check", (_req, res) => {
+    res.json({
+      nodeEnv: process.env.NODE_ENV || null,
+      port: process.env.PORT || null,
+      hasWebhookContatoUrl: Boolean(process.env.WEBHOOK_CONTATO_URL),
+      hasWebhookDenunciaUrl: Boolean(process.env.WEBHOOK_DENUNCIA_URL),
+    });
+  });
+
   // Store para tokens de verificação humana
   interface HumanVerificationToken {
     token: string;
