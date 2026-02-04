@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Layout } from "@/components/Layout";
 import { PageSEO } from "@/components/SEO/PageSEO";
 import { productsConfig as c } from "@/data/products";
+import { ImageLightbox } from "@/components/ImageLightbox";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -25,14 +26,36 @@ export default function Produtos() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const openLightbox = (src: string) => {
+    setLightboxSrc(src);
+    setLightboxOpen(true);
+  };
+
+  const categoriesWithProducts = useMemo(() => {
+    const counts = c.products.reduce<Record<string, number>>((acc, p) => {
+      acc[p.categoryId] = (acc[p.categoryId] || 0) + 1;
+      return acc;
+    }, {});
+
+    // mantém "all" sempre e remove categorias vazias
+    return c.categories.filter((cat) => cat.id === "all" || (counts[cat.id] ?? 0) > 0);
+  }, []);
+
   const filteredProducts = useMemo(() => {
     if (activeCategory === "all") return c.products;
     return c.products.filter((p) => p.categoryId === activeCategory);
   }, [activeCategory]);
 
   useEffect(() => {
+    // se a categoria atual não existe mais (ex: ficou vazia), volta para "all"
+    if (!categoriesWithProducts.find((cat) => cat.id === activeCategory)) {
+      setActiveCategory("all");
+      return;
+    }
     setCurrentPage(1);
-  }, [activeCategory]);
+  }, [activeCategory, categoriesWithProducts]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / c.itemsPerPage));
   const paginatedProducts = filteredProducts.slice(
@@ -67,7 +90,7 @@ export default function Produtos() {
 
         {/* Filtro Horizontal de Categorias */}
         <div className="flex flex-wrap gap-3 mb-8">
-          {c.categories.map((cat) => (
+          {categoriesWithProducts.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
@@ -92,11 +115,18 @@ export default function Produtos() {
               >
                 {/* Área de Imagem - 60-65% */}
                 <div className="bg-white flex items-center justify-center h-[60%] min-h-[240px] p-6">
-                  <img
-                    src={product.mainImage}
-                    alt={product.title}
-                    className="max-h-full max-w-full object-contain drop-shadow-lg"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(product.mainImage)}
+                    className="w-full h-full flex items-center justify-center"
+                    aria-label={`Ampliar imagem de ${product.title}`}
+                  >
+                    <img
+                      src={product.mainImage}
+                      alt={product.title}
+                      className="max-h-full max-w-full object-contain drop-shadow-lg"
+                    />
+                  </button>
                 </div>
 
                 {/* Conteúdo - 40-35% */}
@@ -149,6 +179,14 @@ export default function Produtos() {
           )}
         </div>
       </div>
+      {lightboxSrc && (
+        <ImageLightbox
+          open={lightboxOpen}
+          onOpenChange={setLightboxOpen}
+          src={lightboxSrc}
+          alt="Imagem do produto"
+        />
+      )}
     </Layout>
   );
 }

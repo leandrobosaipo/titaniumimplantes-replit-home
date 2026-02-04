@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRoute, Link } from "wouter";
+import { ImageLightbox } from "@/components/ImageLightbox";
 import { Layout } from "@/components/Layout";
 import { PageSEO } from "@/components/SEO/PageSEO";
 import { productsConfig as c } from "@/data/products";
@@ -43,6 +44,12 @@ export default function ProdutoDetalhe() {
   );
 
   const [activeImg, setActiveImg] = useState(product?.mainImage ?? "");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const openLightbox = (src: string) => {
+    setLightboxSrc(src);
+    setLightboxOpen(true);
+  };
 
   useEffect(() => {
     if (product) {
@@ -54,6 +61,11 @@ export default function ProdutoDetalhe() {
 
   const categoryLabel = c.categories.find((cat) => cat.id === product.categoryId)?.label;
   const isPerceptRC = product.slug === "percept-rc-neuroestimulador-medtronic";
+
+  // Navegação anterior / próximo
+  const currentIndex = c.products.findIndex((p) => p.slug === product.slug);
+  const prevProduct = currentIndex > 0 ? c.products[currentIndex - 1] : null;
+  const nextProduct = currentIndex >= 0 && currentIndex < c.products.length - 1 ? c.products[currentIndex + 1] : null;
 
   // Conteúdo específico para Percept RC
   const perceptContent = {
@@ -162,11 +174,18 @@ export default function ProdutoDetalhe() {
         <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="bg-white rounded-xl p-8 flex items-center justify-center min-h-[400px]">
-              <img
-                src={activeImg}
-                className="max-h-full max-w-full object-contain"
-                alt={product.title}
-              />
+              <button
+                type="button"
+                onClick={() => openLightbox(activeImg)}
+                className="w-full h-full flex items-center justify-center"
+                aria-label={`Ampliar imagem de ${product.title}`}
+              >
+                <img
+                  src={activeImg}
+                  className="max-h-full max-w-full object-contain"
+                  alt={product.title}
+                />
+              </button>
             </div>
             <div className="space-y-6">
               {categoryLabel && (
@@ -443,20 +462,31 @@ export default function ProdutoDetalhe() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             <div className="space-y-4">
               <div className="rounded-3xl overflow-hidden shadow-2xl aspect-square bg-white">
-                <img
-                  src={activeImg}
-                  className="w-full h-full object-contain p-4"
-                  alt={product.title}
-                />
+                <button
+                  type="button"
+                  onClick={() => openLightbox(activeImg)}
+                  className="w-full h-full"
+                  aria-label={`Ampliar imagem de ${product.title}`}
+                >
+                  <img
+                    src={activeImg}
+                    className="w-full h-full object-contain p-4"
+                    alt={product.title}
+                  />
+                </button>
               </div>
               <div className="flex gap-4 overflow-x-auto pb-2">
                 {product.images.map((img, i) => (
                   <button
                     key={`${product.id}-${i}`}
-                    onClick={() => setActiveImg(img)}
+                    onClick={() => {
+                      setActiveImg(img);
+                      openLightbox(img);
+                    }}
                     className={`w-24 h-24 rounded-xl overflow-hidden border-2 transition-all ${
                       activeImg === img ? "border-[#0d70dc]" : "border-transparent opacity-70"
                     }`}
+                    aria-label={`Ver imagem ${i + 1} de ${product.title}`}
                   >
                     <img src={img} className="w-full h-full object-cover" alt="" />
                   </button>
@@ -566,6 +596,47 @@ export default function ProdutoDetalhe() {
           </div>
         )}
       </div>
+
+      {/* Navegação entre produtos */}
+      <div className="mx-auto max-w-[1280px] px-8 pb-24">
+        <div className="flex items-center justify-between gap-4">
+          {prevProduct ? (
+            <Link href={`/produtos/${prevProduct.slug}`}>
+              <Button variant="outline" className="rounded-full px-6 h-12">
+                ← Anterior
+              </Button>
+            </Link>
+          ) : (
+            <div />
+          )}
+
+          <Link href="/produtos">
+            <Button variant="ghost" className="rounded-full px-6 h-12">
+              Voltar para produtos
+            </Button>
+          </Link>
+
+          {nextProduct ? (
+            <Link href={`/produtos/${nextProduct.slug}`}>
+              <Button variant="outline" className="rounded-full px-6 h-12">
+                Próximo →
+              </Button>
+            </Link>
+          ) : (
+            <div />
+          )}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxSrc && (
+        <ImageLightbox
+          open={lightboxOpen}
+          onOpenChange={setLightboxOpen}
+          src={lightboxSrc}
+          alt={product.title}
+        />
+      )}
     </Layout>
   );
 }
