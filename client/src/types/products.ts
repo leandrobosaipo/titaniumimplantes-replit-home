@@ -16,10 +16,17 @@ export interface Product {
   categoryId: string;
   title: string;
   description: string;
+  /** Texto principal (intro). Se o produto tiver seções estruturadas, mantenha aqui um resumo curto. */
   fullDescription: string;
   mainImage: string;
   images: string[];
   anvisa?: string; // Número de registro ANVISA (opcional)
+
+  /** Conteúdo no padrão do site de referência (seções). */
+  characteristics?: string[];
+  indications?: string[];
+  diferentials?: string[];
+  details?: string[];
 }
 
 /**

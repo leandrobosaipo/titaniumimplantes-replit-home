@@ -488,6 +488,75 @@ export default function ProdutoDetalhe() {
                 {product.fullDescription}
               </div>
 
+              {/* Seções no padrão do site de referência */}
+              {(product.characteristics || product.indications || product.diferentials || product.details) && (
+                <div className="space-y-8">
+                  {product.characteristics?.length ? (
+                    <div>
+                      <h2 className="text-2xl font-black font-lato mb-3" style={{ color: d.colors.text.primary }}>
+                        Características
+                      </h2>
+                      <ul className="space-y-2">
+                        {product.characteristics.map((item, idx) => (
+                          <li key={`char-${idx}`} className="flex gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-[#0d70dc] mt-0.5 flex-shrink-0" />
+                            <span className="font-lato text-[#4A4A4A]">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  {product.indications?.length ? (
+                    <div>
+                      <h2 className="text-2xl font-black font-lato mb-3" style={{ color: d.colors.text.primary }}>
+                        Indicações
+                      </h2>
+                      <ul className="space-y-2">
+                        {product.indications.map((item, idx) => (
+                          <li key={`ind-${idx}`} className="flex gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-[#0d70dc] mt-0.5 flex-shrink-0" />
+                            <span className="font-lato text-[#4A4A4A]">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  {product.diferentials?.length ? (
+                    <div>
+                      <h2 className="text-2xl font-black font-lato mb-3" style={{ color: d.colors.text.primary }}>
+                        Diferenciais
+                      </h2>
+                      <ul className="space-y-2">
+                        {product.diferentials.map((item, idx) => (
+                          <li key={`dif-${idx}`} className="flex gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-[#0d70dc] mt-0.5 flex-shrink-0" />
+                            <span className="font-lato text-[#4A4A4A]">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  {product.details?.length ? (
+                    <div>
+                      <h2 className="text-2xl font-black font-lato mb-3" style={{ color: d.colors.text.primary }}>
+                        Detalhes
+                      </h2>
+                      <ul className="space-y-2">
+                        {product.details.map((item, idx) => (
+                          <li key={`det-${idx}`} className="flex gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-[#0d70dc] mt-0.5 flex-shrink-0" />
+                            <span className="font-lato text-[#4A4A4A]">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+                </div>
+              )}
+
               <Link href="/contato">
                 <Button className="bg-[#0d70dc] hover:bg-[#0953b0] text-white rounded-full font-bold px-12 h-14 uppercase tracking-widest text-sm">
                   Solicitar Cotação
