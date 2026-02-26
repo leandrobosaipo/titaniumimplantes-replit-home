@@ -20,6 +20,7 @@
  */
 
 import type { ProductsPageConfig } from "@/types/products";
+import { productExcelOverrides } from "@/data/productsExcelOverrides";
 import colunaImg from "@assets/coluna-bg-solucoes.jpg";
 import neuroImg from "@assets/neurologia-bg-solucoes.jpg";
 import bucoImg from "@assets/bucomaxilfacial-bg-solucoes.jpg";
@@ -394,3 +395,15 @@ export const productsConfig: ProductsPageConfig = {
   ],
   itemsPerPage: 12,
 };
+
+productsConfig.products = productsConfig.products.map((product) => {
+  const override = productExcelOverrides[product.slug];
+  if (!override) return product;
+
+  return {
+    ...product,
+    title: override.title,
+    description: override.description,
+    fullDescription: override.fullDescription,
+  };
+});

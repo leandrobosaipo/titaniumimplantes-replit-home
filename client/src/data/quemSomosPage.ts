@@ -21,19 +21,19 @@ export const quemSomosPageConfig: QuemSomosPageConfig = {
       id: "1",
       tipo: "missao",
       titulo: "Nossa Missão:",
-      descricao: "Promover a saúde e o bem-estar com segurança, ética e certificação, garantindo que cada paciente receba o melhor resultado possível através de tecnologias confiáveis e parceiros sólidos.",
+      descricao: "Gerar confiança com relacionamento respeitoso, excelência técnica em tudo o que entregamos.",
     },
     {
       id: "2",
       tipo: "visao",
       titulo: "Nossa Visão:",
-      descricao: "Ser reconhecida como a principal referência em implantes e materiais cirúrgicos de Mato Grosso, destacando-se pela excelência técnica, agilidade e parceria com os profissionais de saúde.",
+      descricao: "Consolidar-se no mercado nacional como referência em excelência, sendo admirada por clientes, fornecedores e colaboradores pela qualidade e compromisso em tudo o que faz.",
     },
     {
       id: "3",
       tipo: "valores",
       titulo: "Nossos Valores:",
-      descricao: "Ética e Transparência: relacionamento baseado em confiança e respeito.\nQualidade e Segurança: produtos certificados e processos auditados.\nInovação: soluções que acompanham os avanços da medicina moderna.\nAgilidade e Eficiência: entregas rápidas e suporte integral.\nCuidado com a Vida: foco em cada paciente, em cada história.",
+      descricao: "Respeito e confiança nas pessoas: promovemos um ambiente de acolhimento, transparência e colaboração, onde cada pessoa é valorizada.\n\nQualidade nos produtos: entregamos materiais de alta performance, confiáveis e seguros, comprometidos com o bem-estar do paciente e a tranquilidade do profissional de saúde.\n\nSistematização dos processos: acreditamos que a padronização é a base da excelência. Processos bem definidos garantem eficiência, previsibilidade e segurança em nossas operações.\n\nEvolução e melhoria contínua: investimos no desenvolvimento das pessoas e na inovação constante, buscando sempre fazer melhor do que ontem.\n\nEmpatia: colocar-se no lugar do outro para compreender necessidades, promover acolhimento e construir relações humanas e respeitosas.\n\nFoco em resultados: nosso olhar está direcionado para a performance e para os impactos positivos que geramos na saúde, na vida das pessoas e na sustentabilidade do negócio.",
     },
   ],
   estrutura: {

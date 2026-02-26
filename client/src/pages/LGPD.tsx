@@ -1,6 +1,5 @@
 import { Layout } from "@/components/Layout";
 import { PageSEO } from "@/components/SEO/PageSEO";
-import { LgpdCertificacoesSection } from "@/components/LgpdCertificacoesSection";
 import { LgpdDestaquesMaterialSection } from "@/components/LgpdDestaquesMaterialSection";
 import { LgpdControleQualidadeSection } from "@/components/LgpdControleQualidadeSection";
 import { LgpdComplianceEticaSection } from "@/components/LgpdComplianceEticaSection";
@@ -15,8 +14,9 @@ export default function LGPD() {
         description="Certificações, Compliance e Proteção de Dados."
       />
 
-      <LgpdCertificacoesSection />
-      <LgpdDestaquesMaterialSection />
+      <div className="mt-[100px] lg:mt-[180px]">
+        <LgpdDestaquesMaterialSection />
+      </div>
       <LgpdControleQualidadeSection />
       <LgpdComplianceEticaSection />
       <LgpdProtecaoDadosSection />

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { quemSomosPageConfig as c } from "@/data/quemSomosPage";
-import { Gem, Eye, Rocket } from "lucide-react";
+import { Gem, Eye, Rocket, ChevronDown, ChevronUp } from "lucide-react";
 
 // Função para formatar valores com labels em negrito
 function formatValuesText(text: string): React.ReactNode {
@@ -47,13 +47,21 @@ function getBackgroundText(tipo: string): string {
 }
 
 export function QuemSomosMVVSection() {
+  const [valoresExpanded, setValoresExpanded] = useState(false);
+
   return (
     <section className="py-16 bg-[#F4F5F7] px-8">
       <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-        {c.mvv.map((item) => (
+        {c.mvv.map((item) => {
+          const isValores = item.tipo === "valores";
+          const cardExpanded = isValores && valoresExpanded;
+
+          return (
           <div
             key={item.id}
-            className="bg-[#01155a] text-white p-10 pt-20 rounded-[40px] flex flex-col shadow-lg relative min-h-[500px] md:min-h-[400px]"
+            className={`bg-[#01155a] text-white p-10 pt-20 rounded-[40px] flex flex-col shadow-lg relative min-h-[500px] ${
+              cardExpanded ? "h-auto md:h-auto" : "h-[560px] md:h-[520px]"
+            }`}
           >
             {/* Texto de fundo vertical */}
             <div
@@ -84,20 +92,47 @@ export function QuemSomosMVVSection() {
             </div>
 
             {/* Conteúdo */}
-            <div className="relative z-10 w-full">
+            <div className="relative z-10 w-full flex flex-col h-full">
               <h3 className="text-[44px] font-bold mb-6 font-lato text-[#60a5fa] text-center">
                 {item.titulo}
               </h3>
-              <div className="text-white leading-relaxed text-lg text-left">
-                {item.tipo === "valores" ? (
-                  formatValuesText(item.descricao)
-                ) : (
+
+              {item.tipo === "valores" ? (
+                <>
+                  <div
+                    className={`text-white leading-relaxed text-lg text-left transition-all duration-300 ${
+                      valoresExpanded ? "max-h-none" : "max-h-[180px] overflow-hidden"
+                    }`}
+                  >
+                    {formatValuesText(item.descricao)}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setValoresExpanded((prev) => !prev)}
+                    className="mt-auto self-start inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#60a5fa] text-[#01155a] font-bold text-sm hover:opacity-90 transition"
+                    aria-expanded={valoresExpanded}
+                  >
+                    {valoresExpanded ? (
+                      <>
+                        Recolher <ChevronUp size={18} />
+                      </>
+                    ) : (
+                      <>
+                        Ver todos os valores <ChevronDown size={18} />
+                      </>
+                    )}
+                  </button>
+                </>
+              ) : (
+                <div className="text-white leading-relaxed text-lg text-left">
                   <p className="whitespace-pre-line">{item.descricao}</p>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

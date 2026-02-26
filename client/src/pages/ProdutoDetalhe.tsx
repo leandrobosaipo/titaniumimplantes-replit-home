@@ -435,7 +435,7 @@ export default function ProdutoDetalhe() {
                     detalhadas e apoiar você no processo de decisão clínica.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link href="/contato">
+                    <Link href="/#contato">
                       <Button
                         size="lg"
                         className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-8 h-14 text-lg rounded-lg"
@@ -443,7 +443,7 @@ export default function ProdutoDetalhe() {
                         Solicitar mais informações
                       </Button>
                     </Link>
-                    <Link href="/contato">
+                    <Link href="/#contato">
                       <Button
                         size="lg"
                         variant="outline"
@@ -587,7 +587,7 @@ export default function ProdutoDetalhe() {
                 </div>
               )}
 
-              <Link href="/contato">
+              <Link href="/#contato">
                 <Button className="bg-[#0d70dc] hover:bg-[#0953b0] text-white rounded-full font-bold px-12 h-14 uppercase tracking-widest text-sm">
                   Solicitar Cotação
                 </Button>
