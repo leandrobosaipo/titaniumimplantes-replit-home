@@ -11,18 +11,15 @@ import {
 } from "@/components/ui/sheet";
 
 const navigationLinks = [
-  { title: "Início", href: "/" },
-  { title: "Compliance", href: "/compliance" },
+  { title: "Home", href: "/" },
+  { title: "Quem Somos", href: "/quem-somos" },
+  { title: "Produtos", href: "/produtos" },
+  { title: "Canal de Denúncia", href: "/canal-de-denuncia" },
   { title: "LGPD", href: "/lgpd" },
-  { title: "Canal de Denúncias", href: "/canal-de-denuncia" },
-  { title: "Suporte", href: "/suporte" },
-  { title: "FAQ", href: "/faq" },
+  { title: "Contato", href: "/#contato" },
 ];
 
-const legalLinks = [
-  { title: "Termos de Uso", href: "/termos" },
-  { title: "Política de Privacidade", href: "/privacidade" },
-];
+const legalLinks = [...navigationLinks];
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -270,14 +267,14 @@ export function Footer() {
             className="flex items-center flex-wrap justify-center md:justify-end gap-4 md:gap-8"
           >
             {legalLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-white hover:underline md:hover:opacity-80 transition-all text-body-sm md:text-body font-lato"
                 data-testid={`link-footer-legal-${link.title.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {link.title}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

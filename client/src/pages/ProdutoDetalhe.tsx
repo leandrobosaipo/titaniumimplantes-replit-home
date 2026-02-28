@@ -62,6 +62,26 @@ export default function ProdutoDetalhe() {
   const categoryLabel = c.categories.find((cat) => cat.id === product.categoryId)?.label;
   const isPerceptRC = product.slug === "percept-rc-neuroestimulador-medtronic";
 
+  const cleanedFullDescription = product.fullDescription
+    .replace(/\r\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  const normalizedSections = cleanedFullDescription
+    .split(/\n(?=(?:\d+\)|\)?)\s*(?:Visão Geral|Principais Benefícios|Diferenciais e Benefícios|Indicações Clínicas|Detalhes|Características))/gi)
+    .map((section) => section.trim())
+    .filter(Boolean)
+    .map((section) => {
+      const lines = section.split("\n").map((line) => line.trim()).filter(Boolean);
+      const rawTitle = lines[0] ?? "";
+      const title = rawTitle.replace(/^\d*\)?\s*/g, "").trim();
+      const content = lines.slice(1).join("\n").trim();
+      return { title, content };
+    })
+    .filter((s) => s.title && s.content);
+
+  const hasStructuredText = normalizedSections.length > 0;
+
   // Navegação anterior / próximo
   const currentIndex = c.products.findIndex((p) => p.slug === product.slug);
   const prevProduct = currentIndex > 0 ? c.products[currentIndex - 1] : null;
@@ -435,23 +455,21 @@ export default function ProdutoDetalhe() {
                     detalhadas e apoiar você no processo de decisão clínica.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link href="/#contato">
-                      <Button
-                        size="lg"
-                        className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-8 h-14 text-lg rounded-lg"
-                      >
-                        Solicitar mais informações
-                      </Button>
-                    </Link>
-                    <Link href="/#contato">
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="border-2 border-white text-white hover:bg-white/10 font-lato font-bold px-8 h-14 text-lg rounded-lg"
-                      >
-                        Falar com um especialista
-                      </Button>
-                    </Link>
+                    <Button
+                      asChild
+                      size="lg"
+                      className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-8 h-14 text-lg rounded-lg"
+                    >
+                      <Link href="/contato">Solicitar mais informações</Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="border-2 border-white text-white hover:bg-white/10 font-lato font-bold px-8 h-14 text-lg rounded-lg"
+                    >
+                      <a href="tel:+556530255625">Falar com um especialista</a>
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -514,9 +532,24 @@ export default function ProdutoDetalhe() {
                 )}
               </div>
 
-              <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
-                {product.fullDescription}
-              </div>
+              {hasStructuredText ? (
+                <div className="space-y-8">
+                  {normalizedSections.map((section, idx) => (
+                    <section key={`${section.title}-${idx}`}>
+                      <h2 className="text-2xl font-black font-lato mb-3" style={{ color: d.colors.text.primary }}>
+                        {section.title}
+                      </h2>
+                      <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
+                        {section.content}
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
+                  {product.fullDescription}
+                </div>
+              )}
 
               {/* Seções no padrão do site de referência */}
               {(product.characteristics || product.indications || product.diferentials || product.details) && (
@@ -587,11 +620,35 @@ export default function ProdutoDetalhe() {
                 </div>
               )}
 
-              <Link href="/#contato">
-                <Button className="bg-[#0d70dc] hover:bg-[#0953b0] text-white rounded-full font-bold px-12 h-14 uppercase tracking-widest text-sm">
-                  Solicitar Cotação
-                </Button>
-              </Link>
+              <Card className="bg-[#0d70dc] border-0">
+                <CardContent className="p-8 md:p-10 text-center">
+                  <Users className="w-10 h-10 text-white mx-auto mb-5" />
+                  <h3 className="text-2xl font-black font-lato text-white mb-3">
+                    Precisa de mais informações?
+                  </h3>
+                  <p className="text-base md:text-lg text-white/90 font-lato mb-6 max-w-2xl mx-auto">
+                    Nossa equipe de especialistas está pronta para esclarecer dúvidas técnicas, fornecer informações
+                    detalhadas e apoiar você no processo de decisão clínica.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-6 h-12 text-base rounded-lg"
+                    >
+                      <Link href="/contato">Solicitar mais informações</Link>
+                    </Button>
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="border-2 border-white text-white hover:bg-white/10 font-lato font-bold px-6 h-12 text-base rounded-lg"
+                    >
+                      <a href="tel:+556530255625">Falar com um especialista</a>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         )}
