@@ -48,3 +48,18 @@ curl -s -o /dev/null -w 'contato:%{http_code}\n' http://127.0.0.1:5001/contato
 - Se a porta 5001 já estiver em uso, troque para 5002.
 - Evitar Node 25 para este projeto local (já causou erro de socket `ENOTSUP`).
 - Fluxo de deploy continua sendo GitHub -> EasyPanel.
+
+---
+
+## Skills recomendadas (OpenClaw)
+Usar conforme tarefa:
+
+- **openai-whisper**: transcrever áudios locais (ex.: WhatsApp `.opus`).
+- **coding-agent**: mudanças grandes/refatorações (quando for além de ajustes pontuais).
+- **github**: validação de PR/branch/status remoto via `gh`.
+
+Regra prática neste projeto:
+- Ajuste simples de conteúdo/layout: editar direto.
+- Tarefa extensa/multi-arquivo: considerar `coding-agent`.
+- Sempre validar local antes de push/deploy.
+
