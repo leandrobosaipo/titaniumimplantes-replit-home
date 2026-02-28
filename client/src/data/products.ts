@@ -29,7 +29,6 @@ import heroImg from "@assets/home-topo_1762428378908.jpeg";
 import estruturaImg from "@assets/home-slide_1762428378908.jpeg";
 
 import syncromedMain from "@assets/produtos/synchromed-ii-bomba-infusao-implantavel-medtronic-main.jpg";
-import neuroestimuladorMain from "@assets/produtos/neuroestimulador-intellis-medtronic-main.jpg";
 import neuroestimulador1 from "@assets/produtos/neuroestimulador-intellis-medtronic-1.jpg";
 import neuroestimulador2 from "@assets/produtos/neuroestimulador-intellis-medtronic-2.jpg";
 import dbsPerceptImg from "@assets/DBS-Percept-RC.jpg";
@@ -123,8 +122,8 @@ export const productsConfig: ProductsPageConfig = {
         "Sistema de estimulação da medula espinhal recarregável com tecnologia AdaptiveStim™ para alívio de dor crônica neuropática e intratável.",
       fullDescription:
         "Sistema de estimulação da medula espinhal recarregável com tecnologia AdaptiveStim™ para alívio de dor crônica neuropática e intratável. Projeto compacto com bateria Overdrive™, recarga rápida (~1h) e relatórios Snapshot™ para monitoramento objetivo da terapia.",
-      mainImage: neuroestimuladorMain,
-      images: [neuroestimuladorMain, neuroestimulador1, neuroestimulador2],
+      mainImage: neuroestimulador1,
+      images: [neuroestimulador1, neuroestimulador2],
       anvisa: "10349001101",
     },
     {
