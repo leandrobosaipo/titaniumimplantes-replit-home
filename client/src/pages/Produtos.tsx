@@ -227,11 +227,18 @@ export default function Produtos() {
                       >
                         {product.title}
                       </h4>
-                      {product.videoUrl && (
-                        <span className="inline-flex items-center rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">
-                          Vídeo
-                        </span>
-                      )}
+                      <div className="flex flex-col items-end gap-1">
+                        {product.videoUrl && (
+                          <span className="inline-flex items-center rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">
+                            Vídeo
+                          </span>
+                        )}
+                        {product.pdfUrl && (
+                          <span className="inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">
+                            PDF
+                          </span>
+                        )}
+                      </div>
                     </div>
 
                     {/* ANVISA */}
