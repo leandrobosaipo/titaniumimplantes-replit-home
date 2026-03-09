@@ -397,14 +397,27 @@ export const productsConfig: ProductsPageConfig = {
   itemsPerPage: 12,
 };
 
+const inferManufacturer = (title: string): string | undefined => {
+  const normalized = title.toLowerCase();
+  if (normalized.includes("medtronic")) return "Medtronic";
+  if (normalized.includes("globus")) return "Globus";
+  if (normalized.includes("brainlab")) return "Brainlab";
+  if (normalized.includes("soring")) return "Soring";
+  if (normalized.includes("euros")) return "Euros";
+  if (normalized.includes("atlas")) return "ATLAS";
+  return undefined;
+};
+
 productsConfig.products = productsConfig.products.map((product) => {
   const override = productExcelOverrides[product.slug];
-  if (!override) return product;
+  const nextTitle = override?.title ?? product.title;
 
   return {
     ...product,
-    title: override.title,
-    description: override.description,
-    fullDescription: override.fullDescription,
+    categoryId: override?.categoryId ?? product.categoryId,
+    manufacturer: override?.manufacturer ?? product.manufacturer ?? inferManufacturer(nextTitle),
+    title: nextTitle,
+    description: override?.description ?? product.description,
+    fullDescription: override?.fullDescription ?? product.fullDescription,
   };
 });

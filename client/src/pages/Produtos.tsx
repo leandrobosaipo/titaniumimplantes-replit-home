@@ -141,9 +141,14 @@ export default function Produtos() {
                     </h4>
 
                     {/* ANVISA */}
-                    <p className="font-lato text-xs md:text-sm text-[#4A4A4A] mb-4 font-normal">
+                    <p className="font-lato text-xs md:text-sm text-[#4A4A4A] font-normal">
                       {product.anvisa ? `nº ANVISA ${product.anvisa}` : "Em conformidade"}
                     </p>
+                    {product.manufacturer && (
+                      <p className="font-lato text-xs md:text-sm text-[#4A4A4A] mb-4 font-normal">
+                        Fabricante: {product.manufacturer}
+                      </p>
+                    )}
                   </div>
 
                   {/* Botão */}

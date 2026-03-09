@@ -221,7 +221,7 @@ export default function ProdutoDetalhe() {
               </h1>
               <div className="space-y-2">
                 <p className="font-lato text-lg text-[#4A4A4A]">
-                  <span className="font-semibold">Fabricante:</span> Medtronic
+                  <span className="font-semibold">Fabricante:</span> {product.manufacturer ?? "Medtronic"}
                 </p>
                 <p className="font-lato text-lg text-[#4A4A4A]">
                   <span className="font-semibold">Categoria:</span> Estimulação Cerebral Profunda (DBS)
@@ -525,8 +525,13 @@ export default function ProdutoDetalhe() {
                 >
                   {product.title}
                 </h1>
-                {product.anvisa && (
+                {product.manufacturer && (
                   <p className="font-lato text-sm md:text-base text-[#4A4A4A] mt-3 font-normal">
+                    Fabricante: {product.manufacturer}
+                  </p>
+                )}
+                {product.anvisa && (
+                  <p className="font-lato text-sm md:text-base text-[#4A4A4A] mt-1 font-normal">
                     nº ANVISA {product.anvisa}
                   </p>
                 )}

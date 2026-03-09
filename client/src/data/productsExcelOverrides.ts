@@ -2,6 +2,8 @@ export interface ProductExcelOverride {
   title: string;
   description: string;
   fullDescription: string;
+  categoryId?: string;
+  manufacturer?: string;
 }
 
 export const productExcelOverrides: Record<string, ProductExcelOverride> = {
@@ -522,6 +524,8 @@ A engenharia da ASSURE® foca na simplicidade e na redução de componentes, o q
   },
   "e-spine-angel-care-solutions": {
     title: `Sistema E.SPINE Euros em Cuiabá - Titaniun Implantes MT`,
+    manufacturer: "Euros",
+    categoryId: "coluna",
     description: `O sistema E.SPINE é uma solução avançada para estabilização da coluna vertebral que se destaca pela exclusividade de seus componentes. Disponível através da Titaniun Implantes, o sistema utiliza parafusos pediculares híbridos de dupla função, projetados para o...`,
     fullDescription: `1) Visão Geral
 O sistema E.SPINE é uma solução avançada para estabilização da coluna vertebral que se destaca pela exclusividade de seus componentes. Disponível através da Titaniun Implantes, o sistema utiliza parafusos pediculares híbridos de dupla função, projetados para oferecer ao cirurgião em Mato Grosso uma flexibilidade sem precedentes no tratamento de patologias complexas.
@@ -556,6 +560,8 @@ A tecnologia híbrida do E.SPINE Euros simplifica a gestão de OPME nos hospitai
   },
   "e-spine-tanit-angel-care-solutions": {
     title: `E.SPINE TANIT - Fusão Anterior (ALIF) em Cuiabá - Titaniun Implantes`,
+    manufacturer: "Euros",
+    categoryId: "coluna",
     description: `1) Engenharia de Precisão e Balanço Sagital
 O E.SPINE TANIT não é apenas um espaçador intersomático; é uma ferramenta de reconstrução global da coluna lombar. Desenvolvido pela Euros e distribuído com exclusividade pela Titaniun Implantes em Cuiabá, o TANIT fo...`,
     fullDescription: `1) Engenharia de Precisão e Balanço Sagital
@@ -594,6 +600,8 @@ A Titaniun Implantes entrega mais do que o componente; entregamos segurança em 
   },
   "nemost-angel-care-solutions": {
     title: `NEMOST Euros: Sistema de Correção para Escoliose e Técnica Biportal em Cuiabá | Titaniun Implantes`,
+    manufacturer: "Euros",
+    categoryId: "coluna",
     description: `do Sistema
 O NEMOST (da fabricante Euros) representa o estado da arte em estabilização posterior dinâmica e correção de deformidades vertebrais. Distribuído em Mato Grosso pela Titaniun Implantes, este sistema foi concebido para solucionar o maior desafio das...`,
     fullDescription: `1) Visão Geral do Sistema
