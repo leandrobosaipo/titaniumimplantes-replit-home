@@ -10,18 +10,35 @@ import { useLocation } from "wouter";
  */
 export function ScrollToTop() {
   const [location] = useLocation();
-  
+
   useEffect(() => {
-    // Se a location contém hash (ex: /#contato), não faz scroll para o topo
-    // Deixa o comportamento padrão ou handlers específicos fazerem o scroll para a seção
-    if (location.includes("#")) {
-      return;
+    const hashIndex = location.indexOf("#");
+    const hash = hashIndex >= 0 ? location.slice(hashIndex + 1) : "";
+
+    if (hash) {
+      const id = decodeURIComponent(hash);
+
+      const scrollToHash = () => {
+        const target = document.getElementById(id);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          return true;
+        }
+        return false;
+      };
+
+      if (scrollToHash()) return;
+
+      const retry = setTimeout(() => {
+        scrollToHash();
+      }, 120);
+
+      return () => clearTimeout(retry);
     }
-    
-    // Para mudanças de página sem hash, faz scroll para o topo
+
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [location]);
-  
+
   return null;
 }
 

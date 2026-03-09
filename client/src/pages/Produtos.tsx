@@ -24,6 +24,8 @@ import { designConstants as d } from "@/lib/designConstants";
 
 export default function Produtos() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [activeManufacturer, setActiveManufacturer] = useState("all");
+  const [activeTechnicalCategory, setActiveTechnicalCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -43,10 +45,30 @@ export default function Produtos() {
     return c.categories.filter((cat) => cat.id === "all" || (counts[cat.id] ?? 0) > 0);
   }, []);
 
+  const manufacturers = useMemo(() => {
+    return [
+      "all",
+      ...Array.from(new Set(c.products.map((p) => p.manufacturer).filter(Boolean) as string[])).sort(),
+    ];
+  }, []);
+
+  const technicalCategories = useMemo(() => {
+    return [
+      "all",
+      ...Array.from(new Set(c.products.map((p) => p.technicalCategory).filter(Boolean) as string[])).sort(),
+    ];
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    if (activeCategory === "all") return c.products;
-    return c.products.filter((p) => p.categoryId === activeCategory);
-  }, [activeCategory]);
+    return c.products.filter((p) => {
+      const byArea = activeCategory === "all" || p.categoryId === activeCategory;
+      const byManufacturer = activeManufacturer === "all" || p.manufacturer === activeManufacturer;
+      const byTechnicalCategory =
+        activeTechnicalCategory === "all" || p.technicalCategory === activeTechnicalCategory;
+
+      return byArea && byManufacturer && byTechnicalCategory;
+    });
+  }, [activeCategory, activeManufacturer, activeTechnicalCategory]);
 
   useEffect(() => {
     // se a categoria atual não existe mais (ex: ficou vazia), volta para "all"
@@ -55,7 +77,7 @@ export default function Produtos() {
       return;
     }
     setCurrentPage(1);
-  }, [activeCategory, categoriesWithProducts]);
+  }, [activeCategory, activeManufacturer, activeTechnicalCategory, categoriesWithProducts]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / c.itemsPerPage));
   const paginatedProducts = filteredProducts.slice(
@@ -89,7 +111,7 @@ export default function Produtos() {
         </Breadcrumb>
 
         {/* Filtro Horizontal de Categorias */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <div className="flex flex-wrap gap-3 mb-4">
           {categoriesWithProducts.map((cat) => (
             <button
               key={cat.id}
@@ -103,6 +125,38 @@ export default function Produtos() {
               {cat.label}
             </button>
           ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+          <select
+            value={activeManufacturer}
+            onChange={(e) => setActiveManufacturer(e.target.value)}
+            className="h-11 rounded-lg border border-[#d1d5db] px-3 font-lato text-sm"
+          >
+            <option value="all">Todos os fabricantes</option>
+            {manufacturers
+              .filter((m) => m !== "all")
+              .map((manufacturer) => (
+                <option key={manufacturer} value={manufacturer}>
+                  {manufacturer}
+                </option>
+              ))}
+          </select>
+
+          <select
+            value={activeTechnicalCategory}
+            onChange={(e) => setActiveTechnicalCategory(e.target.value)}
+            className="h-11 rounded-lg border border-[#d1d5db] px-3 font-lato text-sm"
+          >
+            <option value="all">Todas as categorias técnicas</option>
+            {technicalCategories
+              .filter((tc) => tc !== "all")
+              .map((tc) => (
+                <option key={tc} value={tc}>
+                  {tc}
+                </option>
+              ))}
+          </select>
         </div>
 
         {/* Grid de Produtos */}
@@ -145,8 +199,13 @@ export default function Produtos() {
                       {product.anvisa ? `nº ANVISA ${product.anvisa}` : "Em conformidade"}
                     </p>
                     {product.manufacturer && (
-                      <p className="font-lato text-xs md:text-sm text-[#4A4A4A] mb-4 font-normal">
+                      <p className="font-lato text-xs md:text-sm text-[#4A4A4A] font-normal">
                         Fabricante: {product.manufacturer}
+                      </p>
+                    )}
+                    {product.technicalCategory && (
+                      <p className="font-lato text-xs md:text-sm text-[#4A4A4A] mb-4 font-normal">
+                        Categoria técnica: {product.technicalCategory}
                       </p>
                     )}
                   </div>

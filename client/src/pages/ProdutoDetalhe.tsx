@@ -224,7 +224,7 @@ export default function ProdutoDetalhe() {
                   <span className="font-semibold">Fabricante:</span> {product.manufacturer ?? "Medtronic"}
                 </p>
                 <p className="font-lato text-lg text-[#4A4A4A]">
-                  <span className="font-semibold">Categoria:</span> Estimulação Cerebral Profunda (DBS)
+                  <span className="font-semibold">Categoria:</span> {product.technicalCategory ?? "Estimulação Cerebral Profunda (DBS)"}
                 </p>
                 {product.anvisa && (
                   <div className="flex items-center gap-2 mt-4">
@@ -528,6 +528,11 @@ export default function ProdutoDetalhe() {
                 {product.manufacturer && (
                   <p className="font-lato text-sm md:text-base text-[#4A4A4A] mt-3 font-normal">
                     Fabricante: {product.manufacturer}
+                  </p>
+                )}
+                {product.technicalCategory && (
+                  <p className="font-lato text-sm md:text-base text-[#4A4A4A] mt-1 font-normal">
+                    Categoria técnica: {product.technicalCategory}
                   </p>
                 )}
                 {product.anvisa && (

@@ -15,6 +15,7 @@ export interface Product {
   slug: string;
   categoryId: string;
   manufacturer?: string;
+  technicalCategory?: string;
   title: string;
   description: string;
   /** Texto principal (intro). Se o produto tiver seções estruturadas, mantenha aqui um resumo curto. */

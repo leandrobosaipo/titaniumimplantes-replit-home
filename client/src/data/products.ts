@@ -400,22 +400,46 @@ export const productsConfig: ProductsPageConfig = {
 const inferManufacturer = (title: string): string | undefined => {
   const normalized = title.toLowerCase();
   if (normalized.includes("medtronic")) return "Medtronic";
-  if (normalized.includes("globus")) return "Globus";
+  if (normalized.includes("globus")) return "Globus Medical";
   if (normalized.includes("brainlab")) return "Brainlab";
-  if (normalized.includes("soring")) return "Soring";
+  if (normalized.includes("soring") || normalized.includes("söring")) return "Soring";
   if (normalized.includes("euros")) return "Euros";
   if (normalized.includes("atlas")) return "ATLAS";
   return undefined;
 };
 
+const excelMetaOverrides: Record<string, { manufacturer: string; technicalCategory: string }> = {
+  "synchromed-ii-bomba-infusao-implantavel-medtronic": { manufacturer: "Medtronic", technicalCategory: "TDD" },
+  "neuroestimulador-intellis-medtronic": { manufacturer: "Medtronic", technicalCategory: "SCS" },
+  "dvp-strata-ii-medtronic": { manufacturer: "Medtronic", technicalCategory: "Válvulas" },
+  "neuronavegador-brainlab": { manufacturer: "Brainlab", technicalCategory: "Navegador" },
+  "aspirador-ultrassonico-sonoca-300-soring": { manufacturer: "Soring", technicalCategory: "Ultrassônico" },
+  "espacador-cervical-coalition-mis-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "midas-rex-mr8-medtronic": { manufacturer: "Medtronic", technicalCategory: "Sistema de Perfuração" },
+  "altera-globus": { manufacturer: "Globus Medical", technicalCategory: "Cage Expansível para Cirurgia Tubular" },
+  "rise-intralif-globus": { manufacturer: "Globus Medical", technicalCategory: "Cage Expansível para Cirurgia Tubular" },
+  "rise-l-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "sustain-arch-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "independence-gm-sistema-de-fusao-intersomatica-anterior-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "revere-sistema-de-estabilizacao-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "revolve-sistema-de-fixacao-suplementar-percutaneo-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "coalition-gm-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "assure-placa-cervical-anterior-globus": { manufacturer: "Globus Medical", technicalCategory: "Sistema de Fixação" },
+  "e-spine-angel-care-solutions": { manufacturer: "Euros", technicalCategory: "Sistema de Fixação" },
+  "e-spine-tanit-angel-care-solutions": { manufacturer: "Euros", technicalCategory: "Sistema de Fixação" },
+  "nemost-angel-care-solutions": { manufacturer: "Euros", technicalCategory: "Sistema de Fixação" },
+};
+
 productsConfig.products = productsConfig.products.map((product) => {
   const override = productExcelOverrides[product.slug];
+  const meta = excelMetaOverrides[product.slug];
   const nextTitle = override?.title ?? product.title;
 
   return {
     ...product,
     categoryId: override?.categoryId ?? product.categoryId,
-    manufacturer: override?.manufacturer ?? product.manufacturer ?? inferManufacturer(nextTitle),
+    manufacturer: override?.manufacturer ?? meta?.manufacturer ?? product.manufacturer ?? inferManufacturer(nextTitle),
+    technicalCategory: meta?.technicalCategory ?? product.technicalCategory,
     title: nextTitle,
     description: override?.description ?? product.description,
     fullDescription: override?.fullDescription ?? product.fullDescription,
