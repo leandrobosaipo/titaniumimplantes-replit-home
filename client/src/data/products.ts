@@ -176,7 +176,7 @@ export const productsConfig: ProductsPageConfig = {
         "Espaçador cervical intersomático MIS em titânio com perfis anatômicos e placas de fixação integradas, projetado para estabilização segmentar em cirurgias minimamente invasivas da coluna cervical.",
       mainImage: espacadorMain,
       images: [espacadorMain],
-      pdfUrl: "https://www.spi.med.br/docs/COALITIONMIS.pdf",
+      pdfUrl: "/produtos/coalition-mis-globus.pdf",
     },
     {
       id: "8",
