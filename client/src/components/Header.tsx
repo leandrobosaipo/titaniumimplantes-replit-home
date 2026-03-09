@@ -37,9 +37,18 @@ export function Header() {
   const handleContatoClick = (event?: MouseEvent<HTMLAnchorElement>) => {
     event?.preventDefault();
     setMobileMenuOpen(false);
-    setLocation("/#contato");
-    // Garante o scroll após o roteamento para a home
-    setTimeout(scrollToContato, 50);
+
+    if (location === "/") {
+      window.history.replaceState(null, "", "/#contato");
+      setTimeout(scrollToContato, 40);
+      return;
+    }
+
+    setLocation("/");
+    setTimeout(() => {
+      window.history.replaceState(null, "", "/#contato");
+      scrollToContato();
+    }, 220);
   };
 
   const handleDefaultNav = (path: string) => {
@@ -226,7 +235,6 @@ export function Header() {
                     <li key={item.path}>
                       <Link
                         {...linkProps}
-                        onClick={() => setMobileMenuOpen(false)}
                         data-testid={`link-mobile-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                         className={`block px-4 py-3 rounded-sm font-medium transition-all ${
                           isActive
@@ -374,7 +382,6 @@ export function Header() {
                     <li key={item.path}>
                       <Link
                         {...linkProps}
-                        onClick={() => setMobileMenuOpen(false)}
                         data-testid={`link-mobile-compact-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
                         className={`block px-4 py-3 rounded-sm font-medium transition-all ${
                           isActive

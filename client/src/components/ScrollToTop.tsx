@@ -12,27 +12,20 @@ export function ScrollToTop() {
   const [location] = useLocation();
 
   useEffect(() => {
-    const hashIndex = location.indexOf("#");
-    const hash = hashIndex >= 0 ? location.slice(hashIndex + 1) : "";
+    const hash = window.location.hash?.replace(/^#/, "") ?? "";
+
+    const scrollToHash = (id: string) => {
+      const target = document.getElementById(decodeURIComponent(id));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      }
+      return false;
+    };
 
     if (hash) {
-      const id = decodeURIComponent(hash);
-
-      const scrollToHash = () => {
-        const target = document.getElementById(id);
-        if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-          return true;
-        }
-        return false;
-      };
-
-      if (scrollToHash()) return;
-
-      const retry = setTimeout(() => {
-        scrollToHash();
-      }, 120);
-
+      if (scrollToHash(hash)) return;
+      const retry = setTimeout(() => scrollToHash(hash), 180);
       return () => clearTimeout(retry);
     }
 

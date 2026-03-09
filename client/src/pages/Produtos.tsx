@@ -110,54 +110,87 @@ export default function Produtos() {
           </BreadcrumbList>
         </Breadcrumb>
 
-        {/* Filtro Horizontal de Categorias */}
-        <div className="flex flex-wrap gap-3 mb-4">
-          {categoriesWithProducts.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-2 rounded-full font-lato font-medium text-sm transition-all duration-300 ${
-                activeCategory === cat.id
-                  ? "border-2 border-[#0d70dc] bg-[#0d70dc] text-white shadow-md"
-                  : "border-2 border-[#0d70dc] text-[#0d70dc] bg-transparent hover:bg-[#0d70dc]/10"
-              }`}
+        <section className="mb-8 rounded-xl border border-[#e5e7eb] bg-white p-4 md:p-5 shadow-sm" aria-label="Filtros de produtos">
+          <h2 className="font-lato font-bold text-base md:text-lg text-[#0a324c] mb-3">Filtrar produtos</h2>
+
+          {/* Filtro Horizontal de Categorias */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {categoriesWithProducts.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-4 py-2 rounded-full font-lato font-medium text-sm transition-all duration-300 ${
+                  activeCategory === cat.id
+                    ? "border-2 border-[#0d70dc] bg-[#0d70dc] text-white shadow-md"
+                    : "border-2 border-[#0d70dc] text-[#0d70dc] bg-transparent hover:bg-[#0d70dc]/10"
+                }`}
+                aria-pressed={activeCategory === cat.id}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="space-y-1">
+              <label htmlFor="manufacturer-filter" className="font-lato text-sm font-semibold text-[#0a324c]">
+                Fabricante
+              </label>
+              <select
+                id="manufacturer-filter"
+                value={activeManufacturer}
+                onChange={(e) => setActiveManufacturer(e.target.value)}
+                className="h-11 w-full rounded-lg border border-[#d1d5db] px-3 font-lato text-sm"
+              >
+                <option value="all">Todos os fabricantes</option>
+                {manufacturers
+                  .filter((m) => m !== "all")
+                  .map((manufacturer) => (
+                    <option key={manufacturer} value={manufacturer}>
+                      {manufacturer}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label htmlFor="technical-category-filter" className="font-lato text-sm font-semibold text-[#0a324c]">
+                Categoria técnica
+              </label>
+              <select
+                id="technical-category-filter"
+                value={activeTechnicalCategory}
+                onChange={(e) => setActiveTechnicalCategory(e.target.value)}
+                className="h-11 w-full rounded-lg border border-[#d1d5db] px-3 font-lato text-sm"
+              >
+                <option value="all">Todas as categorias técnicas</option>
+                {technicalCategories
+                  .filter((tc) => tc !== "all")
+                  .map((tc) => (
+                    <option key={tc} value={tc}>
+                      {tc}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <p className="text-sm text-[#4A4A4A] font-lato">{filteredProducts.length} produto(s) encontrado(s)</p>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setActiveCategory("all");
+                setActiveManufacturer("all");
+                setActiveTechnicalCategory("all");
+              }}
+              className="w-full sm:w-auto"
             >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-          <select
-            value={activeManufacturer}
-            onChange={(e) => setActiveManufacturer(e.target.value)}
-            className="h-11 rounded-lg border border-[#d1d5db] px-3 font-lato text-sm"
-          >
-            <option value="all">Todos os fabricantes</option>
-            {manufacturers
-              .filter((m) => m !== "all")
-              .map((manufacturer) => (
-                <option key={manufacturer} value={manufacturer}>
-                  {manufacturer}
-                </option>
-              ))}
-          </select>
-
-          <select
-            value={activeTechnicalCategory}
-            onChange={(e) => setActiveTechnicalCategory(e.target.value)}
-            className="h-11 rounded-lg border border-[#d1d5db] px-3 font-lato text-sm"
-          >
-            <option value="all">Todas as categorias técnicas</option>
-            {technicalCategories
-              .filter((tc) => tc !== "all")
-              .map((tc) => (
-                <option key={tc} value={tc}>
-                  {tc}
-                </option>
-              ))}
-          </select>
-        </div>
+              Limpar filtros
+            </Button>
+          </div>
+        </section>
 
         {/* Grid de Produtos */}
         <div className="space-y-10">

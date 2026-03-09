@@ -24,9 +24,11 @@ export function LgpdExercerDireitosSection() {
 
   const handleContatoClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    setLocation("/#contato");
-    // Garante o scroll após o roteamento para a home
-    setTimeout(scrollToContato, 50);
+    setLocation("/");
+    setTimeout(() => {
+      window.history.replaceState(null, "", "/#contato");
+      scrollToContato();
+    }, 220);
   };
 
   return (

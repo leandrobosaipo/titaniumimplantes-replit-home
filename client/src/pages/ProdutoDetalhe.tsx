@@ -87,6 +87,13 @@ export default function ProdutoDetalhe() {
   const prevProduct = currentIndex > 0 ? c.products[currentIndex - 1] : null;
   const nextProduct = currentIndex >= 0 && currentIndex < c.products.length - 1 ? c.products[currentIndex + 1] : null;
 
+  const productUrl =
+    typeof window !== "undefined"
+      ? window.location.href
+      : `https://titaniumimplantes.com.br/produtos/${product.slug}`;
+  const whatsappMessage = `Olá! Quero falar com um especialista sobre o produto ${product.title}.\nLink: ${productUrl}`;
+  const specialistWhatsappUrl = `https://wa.me/5565981280373?text=${encodeURIComponent(whatsappMessage)}`;
+
   // Conteúdo específico para Percept RC
   const perceptContent = {
     overview: {
@@ -468,7 +475,7 @@ export default function ProdutoDetalhe() {
                       variant="outline"
                       className="border-2 border-white text-white hover:bg-white/10 font-lato font-bold px-8 h-14 text-lg rounded-lg"
                     >
-                      <a href="tel:+556530255625">Falar com um especialista</a>
+                      <a href={specialistWhatsappUrl} target="_blank" rel="noopener noreferrer">Falar com um especialista</a>
                     </Button>
                   </div>
                 </CardContent>
@@ -543,22 +550,30 @@ export default function ProdutoDetalhe() {
               </div>
 
               {hasStructuredText ? (
-                <div className="space-y-8">
+                <div className="space-y-6">
                   {normalizedSections.map((section, idx) => (
-                    <section key={`${section.title}-${idx}`}>
-                      <h2 className="text-2xl font-black font-lato mb-3" style={{ color: d.colors.text.primary }}>
-                        {section.title}
-                      </h2>
-                      <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
-                        {section.content}
-                      </div>
-                    </section>
+                    <Card key={`${section.title}-${idx}`} className="border-0 shadow-lg">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-2xl font-black font-lato" style={{ color: d.colors.text.primary }}>
+                          {section.title}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
+                          {section.content}
+                        </div>
+                      </CardContent>
+                    </Card>
                   ))}
                 </div>
               ) : (
-                <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
-                  {product.fullDescription}
-                </div>
+                <Card className="border-0 shadow-lg">
+                  <CardContent className="pt-6">
+                    <div className="text-lg leading-relaxed font-lato text-[#4A4A4A] whitespace-pre-line">
+                      {product.fullDescription}
+                    </div>
+                  </CardContent>
+                </Card>
               )}
 
               {/* Seções no padrão do site de referência */}
@@ -654,7 +669,7 @@ export default function ProdutoDetalhe() {
                       variant="outline"
                       className="border-2 border-white text-white hover:bg-white/10 font-lato font-bold px-6 h-12 text-base rounded-lg"
                     >
-                      <a href="tel:+556530255625">Falar com um especialista</a>
+                      <a href={specialistWhatsappUrl} target="_blank" rel="noopener noreferrer">Falar com um especialista</a>
                     </Button>
                   </div>
                 </CardContent>
