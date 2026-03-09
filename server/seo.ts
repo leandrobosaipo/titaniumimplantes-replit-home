@@ -8,15 +8,16 @@ type SeoPayload = {
 };
 
 const SITE_URL = "https://titaniumimplantes.com.br";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 
-const baseOrganization = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Titanium Implantes",
-  url: SITE_URL,
-  logo: `${SITE_URL}/logo.png`,
-};
+function getBaseOrganization(siteUrl: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Titanium Implantes",
+    url: siteUrl,
+    logo: `${siteUrl}/logo.png`,
+  };
+}
 
 function slugToProductName(slug: string): string {
   return slug
@@ -25,24 +26,26 @@ function slugToProductName(slug: string): string {
     .trim();
 }
 
-export function getSeoForPath(pathname: string): SeoPayload {
+export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload {
   const path = pathname.split("?")[0];
+  const defaultOgImage = `${siteUrl}/og-default.jpg`;
+  const baseOrganization = getBaseOrganization(siteUrl);
 
   if (path === "/") {
     return {
       title: "Titanium Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT",
       description:
         "Distribuidora especializada em implantes para coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia em Cuiabá-MT. Soluções certificadas, alta tecnologia e entrega ágil.",
-      canonical: `${SITE_URL}/`,
+      canonical: `${siteUrl}/`,
       ogType: "website",
-      ogImage: DEFAULT_OG_IMAGE,
+      ogImage: defaultOgImage,
       schema: {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "WebSite",
             name: "Titanium Implantes",
-            url: SITE_URL,
+            url: siteUrl,
           },
           baseOrganization,
         ],
@@ -54,16 +57,16 @@ export function getSeoForPath(pathname: string): SeoPayload {
     return {
       title: "Produtos | Titanium Implantes",
       description: "Conheça nosso portfólio completo de implantes cirúrgicos certificados.",
-      canonical: `${SITE_URL}/produtos`,
+      canonical: `${siteUrl}/produtos`,
       ogType: "website",
-      ogImage: DEFAULT_OG_IMAGE,
+      ogImage: defaultOgImage,
       schema: {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "CollectionPage",
             name: "Produtos | Titanium Implantes",
-            url: `${SITE_URL}/produtos`,
+            url: `${siteUrl}/produtos`,
             description: "Portfólio de implantes cirúrgicos da Titanium Implantes.",
           },
           baseOrganization,
@@ -75,14 +78,14 @@ export function getSeoForPath(pathname: string): SeoPayload {
   if (path.startsWith("/produtos/")) {
     const slug = path.replace("/produtos/", "").trim();
     const productName = slugToProductName(slug);
-    const canonical = `${SITE_URL}/produtos/${slug}`;
+    const canonical = `${siteUrl}/produtos/${slug}`;
 
     return {
       title: `${productName} | Produtos | Titanium Implantes`,
       description: `Saiba mais sobre ${productName}. Especificações e informações técnicas com suporte especializado da Titanium Implantes.`,
       canonical,
       ogType: "product",
-      ogImage: DEFAULT_OG_IMAGE,
+      ogImage: defaultOgImage,
       schema: {
         "@context": "https://schema.org",
         "@graph": [
@@ -91,7 +94,7 @@ export function getSeoForPath(pathname: string): SeoPayload {
             name: productName,
             brand: { "@type": "Brand", name: "Titanium Implantes" },
             url: canonical,
-            image: [DEFAULT_OG_IMAGE],
+            image: [defaultOgImage],
             description: `Informações técnicas de ${productName}.`,
           },
           baseOrganization,
@@ -126,16 +129,16 @@ export function getSeoForPath(pathname: string): SeoPayload {
 
   return {
     ...fallback,
-    canonical: `${SITE_URL}${path === "/" ? "/" : path}`,
+    canonical: `${siteUrl}${path === "/" ? "/" : path}`,
     ogType: "website",
-    ogImage: DEFAULT_OG_IMAGE,
+    ogImage: defaultOgImage,
     schema: {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebPage",
           name: fallback.title,
-          url: `${SITE_URL}${path === "/" ? "/" : path}`,
+          url: `${siteUrl}${path === "/" ? "/" : path}`,
           description: fallback.description,
         },
         baseOrganization,
@@ -151,8 +154,8 @@ function replaceOrInsert(html: string, pattern: RegExp, replacement: string, fal
   return html.replace("</head>", `${fallbackInsert}\n</head>`);
 }
 
-export function applySeoToHtml(html: string, pathname: string): string {
-  const seo = getSeoForPath(pathname);
+export function applySeoToHtml(html: string, pathname: string, siteUrl = SITE_URL): string {
+  const seo = getSeoForPath(pathname, siteUrl);
   const schemaJson = JSON.stringify(seo.schema);
 
   let out = html;
@@ -176,6 +179,9 @@ export function applySeoToHtml(html: string, pathname: string): string {
     [/<meta\s+property="og:type"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta property="og:type" content="${seo.ogType}" />`, `<meta property="og:type" content="${seo.ogType}" />`],
     [/<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta property="og:url" content="${seo.canonical}" />`, `<meta property="og:url" content="${seo.canonical}" />`],
     [/<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta property="og:image" content="${seo.ogImage}" />`, `<meta property="og:image" content="${seo.ogImage}" />`],
+    [/<meta\s+property="og:image:width"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta property="og:image:width" content="1200" />`, `<meta property="og:image:width" content="1200" />`],
+    [/<meta\s+property="og:image:height"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta property="og:image:height" content="630" />`, `<meta property="og:image:height" content="630" />`],
+    [/<meta\s+property="og:image:type"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta property="og:image:type" content="image/jpeg" />`, `<meta property="og:image:type" content="image/jpeg" />`],
     [/<meta\s+name="twitter:card"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta name="twitter:card" content="summary_large_image" />`, `<meta name="twitter:card" content="summary_large_image" />`],
     [/<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta name="twitter:title" content="${seo.title}" />`, `<meta name="twitter:title" content="${seo.title}" />`],
     [/<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>(?:\s*)/i, `<meta name="twitter:description" content="${seo.description}" />`, `<meta name="twitter:description" content="${seo.description}" />`],

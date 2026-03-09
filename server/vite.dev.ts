@@ -100,7 +100,10 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
       const page = await vite.transformIndexHtml(url, template);
-      const seoPage = applySeoToHtml(page, req.originalUrl || req.url || req.path);
+      const host = req.get("x-forwarded-host") || req.get("host") || "titaniumimplantes.com.br";
+      const proto = req.get("x-forwarded-proto") || (host.includes("localhost") || host.includes("127.0.0.1") ? "http" : "https");
+      const siteUrl = `${proto}://${host}`;
+      const seoPage = applySeoToHtml(page, req.originalUrl || req.url || req.path, siteUrl);
       res.status(200).set({ "Content-Type": "text/html" }).end(seoPage);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);

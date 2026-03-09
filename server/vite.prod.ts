@@ -39,7 +39,10 @@ export function serveStatic(app: Express) {
     try {
       const indexPath = path.resolve(distPath, "index.html");
       const template = await fs.promises.readFile(indexPath, "utf-8");
-      const seoPage = applySeoToHtml(template, req.originalUrl || req.url || req.path);
+      const host = req.get("x-forwarded-host") || req.get("host") || "titaniumimplantes.com.br";
+      const proto = req.get("x-forwarded-proto") || (host.includes("localhost") || host.includes("127.0.0.1") ? "http" : "https");
+      const siteUrl = `${proto}://${host}`;
+      const seoPage = applySeoToHtml(template, req.originalUrl || req.url || req.path, siteUrl);
       res.status(200).set({ "Content-Type": "text/html" }).send(seoPage);
     } catch (error) {
       next(error);
