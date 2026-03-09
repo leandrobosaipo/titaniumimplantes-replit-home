@@ -460,7 +460,7 @@ export default function ProdutoDetalhe() {
                       size="lg"
                       className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-8 h-14 text-lg rounded-lg"
                     >
-                      <Link href="/contato">Solicitar mais informações</Link>
+                      <Link href="/#contato">Solicitar mais informações</Link>
                     </Button>
                     <Button
                       asChild
@@ -636,7 +636,7 @@ export default function ProdutoDetalhe() {
                       size="lg"
                       className="bg-white text-[#0d70dc] hover:bg-white/90 font-lato font-bold px-6 h-12 text-base rounded-lg"
                     >
-                      <Link href="/contato">Solicitar mais informações</Link>
+                      <Link href="/#contato">Solicitar mais informações</Link>
                     </Button>
                     <Button
                       asChild
