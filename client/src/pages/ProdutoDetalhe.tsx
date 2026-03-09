@@ -679,6 +679,62 @@ export default function ProdutoDetalhe() {
         )}
       </div>
 
+      {(product.videoUrl || product.pdfUrl) && (
+        <div className="mx-auto max-w-[1280px] px-8 pb-10">
+          <div className="grid grid-cols-1 gap-6">
+            {product.videoUrl && (
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="font-lato text-2xl" style={{ color: d.colors.text.primary }}>
+                    Vídeo do produto
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="relative w-full overflow-hidden rounded-xl" style={{ paddingTop: "56.25%" }}>
+                    <iframe
+                      src={product.videoUrl.replace("watch?v=", "embed/")}
+                      title={`Vídeo de ${product.title}`}
+                      className="absolute inset-0 h-full w-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {product.pdfUrl && (
+              <Card className="border-0 shadow-lg">
+                <CardHeader>
+                  <CardTitle className="font-lato text-2xl" style={{ color: d.colors.text.primary }}>
+                    Catálogo técnico (PDF)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="h-[620px] rounded-xl overflow-hidden border">
+                    <iframe
+                      src={product.pdfUrl}
+                      title={`PDF de ${product.title}`}
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <a
+                    href={product.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-md bg-[#0d70dc] px-4 py-2 text-white font-semibold hover:bg-[#0953b0] transition-colors"
+                    download
+                  >
+                    Baixar PDF
+                  </a>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Navegação entre produtos */}
       <div className="mx-auto max-w-[1280px] px-8 pb-24">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4">

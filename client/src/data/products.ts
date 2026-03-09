@@ -176,6 +176,7 @@ export const productsConfig: ProductsPageConfig = {
         "Espaçador cervical intersomático MIS em titânio com perfis anatômicos e placas de fixação integradas, projetado para estabilização segmentar em cirurgias minimamente invasivas da coluna cervical.",
       mainImage: espacadorMain,
       images: [espacadorMain],
+      pdfUrl: "https://www.spi.med.br/docs/COALITIONMIS.pdf",
     },
     {
       id: "8",
@@ -214,6 +215,7 @@ export const productsConfig: ProductsPageConfig = {
         "Cage TLIF expansível e articulado, fabricado em titânio. Foi projetado para restaurar a altura e a lordose do espaço interdiscal, auxiliando na manutenção do equilíbrio sagital. ALTERA é inserido através de um acesso minimizado, reduzindo os desafios do acesso, articulado na posição frontal e, depois, expandido para otimizar o ajuste. Seu mecanismo de articulação permite um posicionamento frontal direcionável.",
       mainImage: alteraMain,
       images: [alteraMain, altera1],
+      videoUrl: "https://www.youtube.com/watch?v=gC1qo5-A0x8",
       anvisa: "80263050065",
     },
     {

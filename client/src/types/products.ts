@@ -16,6 +16,8 @@ export interface Product {
   categoryId: string;
   manufacturer?: string;
   technicalCategory?: string;
+  videoUrl?: string;
+  pdfUrl?: string;
   title: string;
   description: string;
   /** Texto principal (intro). Se o produto tiver seções estruturadas, mantenha aqui um resumo curto. */

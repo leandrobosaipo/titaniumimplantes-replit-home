@@ -220,12 +220,19 @@ export default function Produtos() {
                 <CardContent className="flex flex-col justify-between flex-1 p-6 md:p-8">
                   <div>
                     {/* Nome do Produto */}
-                    <h4
-                      className="font-lato font-semibold text-lg md:text-xl mb-2"
-                      style={{ color: d.colors.text.primary }}
-                    >
-                      {product.title}
-                    </h4>
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <h4
+                        className="font-lato font-semibold text-lg md:text-xl"
+                        style={{ color: d.colors.text.primary }}
+                      >
+                        {product.title}
+                      </h4>
+                      {product.videoUrl && (
+                        <span className="inline-flex items-center rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide">
+                          Vídeo
+                        </span>
+                      )}
+                    </div>
 
                     {/* ANVISA */}
                     <p className="font-lato text-xs md:text-sm text-[#4A4A4A] font-normal">
