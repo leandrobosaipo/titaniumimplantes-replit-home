@@ -80,12 +80,20 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
     const productName = slugToProductName(slug);
     const canonical = `${siteUrl}/produtos/${slug}`;
 
+    const productsWithoutSpecificOgImage = new Set([
+      "valvulas-hidrocefalia-pressao-fixa-atlas",
+    ]);
+
+    const productOgImage = productsWithoutSpecificOgImage.has(slug)
+      ? defaultOgImage
+      : `${siteUrl}/produtos/${slug}-main.jpg`;
+
     return {
       title: `${productName} | Produtos | Titanium Implantes`,
       description: `Saiba mais sobre ${productName}. Especificações e informações técnicas com suporte especializado da Titanium Implantes.`,
       canonical,
       ogType: "product",
-      ogImage: defaultOgImage,
+      ogImage: productOgImage,
       schema: {
         "@context": "https://schema.org",
         "@graph": [
@@ -94,7 +102,7 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
             name: productName,
             brand: { "@type": "Brand", name: "Titanium Implantes" },
             url: canonical,
-            image: [defaultOgImage],
+            image: [productOgImage],
             description: `Informações técnicas de ${productName}.`,
           },
           baseOrganization,
