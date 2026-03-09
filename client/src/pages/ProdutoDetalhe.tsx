@@ -199,49 +199,33 @@ export default function ProdutoDetalhe() {
 
         {/* Hero do Produto */}
         <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="bg-white rounded-xl p-8 flex items-center justify-center min-h-[400px]">
-              <button
-                type="button"
-                onClick={() => openLightbox(activeImg)}
-                className="w-full h-full flex items-center justify-center"
-                aria-label={`Ampliar imagem de ${product.title}`}
-              >
-                <img
-                  src={activeImg}
-                  className="max-h-full max-w-full object-contain"
-                  alt={product.title}
-                />
-              </button>
-            </div>
-            <div className="space-y-6">
-              {categoryLabel && (
-                <span className="text-[#0d70dc] font-lato font-bold uppercase tracking-widest text-sm inline-block">
-                  {categoryLabel}
-                </span>
+          <div className="space-y-6">
+            {categoryLabel && (
+              <span className="text-[#0d70dc] font-lato font-bold uppercase tracking-widest text-sm inline-block">
+                {categoryLabel}
+              </span>
+            )}
+            <h1
+              className="text-4xl md:text-5xl font-black font-lato leading-tight"
+              style={{ color: d.colors.text.primary }}
+            >
+              {product.title}
+            </h1>
+            <div className="space-y-2">
+              <p className="font-lato text-lg text-[#4A4A4A]">
+                <span className="font-semibold">Fabricante:</span> {product.manufacturer ?? "Medtronic"}
+              </p>
+              <p className="font-lato text-lg text-[#4A4A4A]">
+                <span className="font-semibold">Categoria:</span> {product.technicalCategory ?? "Estimulação Cerebral Profunda (DBS)"}
+              </p>
+              {product.anvisa && (
+                <div className="flex items-center gap-2 mt-4">
+                  <Shield className="w-5 h-5 text-[#0d70dc]" />
+                  <p className="font-lato text-base font-semibold text-[#0a324c]">
+                    nº ANVISA {product.anvisa}
+                  </p>
+                </div>
               )}
-              <h1
-                className="text-4xl md:text-5xl font-black font-lato leading-tight"
-                style={{ color: d.colors.text.primary }}
-              >
-                {product.title}
-              </h1>
-              <div className="space-y-2">
-                <p className="font-lato text-lg text-[#4A4A4A]">
-                  <span className="font-semibold">Fabricante:</span> {product.manufacturer ?? "Medtronic"}
-                </p>
-                <p className="font-lato text-lg text-[#4A4A4A]">
-                  <span className="font-semibold">Categoria:</span> {product.technicalCategory ?? "Estimulação Cerebral Profunda (DBS)"}
-                </p>
-                {product.anvisa && (
-                  <div className="flex items-center gap-2 mt-4">
-                    <Shield className="w-5 h-5 text-[#0d70dc]" />
-                    <p className="font-lato text-base font-semibold text-[#0a324c]">
-                      nº ANVISA {product.anvisa}
-                    </p>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
         </div>
@@ -500,23 +484,25 @@ export default function ProdutoDetalhe() {
                   />
                 </button>
               </div>
-              <div className="flex gap-4 overflow-x-auto pb-2">
-                {product.images.map((img, i) => (
-                  <button
-                    key={`${product.id}-${i}`}
-                    onClick={() => {
-                      setActiveImg(img);
-                      openLightbox(img);
-                    }}
-                    className={`w-24 h-24 rounded-xl overflow-hidden border-2 transition-all ${
-                      activeImg === img ? "border-[#0d70dc]" : "border-transparent opacity-70"
-                    }`}
-                    aria-label={`Ver imagem ${i + 1} de ${product.title}`}
-                  >
-                    <img src={img} className="w-full h-full object-cover" alt="" />
-                  </button>
-                ))}
-              </div>
+              {product.images.length > 1 && (
+                <div className="flex gap-4 overflow-x-auto pb-2">
+                  {product.images.map((img, i) => (
+                    <button
+                      key={`${product.id}-${i}`}
+                      onClick={() => {
+                        setActiveImg(img);
+                        openLightbox(img);
+                      }}
+                      className={`w-24 h-24 rounded-xl overflow-hidden border-2 transition-all ${
+                        activeImg === img ? "border-[#0d70dc]" : "border-transparent opacity-70"
+                      }`}
+                      aria-label={`Ver imagem ${i + 1} de ${product.title}`}
+                    >
+                      <img src={img} className="w-full h-full object-cover" alt="" />
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {product.videoUrl && (
                 <Card className="border-0 shadow-lg">
