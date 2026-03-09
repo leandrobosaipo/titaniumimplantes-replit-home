@@ -10,6 +10,7 @@ export default function CanalDenuncia() {
       <PageSEO
         title="Canal de Denúncia | Titanium Implantes"
         description="Canal de denúncia da Titanium Implantes. Reporte irregularidades de forma segura e anônima. Comprometidos com ética e transparência."
+        canonical="https://titaniumimplantes.com.br/canal-de-denuncia"
       />
       <CanalDenunciaHeroSection />
       <CanalDenunciaOrientacoesSection />

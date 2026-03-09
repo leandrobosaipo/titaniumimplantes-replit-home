@@ -12,6 +12,7 @@ export default function LGPD() {
       <PageSEO
         title="LGPD e Compliance | Titanium Implantes"
         description="Certificações, Compliance e Proteção de Dados."
+        canonical="https://titaniumimplantes.com.br/lgpd"
       />
 
       <div className="mt-[100px] lg:mt-[180px]">

@@ -95,6 +95,15 @@ export default function Produtos() {
       <PageSEO
         title="Produtos | Titanium Implantes"
         description="Conheça nosso portfólio completo de implantes cirúrgicos certificados."
+        canonical="https://titaniumimplantes.com.br/produtos"
+        ogType="website"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Produtos | Titanium Implantes",
+          url: "https://titaniumimplantes.com.br/produtos",
+          description: "Portfólio completo de implantes cirúrgicos da Titanium Implantes.",
+        }}
       />
 
       <div className="mx-auto max-w-[1280px] px-8 pt-[100px] lg:pt-[160px] pb-24">

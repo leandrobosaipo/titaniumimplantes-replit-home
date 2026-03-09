@@ -10,6 +10,7 @@ export default function NotFound() {
       <PageSEO
         title="404 - Página Não Encontrada | Titanium Implantes"
         description="A página que você está procurando não foi encontrada."
+        canonical="https://titaniumimplantes.com.br/404"
       />
       <div className="min-h-[60vh] w-full flex items-center justify-center bg-gray-50 py-16">
       <Card className="w-full max-w-md mx-4">

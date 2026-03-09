@@ -14,6 +14,13 @@ export default function Home() {
         title="Titanium Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT"
         description="Distribuidora especializada em implantes para coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia em Cuiabá-MT. Soluções certificadas, alta tecnologia e entrega ágil."
         canonical="https://titaniumimplantes.com.br/"
+        ogType="website"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Titanium Implantes",
+          url: "https://titaniumimplantes.com.br/",
+        }}
       />
         <Carousel />
         <QuemSomosSection />

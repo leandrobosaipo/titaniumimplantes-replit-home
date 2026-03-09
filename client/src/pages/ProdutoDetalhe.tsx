@@ -87,10 +87,8 @@ export default function ProdutoDetalhe() {
   const prevProduct = currentIndex > 0 ? c.products[currentIndex - 1] : null;
   const nextProduct = currentIndex >= 0 && currentIndex < c.products.length - 1 ? c.products[currentIndex + 1] : null;
 
-  const productUrl =
-    typeof window !== "undefined"
-      ? window.location.href
-      : `https://titaniumimplantes.com.br/produtos/${product.slug}`;
+  const canonicalProductUrl = `https://titaniumimplantes.com.br/produtos/${product.slug}`;
+  const productUrl = typeof window !== "undefined" ? window.location.href : canonicalProductUrl;
   const whatsappMessage = `Olá! Quero falar com um especialista sobre o produto ${product.title}.\nLink: ${productUrl}`;
   const specialistWhatsappUrl = `https://wa.me/5565981280373?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -176,6 +174,22 @@ export default function ProdutoDetalhe() {
       <PageSEO
         title={`${product.title} | Produtos | Titanium Implantes`}
         description={product.description}
+        canonical={canonicalProductUrl}
+        ogType="product"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.title,
+          description: product.description,
+          sku: product.slug,
+          image: [canonicalProductUrl.replace(`/produtos/${product.slug}`, "/og-default.jpg")],
+          brand: {
+            "@type": "Brand",
+            name: product.manufacturer ?? "Titanium Implantes",
+          },
+          category: product.technicalCategory ?? categoryLabel,
+          url: canonicalProductUrl,
+        }}
       />
 
       <div className="mx-auto max-w-[1280px] px-8 pt-[100px] lg:pt-[160px] pb-24">
