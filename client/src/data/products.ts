@@ -283,6 +283,7 @@ export const productsConfig: ProductsPageConfig = {
         "Sistema de estabilização posterior para cirurgias minimamente invasivas. Facilidade de uso independente da anatomia do paciente por meio de haste integrada e simplificada, além de forte conexão parafuso-torre. Capacidade de atender a múltiplos níveis. Aplicação para as mais diversas patologias (ex. tumor, trauma e deformidades).",
       mainImage: revolveMain,
       images: [revolveMain, revolve1],
+      pdfUrl: "/produtos/revolve.pdf",
       anvisa: "80263050090",
     },
     {
@@ -309,6 +310,7 @@ export const productsConfig: ProductsPageConfig = {
         "Placa cervical anterior que requer somente uma etapa para inserção e bloqueio dos parafusos, possibilitando menor perfil e tempo cirúrgico. O design das placas permite uma superfície anterior lisa. Placa cervical de baixo perfil, com sistema de bloqueio acoplado. Reduz a ocorrência de complicações relacionadas à compressão de estruturas adjacentes, como cordas vocais e esôfago.",
       mainImage: assureMain,
       images: [assureMain, assure1],
+      pdfUrl: "/produtos/assure.pdf",
       anvisa: "80263050053",
     },
 
