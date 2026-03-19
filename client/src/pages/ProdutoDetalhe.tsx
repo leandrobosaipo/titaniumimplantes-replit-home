@@ -92,6 +92,38 @@ export default function ProdutoDetalhe() {
   const whatsappMessage = `Olá! Quero falar com um especialista sobre o produto ${product.title}.\nLink: ${productUrl}`;
   const specialistWhatsappUrl = `https://wa.me/5565981280373?text=${encodeURIComponent(whatsappMessage)}`;
 
+  const getYouTubeEmbedUrl = (url: string) => {
+    try {
+      const parsed = new URL(url);
+      const host = parsed.hostname.replace(/^www\./, "");
+
+      if (host === "youtu.be") {
+        const id = parsed.pathname.split("/").filter(Boolean)[0];
+        return id ? `https://www.youtube.com/embed/${id}` : url;
+      }
+
+      if (host.endsWith("youtube.com")) {
+        if (parsed.pathname === "/watch") {
+          const id = parsed.searchParams.get("v");
+          return id ? `https://www.youtube.com/embed/${id}` : url;
+        }
+
+        if (parsed.pathname.startsWith("/shorts/")) {
+          const id = parsed.pathname.split("/").filter(Boolean)[1];
+          return id ? `https://www.youtube.com/embed/${id}` : url;
+        }
+
+        if (parsed.pathname.startsWith("/embed/")) {
+          return url;
+        }
+      }
+
+      return url;
+    } catch {
+      return url.replace("watch?v=", "embed/");
+    }
+  };
+
   // Conteúdo específico para Percept RC
   const perceptContent = {
     overview: {
@@ -569,7 +601,7 @@ export default function ProdutoDetalhe() {
                   <CardContent>
                     <div className="relative w-full overflow-hidden rounded-xl" style={{ paddingTop: "56.25%" }}>
                       <iframe
-                        src={product.videoUrl.replace("watch?v=", "embed/")}
+                        src={getYouTubeEmbedUrl(product.videoUrl)}
                         title={`Vídeo de ${product.title}`}
                         className="absolute inset-0 h-full w-full"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -754,7 +786,7 @@ export default function ProdutoDetalhe() {
                 <CardContent>
                   <div className="relative w-full overflow-hidden rounded-xl" style={{ paddingTop: "56.25%" }}>
                     <iframe
-                      src={product.videoUrl.replace("watch?v=", "embed/")}
+                      src={getYouTubeEmbedUrl(product.videoUrl)}
                       title={`Vídeo de ${product.title}`}
                       className="absolute inset-0 h-full w-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
