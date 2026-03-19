@@ -22,7 +22,6 @@
 import type { ProductsPageConfig } from "@/types/products";
 import { productExcelOverrides } from "@/data/productsExcelOverrides";
 import colunaImg from "@assets/coluna-bg-solucoes.jpg";
-import neuroImg from "@assets/neurologia-bg-solucoes.jpg";
 import bucoImg from "@assets/bucomaxilfacial-bg-solucoes.jpg";
 import otorrinoImg from "@assets/otorrinolaringologia-bg-solucoes.jpg";
 import heroImg from "@assets/home-topo_1762428378908.jpeg";
@@ -176,19 +175,8 @@ export const productsConfig: ProductsPageConfig = {
         "Espaçador cervical intersomático MIS em titânio com perfis anatômicos e placas de fixação integradas, projetado para estabilização segmentar em cirurgias minimamente invasivas da coluna cervical.",
       mainImage: espacadorMain,
       images: [espacadorMain],
+      videoUrl: "https://youtu.be/bGZ-Ow-QhiU",
       pdfUrl: "/produtos/coalition-mis-globus.pdf",
-    },
-    {
-      id: "8",
-      slug: "valvulas-hidrocefalia-pressao-fixa-atlas",
-      categoryId: "neuro",
-      title: "Válvulas para Hidrocefalia – Pressão Fixa ATLAS",
-      description:
-        "Válvulas de pressão fixa para derivação ventricular em regimes terapêuticos de hidrocefalia com fluxo estável de líquido cerebrospinal.",
-      fullDescription:
-        "Válvulas de pressão fixa para derivação ventricular em regimes terapêuticos de hidrocefalia, projetadas para manutenção de fluxo estável de líquido cerebrospinal e redução de riscos de sobre-drenagem.",
-      mainImage: neuroImg, // Placeholder: substituir por produto-valvulas-hidrocefalia-atlas-main.jpg
-      images: [neuroImg],
     },
     // Produtos importados do catálogo extraído
     {
@@ -242,6 +230,7 @@ export const productsConfig: ProductsPageConfig = {
         "Dispositivo de fusão intersomático lateral expansível. Projetado para ser implantado através de uma incisão mínima enquanto permite descompressão indireta. Projetado para proporcionar lordose segmentar enquanto a introdução de enxerto ósseo adicional in situ proporciona um ambiente de fusão ideal. Até 15° de lordose ajustável sem comprometer a descompressão indireta.",
       mainImage: riseLMain,
       images: [riseLMain, riseL1],
+      videoUrl: "https://youtu.be/pR6UHXvkFL4",
       anvisa: "80263050052",
     },
     {

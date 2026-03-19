@@ -246,6 +246,47 @@ export default function ProdutoDetalhe() {
 
         {isPerceptRC && perceptContent ? (
           <>
+            {/* Mídia do produto (Percept RC) */}
+            <section className="mb-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="space-y-4">
+                  <div className="rounded-3xl overflow-hidden shadow-2xl aspect-square bg-white">
+                    <button
+                      type="button"
+                      onClick={() => openLightbox(activeImg)}
+                      className="w-full h-full"
+                      aria-label={`Ampliar imagem de ${product.title}`}
+                    >
+                      <img
+                        src={activeImg}
+                        className="w-full h-full object-contain p-4"
+                        alt={product.title}
+                      />
+                    </button>
+                  </div>
+                  {product.images.length > 1 && (
+                    <div className="flex gap-4 overflow-x-auto pb-2">
+                      {product.images.map((img, i) => (
+                        <button
+                          key={`${product.id}-${i}`}
+                          onClick={() => {
+                            setActiveImg(img);
+                            openLightbox(img);
+                          }}
+                          className={`w-24 h-24 rounded-xl overflow-hidden border-2 transition-all ${
+                            activeImg === img ? "border-[#0d70dc]" : "border-transparent opacity-70"
+                          }`}
+                          aria-label={`Ver imagem ${i + 1} de ${product.title}`}
+                        >
+                          <img src={img} className="w-full h-full object-cover" alt="" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+
             {/* Visão Geral */}
             <section className="mb-12">
               <h2
@@ -560,9 +601,8 @@ export default function ProdutoDetalhe() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center rounded-md bg-[#0d70dc] px-4 py-2 text-white font-semibold hover:bg-[#0953b0] transition-colors"
-                      download
                     >
-                      Baixar PDF
+                      Abrir / Baixar PDF
                     </a>
                   </CardContent>
                 </Card>
@@ -746,9 +786,8 @@ export default function ProdutoDetalhe() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-md bg-[#0d70dc] px-4 py-2 text-white font-semibold hover:bg-[#0953b0] transition-colors"
-                    download
                   >
-                    Baixar PDF
+                    Abrir / Baixar PDF
                   </a>
                 </CardContent>
               </Card>
