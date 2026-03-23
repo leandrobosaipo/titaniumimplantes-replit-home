@@ -12,7 +12,7 @@ const lgpdIconMap = {
 
 export function LgpdProtecaoDadosSection() {
   return (
-    <section className="bg-white py-24 px-8">
+    <section className="bg-white pt-[100px] lg:pt-[160px] pb-24 px-8">
       <SectionContainer>
         <div className="bg-[#0d70dc] rounded-3xl p-12 md:p-16">
           {/* Área superior: título + ilustração */}
