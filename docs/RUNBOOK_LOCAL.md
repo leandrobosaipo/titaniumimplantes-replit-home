@@ -138,7 +138,22 @@ Arquivos para atualizar:
 
 ---
 
-## Atualização de referência — 2026-03-19 (última bateria entregue)
+## Atualização de referência — 2026-03-23 (última bateria entregue)
+
+Implementado nesta rodada:
+- Removidas 3 seções da página `/lgpd`:
+  - `LgpdDestaquesMaterialSection` ("Destaques do material")
+  - `LgpdControleQualidadeSection` ("Controle de qualidade")
+  - `LgpdComplianceEticaSection` ("Compliance e Ética")
+- Página `/lgpd` ficou apenas com as 2 seções finais:
+  - `LgpdProtecaoDadosSection` ("LGPD — Proteção de Dados")
+  - `LgpdExercerDireitosSection` (direitos e canais de contato)
+- Corrigido gap de topo: `pt-[100px] lg:pt-[160px]` em `LgpdProtecaoDadosSection` (padrão do projeto).
+- SEO atualizado: title e description focados em LGPD/Proteção de Dados.
+- Commit: `ef734b7`
+- Deploy EasyPanel: ✅ concluído (56s de build)
+
+## Atualização de referência — 2026-03-19 (bateria anterior)
 
 Implementado nesta rodada:
 - Correção de imagem no detalhe do produto **Percept RC**.
