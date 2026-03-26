@@ -38,7 +38,7 @@ export const quemSomosPageConfig: QuemSomosPageConfig = {
   ],
   estrutura: {
     titulo: "Nossa estrutura e diferenciais:",
-    subtitulo: "Com uma equipe especializada e marcas exclusivas, a Titanium Implantes assegura excelência em todas as etapas, do atendimento à entrega.",
+    subtitulo: "Com uma equipe especializada e marcas exclusivas, a Titaniun Implantes assegura excelência em todas as etapas, do atendimento à entrega.",
     imagem: [estruturaSlide1, estruturaSlide2],
     textoFinal: "Mantemos certificações ISO, registro ANVISA, e atuamos em conformidade com as diretrizes de Compliance, LGPD e Ética em Saúde, reforçando nosso compromisso com a integridade e a transparência.",
     propositoBadge: "NOSSO PROPÓSITO",
