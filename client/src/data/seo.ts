@@ -6,9 +6,9 @@
  */
 
 export const seoConfig = {
-  siteName: "Titanium Implantes",
+  siteName: "Titaniun Implantes",
   baseUrl: "https://titaniumimplantes.com.br",
-  defaultTitle: "Titanium Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT",
+  defaultTitle: "Titaniun Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT",
   defaultDescription: "Distribuidora especializada em implantes para coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia em Cuiabá-MT. Soluções certificadas, alta tecnologia e entrega ágil.",
   keywords: [
     "implantes cirúrgicos",
@@ -23,8 +23,8 @@ export const seoConfig = {
     "distribuidora implantes Mato Grosso"
   ],
   organization: {
-    name: "Titanium Implantes",
-    legalName: "Titanium Implantes",
+    name: "Titaniun Implantes",
+    legalName: "Titaniun Implantes",
     url: "https://titaniumimplantes.com.br",
     logo: "https://titaniumimplantes.com.br/logo.png",
     contactPoint: {
@@ -42,7 +42,7 @@ export const seoConfig = {
     ]
   },
   localBusiness: {
-    name: "Titanium Implantes",
+    name: "Titaniun Implantes",
     address: {
       streetAddress: "Av. Hist. Rubens de Mendonça, 2368, Sala 1101",
       addressLocality: "Cuiabá",

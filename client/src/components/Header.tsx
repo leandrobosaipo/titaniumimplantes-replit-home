@@ -89,7 +89,7 @@ export function Header() {
             <Link href="/" data-testid="link-home">
               <img
                 src="/logo.png"
-                alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+                alt="Titaniun Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
                 className="w-[140px] md:w-[160px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
                 data-testid="logo-header"
                 width="160"
@@ -125,7 +125,7 @@ export function Header() {
               <Link href="/" data-testid="link-home-desktop">
                 <img
                   src="/logo.png"
-                  alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+                  alt="Titaniun Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
                   className="w-[200px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
                   data-testid="logo-header-desktop"
                   width="200"
@@ -287,7 +287,7 @@ export function Header() {
           <Link href="/" data-testid="link-home-compact">
             <img
               src="/logo.png"
-              alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+              alt="Titaniun Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
               className="w-[140px] md:w-[160px] h-auto object-contain cursor-pointer transition-opacity hover:opacity-90"
               data-testid="logo-header-compact"
               width="160"

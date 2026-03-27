@@ -19,5 +19,5 @@ Sempre que iniciar sessão neste workspace:
 ## Contexto do usuário
 
 - Usuário: Leandro
-- Projeto: Titanium Implantes
+- Projeto: Titaniun Implantes
 - Preferência: manutenção contínua, operação local confiável e validação antes de qualquer alteração.

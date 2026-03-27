@@ -107,14 +107,51 @@ git log --oneline -n 5 --decorate
 ```
 Confirmar que `HEAD` local está em `origin/main`.
 
-### 5.3 EasyPanel (projeto Titanium)
+### 5.3 Fluxo principal de deploy (explícito)
+**O padrão principal deste projeto não é mais depender da UI do EasyPanel.**
+
+Usar este fluxo como caminho oficial:
+1. validar local com `npm run build`;
+2. `git push origin main`;
+3. publicar no servidor por **SSH + Docker Swarm**;
+4. validar a URL pública.
+
+Comando operacional padrão:
+```bash
+ssh root@173.212.225.231 '
+set -e
+CODE_DIR=/etc/easypanel/projects/codigo5/titaniunimplantes/code
+IMAGE=easypanel/codigo5/titaniunimplantes
+SERVICE=codigo5_titaniunimplantes
+cd "$CODE_DIR"
+git pull --rebase origin main
+docker build -t "$IMAGE" "$CODE_DIR"
+docker service update --image "$IMAGE" --force "$SERVICE"
+'
+```
+
+Depois verificar:
+```bash
+ssh root@173.212.225.231 'docker service ps codigo5_titaniunimplantes'
+curl -I -L https://titaniunimplantes.codigo5.com.br/
+```
+
+### 5.4 Referência obrigatória
+O runbook detalhado e validado do deploy real está em:
+
+- `docs/DEPLOY_EASYPANEL_RUNBOOK.md`
+
+Sempre tratar esse arquivo como a fonte de verdade para publicação.
+
+### 5.5 EasyPanel (UI) — opcional
 - Painel: `https://easypanel.codigo5.com.br`
 - Projeto/serviço: `codigo5 / titaniunimplantes`
 - URL do serviço: `https://titaniunimplantes.codigo5.com.br/`
-- Na tela do serviço, clicar em **Implantar** (deploy da branch `main`).
-- Após deploy, validar produção com o mesmo checklist de páginas/seções.
 
-### 5.4 Credenciais e acessos (onde estão)
+A UI pode ser usada quando estiver conveniente, mas **não é o fluxo principal**.
+Se a UI falhar, seguir o fluxo SSH/Swarm acima sem bloquear a entrega.
+
+### 5.6 Credenciais e acessos (onde estão)
 > **Importante:** não versionar segredos no repositório.
 
 - Arquivo operacional com acessos do EasyPanel e variáveis de produção:

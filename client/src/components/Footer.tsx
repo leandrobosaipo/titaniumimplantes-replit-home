@@ -42,7 +42,7 @@ export function Footer() {
             {/* Logo */}
             <img
               src="/logo.png"
-              alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+              alt="Titaniun Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
               className="w-[120px] xs:w-[140px] h-auto object-contain flex-shrink-0"
               data-testid="logo-footer"
               loading="lazy"
@@ -104,7 +104,7 @@ export function Footer() {
           <div className="flex flex-col">
             <img
               src="/logo.png"
-              alt="Titanium Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
+              alt="Titaniun Implantes - Distribuidora de implantes cirúrgicos em Cuiabá-MT"
               className="w-[140px] sm:w-[160px] lg:w-[180px] h-auto object-contain mb-4"
               data-testid="logo-footer-desktop"
               width="180"

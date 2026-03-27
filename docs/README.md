@@ -1,4 +1,4 @@
-# Documentação do Projeto Titanium Implantes
+# Documentação do Projeto Titaniun Implantes
 
 Esta pasta contém a documentação técnica e de manutenção do projeto.
 

@@ -148,7 +148,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
               {slide.imageMobile && (
                 <img
                   src={slide.imageMobile}
-                  alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
+                  alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titaniun Implantes - Slide ${index + 1}`}
                   className="w-full h-full object-contain object-center block md:hidden"
                   loading={index === 0 ? "eager" : "lazy"}
                   fetchPriority={index === 0 ? "high" : "auto"}
@@ -158,7 +158,7 @@ export function Carousel({ slides: customSlides, autoplayInterval: customInterva
               {/* Imagem Desktop - visível a partir de breakpoint md - preenche toda área com foco no centro */}
               <img
                 src={slide.image}
-                alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titanium Implantes - Slide ${index + 1}`}
+                alt={slide.alt || slide.title || slide.subtitle || `Sistema de implantes cirúrgicos Titaniun Implantes - Slide ${index + 1}`}
                 className={`w-full h-full object-cover object-center ${slide.imageMobile ? "hidden md:block" : ""}`}
                 style={{
                   objectPosition: 'center center',

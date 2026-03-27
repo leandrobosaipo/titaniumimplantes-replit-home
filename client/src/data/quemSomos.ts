@@ -13,7 +13,7 @@ export const quemSomosConfig: QuemSomosConfig = {
   tituloSessao: "QUEM SOMOS",
   titulo: "Nossa missão é promover saúde e qualidade de vida com inovação e produtos de excelência.",
   descricao:
-    "A Titanium Implantes tem o compromisso de gerar confiança por meio de produtos cirúrgicos de alta tecnologia. Visamos ser referência nacional em qualidade, evoluindo continuamente e respeitando os profissionais e pacientes que fazem parte de nossa jornada.",
+    "A Titaniun Implantes tem o compromisso de gerar confiança por meio de produtos cirúrgicos de alta tecnologia. Visamos ser referência nacional em qualidade, evoluindo continuamente e respeitando os profissionais e pacientes que fazem parte de nossa jornada.",
   mostrarBotao: true,
   textoBotao: "Conheça nossa história",
   linkBotao: "/quem-somos",

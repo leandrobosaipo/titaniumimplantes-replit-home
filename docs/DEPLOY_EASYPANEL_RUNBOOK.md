@@ -84,7 +84,7 @@ curl -sL https://titaniunimplantes.codigo5.com.br/assets/index-*.js
 
 Objetivo executado:
 - corrigir na página `/quem-somos`, seção **Nossa estrutura e diferenciais**
-- trocar o texto de `Titanium Implantes` para `Titaniun Implantes`
+- trocar o texto de `Titaniun Implantes` para `Titaniun Implantes`
 
 ### Arquivo alterado
 - `client/src/data/quemSomosPage.ts`

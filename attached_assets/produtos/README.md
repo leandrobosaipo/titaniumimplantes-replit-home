@@ -1,6 +1,6 @@
 # Pasta de Imagens de Produtos
 
-Esta pasta contém todas as imagens dos produtos do catálogo da Titanium Implantes.
+Esta pasta contém todas as imagens dos produtos do catálogo da Titaniun Implantes.
 
 ## Padrão de Nomenclatura
 

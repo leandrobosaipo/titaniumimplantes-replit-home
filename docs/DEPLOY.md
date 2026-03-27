@@ -1,4 +1,4 @@
-# Guia de Deploy - Titanium Implantes
+# Guia de Deploy - Titaniun Implantes
 
 Este documento descreve o processo completo de deploy do projeto usando GitHub, Docker e EasyPanel.
 

@@ -13,7 +13,7 @@ function getBaseOrganization(siteUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Titanium Implantes",
+    name: "Titaniun Implantes",
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
   };
@@ -33,7 +33,7 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
 
   if (path === "/") {
     return {
-      title: "Titanium Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT",
+      title: "Titaniun Implantes | Implantes para Coluna, Neuro e Bucomaxilo em Cuiabá - MT",
       description:
         "Distribuidora especializada em implantes para coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia em Cuiabá-MT. Soluções certificadas, alta tecnologia e entrega ágil.",
       canonical: `${siteUrl}/`,
@@ -44,7 +44,7 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
         "@graph": [
           {
             "@type": "WebSite",
-            name: "Titanium Implantes",
+            name: "Titaniun Implantes",
             url: siteUrl,
           },
           baseOrganization,
@@ -55,7 +55,7 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
 
   if (path === "/produtos") {
     return {
-      title: "Produtos | Titanium Implantes",
+      title: "Produtos | Titaniun Implantes",
       description: "Conheça nosso portfólio completo de implantes cirúrgicos certificados.",
       canonical: `${siteUrl}/produtos`,
       ogType: "website",
@@ -65,9 +65,9 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
         "@graph": [
           {
             "@type": "CollectionPage",
-            name: "Produtos | Titanium Implantes",
+            name: "Produtos | Titaniun Implantes",
             url: `${siteUrl}/produtos`,
-            description: "Portfólio de implantes cirúrgicos da Titanium Implantes.",
+            description: "Portfólio de implantes cirúrgicos da Titaniun Implantes.",
           },
           baseOrganization,
         ],
@@ -89,8 +89,8 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
       : `${siteUrl}/produtos/${slug}-main.jpg`;
 
     return {
-      title: `${productName} | Produtos | Titanium Implantes`,
-      description: `Saiba mais sobre ${productName}. Especificações e informações técnicas com suporte especializado da Titanium Implantes.`,
+      title: `${productName} | Produtos | Titaniun Implantes`,
+      description: `Saiba mais sobre ${productName}. Especificações e informações técnicas com suporte especializado da Titaniun Implantes.`,
       canonical,
       ogType: "product",
       ogImage: productOgImage,
@@ -100,7 +100,7 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
           {
             "@type": "Product",
             name: productName,
-            brand: { "@type": "Brand", name: "Titanium Implantes" },
+            brand: { "@type": "Brand", name: "Titaniun Implantes" },
             url: canonical,
             image: [productOgImage],
             description: `Informações técnicas de ${productName}.`,
@@ -113,26 +113,26 @@ export function getSeoForPath(pathname: string, siteUrl = SITE_URL): SeoPayload 
 
   const map: Record<string, { title: string; description: string }> = {
     "/quem-somos": {
-      title: "Quem Somos | Titanium Implantes",
-      description: "Conheça a história e o compromisso da Titanium Implantes com a excelência em materiais cirúrgicos.",
+      title: "Quem Somos | Titaniun Implantes",
+      description: "Conheça a história e o compromisso da Titaniun Implantes com a excelência em materiais cirúrgicos.",
     },
     "/lgpd": {
-      title: "LGPD e Compliance | Titanium Implantes",
-      description: "Certificações, compliance e proteção de dados na Titanium Implantes.",
+      title: "LGPD e Compliance | Titaniun Implantes",
+      description: "Certificações, compliance e proteção de dados na Titaniun Implantes.",
     },
     "/canal-de-denuncia": {
-      title: "Canal de Denúncia | Titanium Implantes",
-      description: "Canal de denúncia seguro e confidencial da Titanium Implantes.",
+      title: "Canal de Denúncia | Titaniun Implantes",
+      description: "Canal de denúncia seguro e confidencial da Titaniun Implantes.",
     },
     "/contato": {
-      title: "Contato | Titanium Implantes",
-      description: "Entre em contato com a Titanium Implantes em Cuiabá-MT.",
+      title: "Contato | Titaniun Implantes",
+      description: "Entre em contato com a Titaniun Implantes em Cuiabá-MT.",
     },
   };
 
   const fallback = map[path] ?? {
-    title: "Titanium Implantes",
-    description: "Titanium Implantes - implantes cirúrgicos e soluções médicas.",
+    title: "Titaniun Implantes",
+    description: "Titaniun Implantes - implantes cirúrgicos e soluções médicas.",
   };
 
   return {

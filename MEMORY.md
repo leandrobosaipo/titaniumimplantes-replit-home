@@ -3,7 +3,7 @@
 ## Preferências duradouras
 
 - Usuário: **Leandro**.
-- Projeto principal: **Titanium Implantes**.
+- Projeto principal: **Titaniun Implantes**.
 - Preferência: manutenção contínua, validação local confiável e deploy via **GitHub -> EasyPanel**.
 - Não alterar rotas sem solicitação explícita.
 

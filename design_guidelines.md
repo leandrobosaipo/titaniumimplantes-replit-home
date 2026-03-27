@@ -1,4 +1,4 @@
-# Design Guidelines - Titanium Implantes Corporate Homepage
+# Design Guidelines - Titaniun Implantes Corporate Homepage
 
 ## Design Approach
 **Reference-Based Implementation**: Follow the provided reference images precisely. This is a corporate medical/healthcare website requiring professional credibility and trust-building through clean, authoritative design.

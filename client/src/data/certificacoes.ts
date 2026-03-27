@@ -12,7 +12,7 @@ export const certificacoesConfig: CertificacoesConfig = {
   imagem: certificacoesImg,
   tituloSessao: "CERTIFICAÇÕES, COMPLIANCE E LGPD",
   textoInstitucional:
-    "Na Titanium Implantes, seguimos os mais rigorosos padrões internacionais de qualidade, segurança e ética. Nosso compromisso é oferecer produtos confiáveis e processos transparentes, garantindo a confiança de profissionais da saúde, pacientes e parceiros.",
+    "Na Titaniun Implantes, seguimos os mais rigorosos padrões internacionais de qualidade, segurança e ética. Nosso compromisso é oferecer produtos confiáveis e processos transparentes, garantindo a confiança de profissionais da saúde, pacientes e parceiros.",
   mostrarBotao: true,
   textoBotao: "Saiba mais",
   linkBotao: "/lgpd",

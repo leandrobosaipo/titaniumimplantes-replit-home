@@ -4,7 +4,7 @@ import { quemSomosPageConfig as c } from "@/data/quemSomosPage";
 // Função para destacar palavras-chave no texto
 function highlightText(text: string): React.ReactNode {
   const highlights = [
-    "Titanium Implantes",
+    "Titaniun Implantes",
     "coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia",
   ];
 

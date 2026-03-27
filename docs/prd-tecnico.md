@@ -1,8 +1,8 @@
-# PRD Técnico - Titanium Implantes Website
+# PRD Técnico - Titaniun Implantes Website
 
 ## Resumo Executivo
 
-O projeto atual entrega uma landing page corporativa estática para a Titanium Implantes, servida por um backend Express que ainda não expõe APIs. O objetivo desta evolução é transformar o site em uma aplicação de múltiplas páginas, alimentada por conteúdo dinâmico em JSON, com navegação consistente e infraestrutura pronta para atualizações futuras sem retrabalho manual.
+O projeto atual entrega uma landing page corporativa estática para a Titaniun Implantes, servida por um backend Express que ainda não expõe APIs. O objetivo desta evolução é transformar o site em uma aplicação de múltiplas páginas, alimentada por conteúdo dinâmico em JSON, com navegação consistente e infraestrutura pronta para atualizações futuras sem retrabalho manual.
 
 ## Stack Tecnológica Atual
 
@@ -207,8 +207,8 @@ export const sectionSchema = z.discriminatedUnion('type', [
   "slug": "quem-somos",
   "locale": "pt-BR",
   "metadata": {
-    "title": "Quem Somos - Titanium Implantes",
-    "description": "Conheça a história e missão da Titanium Implantes",
+    "title": "Quem Somos - Titaniun Implantes",
+    "description": "Conheça a história e missão da Titaniun Implantes",
     "ogImage": "/images/og-quem-somos.jpg"
   },
   "sections": [
@@ -517,5 +517,5 @@ O uso de componentes reutilizáveis mantém a base de código enxuta e facilita 
 
 ## Conclusão
 
-Este PRD estabelece a base técnica para evoluir o site da Titanium Implantes de uma landing page estática para uma aplicação web moderna, escalável e fácil de manter. A arquitetura proposta prioriza flexibilidade, performance e experiência do desenvolvedor, preparando o projeto para crescimento futuro.
+Este PRD estabelece a base técnica para evoluir o site da Titaniun Implantes de uma landing page estática para uma aplicação web moderna, escalável e fácil de manter. A arquitetura proposta prioriza flexibilidade, performance e experiência do desenvolvedor, preparando o projeto para crescimento futuro.
 

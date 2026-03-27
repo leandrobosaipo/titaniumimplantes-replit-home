@@ -75,7 +75,7 @@ export const quemSomosConfig: QuemSomosConfig = {
   ativo: true,
   backgroundImage: bgQuemSomos,
   titulo: "Nossa missão é promover saúde...",
-  descricao: "A Titanium Implantes tem o compromisso...",
+  descricao: "A Titaniun Implantes tem o compromisso...",
   mostrarBotao: true,
   textoBotao: "Conheça nossa história",
   linkBotao: "/institucional",

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$comment": "Modelo JSON para adicionar novos produtos ao catálogo",
-  "description": "Template para estrutura de produtos da Titanium Implantes",
+  "description": "Template para estrutura de produtos da Titaniun Implantes",
   "type": "object",
   "properties": {
     "id": {

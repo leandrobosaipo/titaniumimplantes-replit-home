@@ -13,7 +13,7 @@ export const quemSomosPageConfig: QuemSomosPageConfig = {
   },
   historia: {
     titulo: "Nossa História",
-    texto: "Há 13 anos, a Titanium Implantes atua no mercado de materiais cirúrgicos com o propósito de promover saúde e qualidade de vida por meio da inovação e da confiança.\n\nSediada em Mato Grosso, a empresa é referência na distribuição de implantes e soluções médicas nas áreas de coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia, oferecendo produtos de alto desempenho para profissionais e pacientes em todo o estado.",
+    texto: "Há 13 anos, a Titaniun Implantes atua no mercado de materiais cirúrgicos com o propósito de promover saúde e qualidade de vida por meio da inovação e da confiança.\n\nSediada em Mato Grosso, a empresa é referência na distribuição de implantes e soluções médicas nas áreas de coluna, neurocirurgia, bucomaxilofacial e otorrinolaringologia, oferecendo produtos de alto desempenho para profissionais e pacientes em todo o estado.",
     imagem: historiaImg,
   },
   mvv: [

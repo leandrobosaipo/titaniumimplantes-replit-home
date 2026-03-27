@@ -13,7 +13,7 @@ interface SchemaMarkupProps {
 
 export function SchemaMarkup({ 
   baseUrl = "https://titaniumimplantes.com.br",
-  organizationName = "Titanium Implantes"
+  organizationName = "Titaniun Implantes"
 }: SchemaMarkupProps = {}) {
   const siteUrl = `${baseUrl}/`;
 

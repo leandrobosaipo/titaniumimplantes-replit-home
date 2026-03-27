@@ -34,7 +34,7 @@ export function InstitutionalSection() {
               Comprometidos com a excelência em saúde
             </h2>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed" data-testid="text-institutional-desc">
-              A Titanium Implantes nasceu com o propósito de fornecer soluções de alta qualidade para o mercado de materiais cirúrgicos e implantes médicos. Com respeito, segurança, inovação e compromisso com a saúde, trabalhamos para oferecer o melhor aos profissionais da área médica.
+              A Titaniun Implantes nasceu com o propósito de fornecer soluções de alta qualidade para o mercado de materiais cirúrgicos e implantes médicos. Com respeito, segurança, inovação e compromisso com a saúde, trabalhamos para oferecer o melhor aos profissionais da área médica.
             </p>
 
             <div className="space-y-6 mb-8">

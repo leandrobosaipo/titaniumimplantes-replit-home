@@ -1,7 +1,7 @@
-# Titanium Implantes - Homepage Institucional
+# Titaniun Implantes - Homepage Institucional
 
 ## Visão Geral
-Homepage institucional corporativa para a Titanium Implantes, empresa especializada em materiais cirúrgicos e implantes médicos. O projeto foi desenvolvido com foco em design profissional, responsividade e otimização para SEO.
+Homepage institucional corporativa para a Titaniun Implantes, empresa especializada em materiais cirúrgicos e implantes médicos. O projeto foi desenvolvido com foco em design profissional, responsividade e otimização para SEO.
 
 ## Tecnologias Utilizadas
 - **Frontend**: React 18 + TypeScript

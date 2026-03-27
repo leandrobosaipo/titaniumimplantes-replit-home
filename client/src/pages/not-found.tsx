@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <Layout>
       <PageSEO
-        title="404 - Página Não Encontrada | Titanium Implantes"
+        title="404 - Página Não Encontrada | Titaniun Implantes"
         description="A página que você está procurando não foi encontrada."
         canonical="https://titaniumimplantes.com.br/404"
       />

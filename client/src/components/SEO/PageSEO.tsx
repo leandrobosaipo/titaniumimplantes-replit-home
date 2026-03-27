@@ -90,7 +90,7 @@ export function PageSEO({
       "@graph": [
         {
           "@type": "Organization",
-          name: "Titanium Implantes",
+          name: "Titaniun Implantes",
           url: SITE_URL,
           logo: `${SITE_URL}/logo.png`,
         },

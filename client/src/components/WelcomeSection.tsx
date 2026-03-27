@@ -16,7 +16,7 @@ export function WelcomeSection() {
             </h2>
             <div className="space-y-4 text-muted-foreground text-base md:text-lg leading-relaxed">
               <p data-testid="text-welcome-p1">
-                A Titanium Implantes é uma empresa comprometida com a excelência no fornecimento de materiais cirúrgicos e implantes médicos de alta qualidade.
+                A Titaniun Implantes é uma empresa comprometida com a excelência no fornecimento de materiais cirúrgicos e implantes médicos de alta qualidade.
               </p>
               <p data-testid="text-welcome-p2">
                 Com foco em inovação e segurança, oferecemos soluções completas para especialidades cirúrgicas, sempre em parceria com as principais referências mundiais do setor.

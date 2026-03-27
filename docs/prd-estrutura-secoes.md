@@ -122,7 +122,7 @@ A página Home (`client/src/pages/Home.tsx`) segue esta ordem:
      backgroundImage: bgQuemSomos,
      tituloSessao: "QUEM SOMOS",
      titulo: "Nossa missão é promover...",
-     descricao: "A Titanium Implantes...",
+     descricao: "A Titaniun Implantes...",
      mostrarBotao: true,
      textoBotao: "Conheça nossa história",
      linkBotao: "/institucional",

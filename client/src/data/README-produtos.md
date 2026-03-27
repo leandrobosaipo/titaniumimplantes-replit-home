@@ -1,6 +1,6 @@
 # Guia de Importação de Produtos
 
-Este guia explica como adicionar novos produtos ao catálogo da Titanium Implantes.
+Este guia explica como adicionar novos produtos ao catálogo da Titaniun Implantes.
 
 ## Estrutura de Dados
 

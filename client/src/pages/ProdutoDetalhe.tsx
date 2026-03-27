@@ -204,7 +204,7 @@ export default function ProdutoDetalhe() {
   return (
     <Layout>
       <PageSEO
-        title={`${product.title} | Produtos | Titanium Implantes`}
+        title={`${product.title} | Produtos | Titaniun Implantes`}
         description={product.description}
         canonical={canonicalProductUrl}
         ogType="product"
@@ -217,7 +217,7 @@ export default function ProdutoDetalhe() {
           image: [canonicalProductUrl.replace(`/produtos/${product.slug}`, "/og-default.jpg")],
           brand: {
             "@type": "Brand",
-            name: product.manufacturer ?? "Titanium Implantes",
+            name: product.manufacturer ?? "Titaniun Implantes",
           },
           category: product.technicalCategory ?? categoryLabel,
           url: canonicalProductUrl,

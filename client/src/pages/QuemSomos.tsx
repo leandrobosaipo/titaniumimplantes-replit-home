@@ -9,8 +9,8 @@ export default function QuemSomos() {
   return (
     <Layout>
       <PageSEO
-        title="Quem Somos | Titanium Implantes"
-        description="Conheça a história e o compromisso da Titanium Implantes com a excelência em materiais cirúrgicos."
+        title="Quem Somos | Titaniun Implantes"
+        description="Conheça a história e o compromisso da Titaniun Implantes com a excelência em materiais cirúrgicos."
         canonical="https://titaniumimplantes.com.br/quem-somos"
       />
 

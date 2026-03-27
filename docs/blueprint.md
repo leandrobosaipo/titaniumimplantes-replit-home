@@ -1,6 +1,6 @@
 # Blueprint - Guia de Comandos e Operações
 
-Este documento contém todos os comandos essenciais para trabalhar com o projeto Titanium Implantes.
+Este documento contém todos os comandos essenciais para trabalhar com o projeto Titaniun Implantes.
 
 ## 📋 Índice
 
